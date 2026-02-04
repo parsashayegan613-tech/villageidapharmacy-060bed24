@@ -17,19 +17,19 @@
     --popover: 0 0% 100%;
     --popover-foreground: 210 11% 20%;
 
-    /* Primary - Deep Evergreen */
-    --primary: 160 35% 22%;
-    --primary-foreground: 40 33% 98%;
+    /* Primary - IDA Blue */
+    --primary: 215 85% 35%;
+    --primary-foreground: 0 0% 100%;
 
     /* Secondary - Warm Off-White */
     --secondary: 40 25% 94%;
-    --secondary-foreground: 160 35% 22%;
+    --secondary-foreground: 215 85% 35%;
 
     --muted: 40 20% 92%;
     --muted-foreground: 210 11% 45%;
 
-    /* Accent - Mint (interactive states only) */
-    --accent: 160 45% 45%;
+    /* Accent - IDA Red */
+    --accent: 0 75% 50%;
     --accent-foreground: 0 0% 100%;
 
     /* Success - Soft green */
@@ -41,16 +41,16 @@
 
     --border: 40 15% 88%;
     --input: 40 15% 88%;
-    --ring: 160 35% 22%;
+    --ring: 215 85% 35%;
 
     --radius: 1rem;
 
     /* Custom Village IDA tokens */
-    --evergreen: 160 35% 22%;
-    --evergreen-dark: 160 40% 15%;
-    --evergreen-light: 160 25% 95%;
-    --mint: 160 45% 45%;
-    --mint-light: 160 40% 92%;
+    --ida-blue: 215 85% 35%;
+    --ida-blue-dark: 215 90% 25%;
+    --ida-blue-light: 215 60% 95%;
+    --ida-red: 0 75% 50%;
+    --ida-red-light: 0 60% 95%;
     --warm-white: 40 33% 98%;
     --warm-cream: 40 25% 94%;
     --charcoal: 210 11% 20%;
@@ -58,12 +58,12 @@
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 210 11% 20%;
-    --sidebar-primary: 160 35% 22%;
-    --sidebar-primary-foreground: 40 33% 98%;
+    --sidebar-primary: 215 85% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 40 25% 94%;
-    --sidebar-accent-foreground: 160 35% 22%;
+    --sidebar-accent-foreground: 215 85% 35%;
     --sidebar-border: 40 15% 88%;
-    --sidebar-ring: 160 35% 22%;
+    --sidebar-ring: 215 85% 35%;
   }
 
   .dark {
@@ -76,16 +76,16 @@
     --popover: 210 15% 10%;
     --popover-foreground: 40 20% 95%;
 
-    --primary: 160 40% 40%;
-    --primary-foreground: 210 15% 8%;
+    --primary: 215 70% 50%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 15% 15%;
-    --secondary-foreground: 160 35% 70%;
+    --secondary-foreground: 215 60% 70%;
 
     --muted: 210 12% 18%;
     --muted-foreground: 210 10% 60%;
 
-    --accent: 160 45% 50%;
+    --accent: 0 65% 55%;
     --accent-foreground: 0 0% 100%;
 
     --success: 145 45% 45%;
@@ -96,16 +96,16 @@
 
     --border: 210 15% 20%;
     --input: 210 15% 20%;
-    --ring: 160 40% 40%;
+    --ring: 215 70% 50%;
 
     --sidebar-background: 210 15% 8%;
     --sidebar-foreground: 40 20% 95%;
-    --sidebar-primary: 160 40% 40%;
-    --sidebar-primary-foreground: 210 15% 8%;
+    --sidebar-primary: 215 70% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 15% 15%;
-    --sidebar-accent-foreground: 160 35% 70%;
+    --sidebar-accent-foreground: 215 60% 70%;
     --sidebar-border: 210 15% 20%;
-    --sidebar-ring: 160 40% 40%;
+    --sidebar-ring: 215 70% 50%;
   }
 }
 
