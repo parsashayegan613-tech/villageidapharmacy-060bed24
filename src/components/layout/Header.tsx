@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import villageIdaLogo from "@/assets/village-ida-logo.jpg";
+
 
 const navigation = [
   {
@@ -52,12 +52,24 @@ export function Header() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <div className="h-12 overflow-hidden rounded">
-                <img 
-                  src={villageIdaLogo} 
-                  alt="Village I.D.A. Pharmacy" 
-                  className="h-12 w-auto object-cover object-left scale-[1.15]"
-                />
+              <div className="flex flex-col items-center justify-center bg-[hsl(215,85%,40%)] rounded-lg px-5 py-2">
+                <span className="text-white font-bold tracking-[0.25em] uppercase text-[9px]">
+                  Village
+                </span>
+                <span 
+                  className="font-black leading-none text-white"
+                  style={{ 
+                    fontSize: 26,
+                    textShadow: '2px 0 0 hsl(0,70%,50%), -2px 0 0 hsl(0,70%,50%), 0 2px 0 hsl(0,70%,50%), 0 -2px 0 hsl(0,70%,50%), 1.5px 1.5px 0 hsl(0,70%,50%), -1.5px -1.5px 0 hsl(0,70%,50%), 1.5px -1.5px 0 hsl(0,70%,50%), -1.5px 1.5px 0 hsl(0,70%,50%)',
+                    fontFamily: 'Arial Black, Impact, sans-serif',
+                    letterSpacing: '0.02em'
+                  }}
+                >
+                  I.D.A.
+                </span>
+                <span className="text-white font-bold tracking-[0.2em] uppercase text-[8px]">
+                  Pharmacy
+                </span>
               </div>
             </Link>
 
