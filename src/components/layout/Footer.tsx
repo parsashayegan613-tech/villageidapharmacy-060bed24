@@ -22,13 +22,25 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand & About */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-primary-foreground/20 flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">V</span>
-              </div>
-              <div>
-                <div className="font-semibold">Village IDA</div>
-                <div className="text-xs opacity-80">Pharmacy</div>
+            <Link to="/" className="inline-block mb-4">
+              <div className="flex flex-col items-center justify-center bg-primary-foreground rounded-lg px-4 py-2">
+                <span className="text-primary font-bold tracking-[0.25em] uppercase text-[8px]">
+                  Village
+                </span>
+                <span 
+                  className="font-black leading-none text-primary"
+                  style={{ 
+                    fontSize: 22,
+                    textShadow: '1.5px 0 0 hsl(0,70%,50%), -1.5px 0 0 hsl(0,70%,50%), 0 1.5px 0 hsl(0,70%,50%), 0 -1.5px 0 hsl(0,70%,50%), 1px 1px 0 hsl(0,70%,50%), -1px -1px 0 hsl(0,70%,50%), 1px -1px 0 hsl(0,70%,50%), -1px 1px 0 hsl(0,70%,50%)',
+                    fontFamily: 'Arial Black, Impact, sans-serif',
+                    letterSpacing: '0.02em'
+                  }}
+                >
+                  I.D.A.
+                </span>
+                <span className="text-primary font-bold tracking-[0.2em] uppercase text-[7px]">
+                  Pharmacy
+                </span>
               </div>
             </Link>
             <p className="text-sm opacity-80 leading-relaxed">
