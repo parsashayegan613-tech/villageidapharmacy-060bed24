@@ -49,7 +49,7 @@ export default function About() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-secondary py-16 md:py-24">
+      <section className="bg-ida-cream py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
@@ -63,7 +63,7 @@ export default function About() {
       </section>
 
       {/* Our Story */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
@@ -82,21 +82,21 @@ export default function About() {
                 </p>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl p-8 md:p-12">
+            <div className="bg-gradient-to-br from-primary/10 to-success/10 rounded-2xl p-8 md:p-10 shadow-warm">
               <div className="grid grid-cols-2 gap-6 text-center">
-                <div className="bg-background rounded-xl p-6 shadow-sm">
+                <div className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="text-4xl font-bold text-primary mb-2">25+</div>
                   <div className="text-sm text-muted-foreground">Years Serving Edmonton</div>
                 </div>
-                <div className="bg-background rounded-xl p-6 shadow-sm">
+                <div className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="text-4xl font-bold text-primary mb-2">10K+</div>
                   <div className="text-sm text-muted-foreground">Happy Patients</div>
                 </div>
-                <div className="bg-background rounded-xl p-6 shadow-sm">
+                <div className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="text-4xl font-bold text-primary mb-2">100%</div>
                   <div className="text-sm text-muted-foreground">ACP Compliant</div>
                 </div>
-                <div className="bg-background rounded-xl p-6 shadow-sm">
+                <div className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="text-4xl font-bold text-primary mb-2">5★</div>
                   <div className="text-sm text-muted-foreground">Patient Rating</div>
                 </div>
@@ -107,7 +107,7 @@ export default function About() {
       </section>
 
       {/* Mission & Values */}
-      <section className="py-16 md:py-24 bg-secondary">
+      <section className="py-16 md:py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -119,7 +119,7 @@ export default function About() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value) => (
-              <Card key={value.title} className="text-center bg-background border-0">
+              <Card key={value.title} className="text-center bg-white border-0 shadow-warm">
                 <CardContent className="p-6">
                   <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <value.icon className="h-8 w-8 text-primary" />
@@ -138,7 +138,7 @@ export default function About() {
       </section>
 
       {/* Our Team */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -150,7 +150,7 @@ export default function About() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {teamMembers.map((member) => (
-              <Card key={member.name} className="text-center">
+              <Card key={member.name} className="text-center border-0 shadow-warm">
                 <CardContent className="p-6">
                   <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <Users className="h-10 w-10 text-primary" />
@@ -158,7 +158,7 @@ export default function About() {
                   <h3 className="text-xl font-semibold text-foreground mb-1">
                     {member.name}
                   </h3>
-                  <div className="text-sm text-primary font-medium mb-3">
+                  <div className="text-sm text-accent font-medium mb-3">
                     {member.role}
                   </div>
                   <p className="text-muted-foreground text-sm">
@@ -172,7 +172,7 @@ export default function About() {
       </section>
 
       {/* Certifications */}
-      <section className="py-16 md:py-24 bg-secondary">
+      <section className="py-16 md:py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8 text-center">
@@ -187,8 +187,8 @@ export default function About() {
                 "Member of IDA Pharmacy network",
                 "Commitment to patient privacy and confidentiality",
               ].map((item, index) => (
-                <div key={index} className="flex items-center gap-3 bg-background rounded-lg p-4">
-                  <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                <div key={index} className="flex items-center gap-3 bg-white rounded-lg p-4 shadow-sm">
+                  <CheckCircle className="h-5 w-5 text-success flex-shrink-0" />
                   <span className="text-foreground">{item}</span>
                 </div>
               ))}
@@ -198,7 +198,7 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
+      <section className="py-16 md:py-20 ida-gradient-blue text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Experience the Village IDA Difference
@@ -207,10 +207,10 @@ export default function About() {
             Visit us today and discover why thousands of Edmonton families trust us with their health.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" variant="secondary">
+            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
               <Link to="/contact">Visit Us Today</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
               <Link to="/services">Explore Our Services</Link>
             </Button>
           </div>

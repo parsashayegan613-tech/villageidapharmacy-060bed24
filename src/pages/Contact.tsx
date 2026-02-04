@@ -47,26 +47,27 @@ export default function Contact() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-secondary py-16 md:py-24">
+      <section className="bg-ida-cream py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Contact Us
             </h1>
             <p className="text-lg text-muted-foreground">
-              Have a question or need assistance? We're here to help. Reach out to us through any of the methods below.
+              Please feel free to contact us for more information. Have a question or need assistance? We're here to help.
             </p>
           </div>
         </div>
       </section>
 
       {/* Contact Content */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Contact Info */}
             <div className="space-y-6">
-              <Card>
+              <Card className="border-0 shadow-warm overflow-hidden">
+                <div className="h-2 bg-primary" />
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Phone className="h-5 w-5 text-primary" />
@@ -77,20 +78,21 @@ export default function Contact() {
                   <div>
                     <a
                       href="tel:780-440-4555"
-                      className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                      className="text-xl font-bold text-accent hover:opacity-80 transition-opacity"
                     >
-                      (780) 440-4555
+                      780.440.4555
                     </a>
                     <p className="text-sm text-muted-foreground">Main Line</p>
                   </div>
                   <div>
-                    <p className="text-lg font-medium text-foreground">(780) 440-1931</p>
+                    <p className="text-lg font-medium text-foreground">780.440.1931</p>
                     <p className="text-sm text-muted-foreground">Fax</p>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-0 shadow-warm overflow-hidden">
+                <div className="h-2 bg-primary" />
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Mail className="h-5 w-5 text-primary" />
@@ -100,7 +102,7 @@ export default function Contact() {
                 <CardContent>
                   <a
                     href="mailto:villida@telus.net"
-                    className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                    className="text-lg font-medium text-primary hover:text-primary/80 transition-colors"
                   >
                     villida@telus.net
                   </a>
@@ -110,7 +112,8 @@ export default function Contact() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-0 shadow-warm overflow-hidden">
+                <div className="h-2 bg-primary" />
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <MapPin className="h-5 w-5 text-primary" />
@@ -122,7 +125,7 @@ export default function Contact() {
                     <p className="text-lg font-medium text-foreground">7004 98 Ave NW</p>
                     <p className="text-muted-foreground">Edmonton, AB T6B 0K7</p>
                   </address>
-                  <Button asChild variant="outline" className="mt-4 w-full">
+                  <Button asChild variant="outline" className="mt-4 w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                     <a
                       href="https://www.google.com/maps/dir/?api=1&destination=7004+98+Ave+NW+Edmonton+AB"
                       target="_blank"
@@ -134,42 +137,27 @@ export default function Contact() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-0 shadow-warm overflow-hidden">
+                <div className="h-2 bg-success" />
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-primary" />
+                    <Clock className="h-5 w-5 text-success" />
                     Hours of Operation
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Monday</span>
-                      <span className="font-medium">9:00 AM - 6:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Tuesday</span>
-                      <span className="font-medium">9:00 AM - 6:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Wednesday</span>
-                      <span className="font-medium">9:00 AM - 6:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Thursday</span>
-                      <span className="font-medium">9:00 AM - 6:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Friday</span>
-                      <span className="font-medium">9:00 AM - 6:00 PM</span>
+                      <span className="text-muted-foreground">Monday - Friday</span>
+                      <span className="font-medium">9:00 AM - 5:00 PM</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Saturday</span>
-                      <span className="font-medium">10:00 AM - 2:00 PM</span>
+                      <span className="font-medium">By Appointment</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Sunday</span>
-                      <span className="font-medium text-destructive">Closed</span>
+                      <span className="font-medium">By Appointment</span>
                     </div>
                   </div>
                 </CardContent>
@@ -178,7 +166,7 @@ export default function Contact() {
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <Card>
+              <Card className="border-0 shadow-warm-lg">
                 <CardHeader>
                   <CardTitle>Send Us a Message</CardTitle>
                   <CardDescription>
@@ -242,7 +230,7 @@ export default function Contact() {
                         required
                       />
                     </div>
-                    <Button type="submit" size="lg" disabled={isSubmitting}>
+                    <Button type="submit" size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground" disabled={isSubmitting}>
                       {isSubmitting ? (
                         "Sending..."
                       ) : (
@@ -257,7 +245,7 @@ export default function Contact() {
               </Card>
 
               {/* Map */}
-              <Card className="mt-6 overflow-hidden">
+              <Card className="mt-6 overflow-hidden border-0 shadow-warm">
                 <div className="aspect-video w-full">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2372.123456789!2d-113.42!3d53.52!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDMxJzEyLjAiTiAxMTPCsDI1JzEyLjAiVw!5e0!3m2!1sen!2sca!4v1234567890"
@@ -277,7 +265,7 @@ export default function Contact() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
+      <section className="py-16 md:py-20 ida-gradient-blue text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Need Immediate Assistance?
@@ -285,10 +273,10 @@ export default function Contact() {
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
             For urgent prescription needs or immediate questions, give us a call. Our pharmacists are ready to help.
           </p>
-          <Button asChild size="lg" variant="secondary">
+          <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
             <a href="tel:780-440-4555">
               <Phone className="h-5 w-5 mr-2" />
-              Call (780) 440-4555
+              Call 780.440.4555
             </a>
           </Button>
         </div>

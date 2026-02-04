@@ -4,7 +4,7 @@ import { Phone, Mail, MapPin, Clock } from "lucide-react";
 const quickLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Services", href: "/services" },
+  { name: "Our Services", href: "/services" },
   { name: "Products", href: "/products" },
   { name: "Refill RX", href: "/refill" },
   { name: "Contact", href: "/contact" },
@@ -15,27 +15,25 @@ const services = [
   "Compounding",
   "Immunizations",
   "Blister Packaging",
-  "Health Consultations",
+  "Free Delivery",
 ];
 
 export function Footer() {
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold text-lg">
-                V
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-lg leading-tight">Village IDA</span>
-                <span className="text-xs opacity-70 leading-tight">Pharmacy</span>
-              </div>
+            <div className="flex flex-col mb-4">
+              <span className="text-sm font-medium tracking-wider uppercase opacity-80">Village</span>
+              <span className="text-2xl font-bold tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
+                I.D.A.
+              </span>
+              <span className="text-sm font-medium tracking-widest uppercase opacity-80">Pharmacy</span>
             </div>
             <p className="text-sm opacity-80 leading-relaxed">
-              Your trusted neighborhood pharmacy in Edmonton, providing personalized care and quality health services since our founding.
+              Your trusted neighborhood pharmacy in Edmonton, providing personalized care and quality health services to our community.
             </p>
           </div>
 
@@ -79,8 +77,8 @@ export function Footer() {
                 >
                   <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
                   <div>
-                    <div>(780) 440-4555</div>
-                    <div className="text-xs opacity-70">Fax: (780) 440-1931</div>
+                    <div className="font-semibold">780.440.4555</div>
+                    <div className="text-xs opacity-70">Fax: 780.440.1931</div>
                   </div>
                 </a>
               </li>
@@ -100,9 +98,8 @@ export function Footer() {
               <li className="flex items-start gap-3 text-sm opacity-80">
                 <Clock className="h-4 w-4 mt-0.5 flex-shrink-0" />
                 <div>
-                  <div>Mon-Fri: 9:00 AM - 6:00 PM</div>
-                  <div>Saturday: 10:00 AM - 2:00 PM</div>
-                  <div>Sunday: Closed</div>
+                  <div>Mon-Fri: 9:00 AM - 5:00 PM</div>
+                  <div>Sat-Sun: By Appointment</div>
                 </div>
               </li>
             </ul>
@@ -111,7 +108,7 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-background/10">
+      <div className="border-t border-primary-foreground/10">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm opacity-70">
             <p>© {new Date().getFullYear()} Village IDA Pharmacy. All rights reserved.</p>

@@ -124,7 +124,7 @@ export default function Services() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-secondary py-16 md:py-24">
+      <section className="bg-ida-cream py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
@@ -138,14 +138,14 @@ export default function Services() {
       </section>
 
       {/* Main Services */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {services.map((service) => (
-              <Card key={service.title} className="overflow-hidden">
+              <Card key={service.title} className="overflow-hidden border-0 shadow-warm">
                 <CardHeader className="bg-secondary pb-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-lg bg-primary flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center">
                       <service.icon className="h-7 w-7 text-primary-foreground" />
                     </div>
                     <div>
@@ -160,7 +160,7 @@ export default function Services() {
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {service.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -173,7 +173,7 @@ export default function Services() {
       </section>
 
       {/* Additional Services */}
-      <section className="py-16 md:py-24 bg-secondary">
+      <section className="py-16 md:py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -185,7 +185,7 @@ export default function Services() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {additionalServices.map((service) => (
-              <Card key={service.title} className="text-center bg-background border-0">
+              <Card key={service.title} className="text-center bg-white border-0 shadow-warm">
                 <CardContent className="p-6">
                   <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <service.icon className="h-7 w-7 text-primary" />
@@ -204,11 +204,11 @@ export default function Services() {
       </section>
 
       {/* Compounding Highlight */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-              <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl p-8 md:p-12">
+              <div className="bg-gradient-to-br from-primary/10 to-success/10 rounded-2xl p-8 md:p-10 shadow-warm">
                 <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center mb-6">
                   <FlaskConical className="h-10 w-10 text-primary-foreground" />
                 </div>
@@ -220,15 +220,15 @@ export default function Services() {
                 </p>
                 <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <div className="w-2 h-2 rounded-full bg-success" />
                     Personalized formulations
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <div className="w-2 h-2 rounded-full bg-success" />
                     Quality-tested ingredients
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <div className="w-2 h-2 rounded-full bg-success" />
                     Expert pharmacist consultations
                   </li>
                 </ul>
@@ -250,7 +250,7 @@ export default function Services() {
                 </p>
               </div>
               <div className="mt-8">
-                <Button asChild size="lg">
+                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                   <Link to="/contact">
                     Inquire About Compounding
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -263,7 +263,7 @@ export default function Services() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
+      <section className="py-16 md:py-20 ida-gradient-blue text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Get Started?
@@ -272,10 +272,10 @@ export default function Services() {
             Whether you need a prescription refill or want to learn more about our services, we're here to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" variant="secondary">
+            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
               <Link to="/refill">Refill Prescription</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
               <Link to="/contact">Contact Us</Link>
             </Button>
           </div>
