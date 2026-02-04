@@ -17,8 +17,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 210 11% 20%;
 
-    /* Primary - IDA Blue */
-    --primary: 215 85% 35%;
+    /* Primary - IDA Blue (matching logo) */
+    --primary: 215 85% 40%;
     --primary-foreground: 0 0% 100%;
 
     /* Secondary - Warm Off-White */
@@ -46,8 +46,8 @@
     --radius: 1rem;
 
     /* Custom Village IDA tokens */
-    --ida-blue: 215 85% 35%;
-    --ida-blue-dark: 215 90% 25%;
+    --ida-blue: 215 85% 40%;
+    --ida-blue-dark: 215 90% 30%;
     --ida-blue-light: 215 60% 95%;
     --ida-red: 0 75% 50%;
     --ida-red-light: 0 60% 95%;
