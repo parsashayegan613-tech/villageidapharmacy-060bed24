@@ -51,32 +51,34 @@ export function VillageIdaLogo({
 
 export function VillageIdaLogoInline({ 
   className = "",
-  dark = false
 }: { 
   className?: string;
-  dark?: boolean;
 }) {
   return (
-    <div className={`flex flex-col items-center ${className}`}>
+    <div 
+      className={`flex flex-col items-center justify-center bg-[hsl(215,85%,35%)] rounded-lg px-4 py-2 ${className}`}
+    >
       <span 
-        className={`text-xs font-bold tracking-widest uppercase ${dark ? 'text-white/90' : 'text-primary'}`}
+        className="text-white font-bold tracking-[0.2em] uppercase"
+        style={{ fontSize: 10 }}
       >
         Village
       </span>
       <span 
-        className="font-black text-2xl tracking-wide"
+        className="font-black tracking-wide leading-none"
         style={{ 
-          color: dark ? 'white' : 'hsl(215 85% 35%)',
-          textShadow: dark 
-            ? '1.5px 0 0 hsl(0 75% 50%), -1.5px 0 0 hsl(0 75% 50%), 0 1.5px 0 hsl(0 75% 50%), 0 -1.5px 0 hsl(0 75% 50%)'
-            : '1.5px 0 0 hsl(0 75% 50%), -1.5px 0 0 hsl(0 75% 50%), 0 1.5px 0 hsl(0 75% 50%), 0 -1.5px 0 hsl(0 75% 50%)',
+          fontSize: 28,
+          color: 'white',
+          textShadow: '2px 0 0 hsl(0 75% 50%), -2px 0 0 hsl(0 75% 50%), 0 2px 0 hsl(0 75% 50%), 0 -2px 0 hsl(0 75% 50%), 1px 1px 0 hsl(0 75% 50%), -1px -1px 0 hsl(0 75% 50%), 1px -1px 0 hsl(0 75% 50%), -1px 1px 0 hsl(0 75% 50%)',
           fontFamily: 'Arial Black, sans-serif',
+          letterSpacing: '0.02em'
         }}
       >
         I.D.A.
       </span>
       <span 
-        className={`text-[10px] font-bold tracking-[0.15em] uppercase ${dark ? 'text-white/90' : 'text-primary'}`}
+        className="text-white font-bold tracking-[0.15em] uppercase"
+        style={{ fontSize: 9 }}
       >
         Pharmacy
       </span>
