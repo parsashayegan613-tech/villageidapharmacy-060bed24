@@ -14,7 +14,14 @@ import {
   ClipboardCheck,
   Users,
   ArrowRight,
+  CheckCircle,
 } from "lucide-react";
+
+// Import images
+import pharmacistConsultation from "@/assets/pharmacist-consultation.jpg";
+import compoundingService from "@/assets/compounding-service.jpg";
+import fluShotService from "@/assets/flu-shot-service.jpg";
+import deliveryService from "@/assets/delivery-service.jpg";
 
 const services = [
   {
@@ -24,49 +31,45 @@ const services = [
     features: [
       "New prescription filling",
       "Prescription refills",
-      "Prescription transfers from other pharmacies",
-      "Medication synchronization",
+      "Prescription transfers",
       "Drug interaction checks",
-      "Insurance claim processing",
+      "Insurance processing",
     ],
   },
   {
     icon: FlaskConical,
     title: "Compounding",
     description: "Custom-formulated medications tailored to your specific health needs.",
+    image: compoundingService,
     features: [
-      "Hormone replacement therapy",
+      "Hormone replacement",
       "Pediatric formulations",
-      "Dermatological preparations",
-      "Veterinary compounds",
-      "Allergen-free medications",
-      "Custom strength and dosage forms",
+      "Allergen-free options",
+      "Custom dosage forms",
     ],
   },
   {
     icon: Syringe,
     title: "Immunizations",
     description: "Convenient vaccination services administered by certified pharmacists.",
+    image: fluShotService,
     features: [
       "Flu shots (seasonal)",
-      "COVID-19 vaccinations",
+      "COVID-19 vaccines",
       "Travel vaccines",
       "Shingles vaccine",
-      "Pneumonia vaccine",
-      "Hepatitis A & B vaccines",
     ],
   },
   {
     icon: Stethoscope,
     title: "Health Consultations",
     description: "One-on-one sessions with our pharmacists for comprehensive medication reviews.",
+    image: pharmacistConsultation,
     features: [
-      "Medication therapy management",
+      "Medication reviews",
       "Diabetes management",
       "Blood pressure monitoring",
-      "Cholesterol screening",
-      "Smoking cessation programs",
-      "Weight management advice",
+      "Smoking cessation",
     ],
   },
   {
@@ -74,24 +77,21 @@ const services = [
     title: "Blister Packaging",
     description: "Organized medication packaging for easier daily management and compliance.",
     features: [
-      "Weekly medication organizers",
+      "Weekly organizers",
       "Multi-dose packaging",
-      "Clear labeling with date/time",
+      "Clear labeling",
       "Ideal for seniors",
-      "Reduces medication errors",
-      "Sync with prescription refills",
     ],
   },
   {
     icon: Truck,
-    title: "Delivery Services",
+    title: "Free Delivery",
     description: "Convenient prescription delivery right to your home or office.",
+    image: deliveryService,
     features: [
       "Free local delivery",
-      "Same-day delivery available",
-      "Scheduled recurring deliveries",
-      "Signature confirmation",
-      "Temperature-controlled transport",
+      "Same-day available",
+      "Scheduled deliveries",
       "Delivery reminders",
     ],
   },
@@ -124,44 +124,62 @@ export default function Services() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-ida-cream py-16 md:py-20">
-        <div className="container mx-auto px-4">
+      <section className="relative py-20 md:py-28 bg-primary text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 right-20 w-64 h-64 rounded-full border-4 border-white" />
+          <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full border-4 border-white" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <span className="text-accent font-semibold uppercase tracking-wider">What We Offer</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-2 mb-6">
               Our Pharmacy Services
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-xl opacity-90">
               Comprehensive health services designed to meet all your pharmaceutical needs. From prescription filling to specialized compounding, we're here to help.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Main Services */}
-      <section className="py-16 md:py-20 bg-white">
+      {/* Main Services Grid */}
+      <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {services.map((service) => (
-              <Card key={service.title} className="overflow-hidden border-0 shadow-warm">
-                <CardHeader className="bg-secondary pb-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center">
-                      <service.icon className="h-7 w-7 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl">{service.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {service.description}
-                      </p>
+              <Card key={service.title} className="overflow-hidden border-0 shadow-warm-lg group hover:shadow-2xl transition-shadow">
+                {service.image ? (
+                  <div className="relative h-48 overflow-hidden">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
+                        <service.icon className="h-6 w-6 text-accent-foreground" />
+                      </div>
+                      <h3 className="text-xl font-bold text-white">{service.title}</h3>
                     </div>
                   </div>
-                </CardHeader>
-                <CardContent className="pt-6">
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                ) : (
+                  <CardHeader className="bg-primary pb-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center">
+                        <service.icon className="h-7 w-7 text-primary-foreground" />
+                      </div>
+                      <CardTitle className="text-xl text-primary-foreground">{service.title}</CardTitle>
+                    </div>
+                  </CardHeader>
+                )}
+                <CardContent className="p-6">
+                  <p className="text-muted-foreground mb-4">{service.description}</p>
+                  <ul className="grid grid-cols-2 gap-2">
                     {service.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0" />
-                        {feature}
+                      <li key={index} className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-success flex-shrink-0" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -173,10 +191,11 @@ export default function Services() {
       </section>
 
       {/* Additional Services */}
-      <section className="py-16 md:py-20 bg-secondary">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <span className="text-primary font-semibold text-sm uppercase tracking-wider">More Services</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
               Additional Services
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -185,12 +204,12 @@ export default function Services() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {additionalServices.map((service) => (
-              <Card key={service.title} className="text-center bg-white border-0 shadow-warm">
-                <CardContent className="p-6">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <service.icon className="h-7 w-7 text-primary" />
+              <Card key={service.title} className="text-center bg-ida-cream border-0 shadow-warm hover:shadow-warm-lg transition-shadow">
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <service.icon className="h-8 w-8 text-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                  <h3 className="text-lg font-bold text-foreground mb-2">
                     {service.title}
                   </h3>
                   <p className="text-muted-foreground text-sm">
@@ -204,75 +223,65 @@ export default function Services() {
       </section>
 
       {/* Compounding Highlight */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-20 bg-ida-cream">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
-              <div className="bg-gradient-to-br from-primary/10 to-success/10 rounded-2xl p-8 md:p-10 shadow-warm">
-                <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center mb-6">
-                  <FlaskConical className="h-10 w-10 text-primary-foreground" />
+              <div className="relative">
+                <img 
+                  src={compoundingService}
+                  alt="Compounding Services"
+                  className="rounded-2xl shadow-warm-lg w-full"
+                />
+                <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground p-6 rounded-xl shadow-lg hidden lg:block">
+                  <FlaskConical className="h-8 w-8 mb-2" />
+                  <div className="text-sm font-bold">Custom Medications</div>
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-4">
-                  Specialized Compounding
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  Our compounding services allow us to create medications that aren't commercially available. Whether you need a different dosage form, strength, or flavor, we can customize your prescription.
-                </p>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-success" />
-                    Personalized formulations
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-success" />
-                    Quality-tested ingredients
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-success" />
-                    Expert pharmacist consultations
-                  </li>
-                </ul>
               </div>
             </div>
             <div className="order-1 md:order-2">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+              <span className="text-accent font-semibold text-sm uppercase tracking-wider">Specialized Service</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-6">
                 Custom Medications for Your Unique Needs
               </h2>
-              <div className="space-y-4 text-muted-foreground">
-                <p>
-                  Not everyone responds the same way to standard medications. Our compounding pharmacy can create custom medications tailored specifically to your needs.
-                </p>
-                <p>
-                  From hormone replacement therapy to pediatric formulations, our experienced pharmacists work with your healthcare provider to create the perfect solution for you.
-                </p>
-                <p>
-                  We also offer compounding for patients with allergies to dyes, lactose, gluten, or other inactive ingredients found in commercial medications.
-                </p>
-              </div>
-              <div className="mt-8">
-                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                  <Link to="/contact">
-                    Inquire About Compounding
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
+              <p className="text-muted-foreground mb-6 text-lg">
+                Not everyone responds the same way to standard medications. Our compounding pharmacy can create custom medications tailored specifically to your needs.
+              </p>
+              <ul className="space-y-3 mb-8">
+                {[
+                  "Personalized formulations",
+                  "Quality-tested ingredients",
+                  "Expert pharmacist consultations",
+                  "Allergen-free options available",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-3">
+                    <CheckCircle className="h-5 w-5 text-success" />
+                    <span className="text-foreground">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                <Link to="/contact">
+                  Inquire About Compounding
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-20 ida-gradient-blue text-white">
+      <section className="py-20 ida-gradient-blue text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Get Started?
           </h2>
-          <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
             Whether you need a prescription refill or want to learn more about our services, we're here to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg">
               <Link to="/refill">Refill Prescription</Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
