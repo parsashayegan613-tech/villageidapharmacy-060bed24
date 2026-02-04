@@ -1,365 +1,94 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useState } from "react";
-import { toast } from "sonner";
-import { Clock, Truck, CheckCircle, Phone, Info, Pill } from "lucide-react";
+import { CheckCircle, Plus, Trash2, Phone, Home, ArrowRight, ArrowLeft } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+type Step = 1 | 2 | "confirmation";
 
 export default function Refill() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [step, setStep] = useState<Step>(1);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    dateOfBirth: "",
-    prescriptionNumbers: "",
-    pickupMethod: "pickup",
-    deliveryAddress: "",
-    notes: "",
+    name: "", phone: "", email: "", contactMethod: "call", consent: false,
+    prescriptions: [""], deliveryType: "pickup", address: "", city: "", postalCode: "", notes: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const addPrescription = () => setFormData(prev => ({ ...prev, prescriptions: [...prev.prescriptions, ""] }));
+  const removePrescription = (index: number) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.filter((_, i) => i !== index) }));
+  const updatePrescription = (index: number, value: string) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.map((p, i) => i === index ? value : p) }));
+  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setStep("confirmation"); };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    toast.success("Refill request submitted!", {
-      description: "We'll contact you when your prescription is ready.",
-    });
-
-    setIsSubmitting(false);
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      dateOfBirth: "",
-      prescriptionNumbers: "",
-      pickupMethod: "pickup",
-      deliveryAddress: "",
-      notes: "",
-    });
-  };
+  if (step === "confirmation") {
+    return (
+      <Layout>
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto px-4">
+            <div className="max-w-lg mx-auto text-center">
+              <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="h-10 w-10 text-accent" />
+              </div>
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">We received your request</h1>
+              <p className="text-muted-foreground text-lg mb-8">We'll respond within 1 business day to confirm your refill.</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg"><a href="tel:780-440-4555"><Phone className="h-4 w-4 mr-2" />Call Now</a></Button>
+                <Button asChild size="lg" variant="outline"><Link to="/"><Home className="h-4 w-4 mr-2" />Back to Home</Link></Button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div className="h-16 md:hidden" />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="bg-ida-cream py-16 md:py-20">
+      <section className="py-12 md:py-16 bg-secondary">
+        <div className="container mx-auto px-4"><div className="max-w-2xl"><h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Refill Request</h1><p className="text-muted-foreground text-lg">Submit your refill request online. We'll confirm and have it ready for pickup or delivery.</p></div></div>
+      </section>
+      <div className="border-b border-border bg-card">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center gap-4">
+            <div className={cn("flex items-center gap-2", step === 1 ? "text-primary" : "text-muted-foreground")}><div className={cn("w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium", step === 1 ? "bg-primary text-primary-foreground" : "bg-muted")}>1</div><span className="hidden sm:inline font-medium">Your Info</span></div>
+            <div className="flex-1 h-px bg-border" />
+            <div className={cn("flex items-center gap-2", step === 2 ? "text-primary" : "text-muted-foreground")}><div className={cn("w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium", step === 2 ? "bg-primary text-primary-foreground" : "bg-muted")}>2</div><span className="hidden sm:inline font-medium">Refill Details</span></div>
+          </div>
+        </div>
+      </div>
+      <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 rounded-xl bg-accent flex items-center justify-center">
-                <Pill className="h-8 w-8 text-accent-foreground" />
-              </div>
-              <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-                  Refill Rx
-                </h1>
-                <p className="text-muted-foreground">Quick and easy prescription refills</p>
-              </div>
-            </div>
-            <p className="text-lg text-muted-foreground">
-              Refilling your prescription is as simple as filling out the form below. We'll prepare it and notify you when it's ready for pickup or delivery.
-            </p>
+          <div className="max-w-xl mx-auto">
+            <form onSubmit={handleSubmit}>
+              {step === 1 && (
+                <div className="space-y-6">
+                  <div><Label htmlFor="name">Full Name *</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-2" /></div>
+                  <div><Label htmlFor="phone">Phone Number *</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-2" /></div>
+                  <div><Label htmlFor="email">Email (optional)</Label><Input id="email" type="email" value={formData.email} onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))} className="mt-2" /></div>
+                  <div><Label>Preferred Contact Method *</Label><RadioGroup value={formData.contactMethod} onValueChange={(value) => setFormData(prev => ({ ...prev, contactMethod: value }))} className="mt-2 flex gap-4"><div className="flex items-center space-x-2"><RadioGroupItem value="call" id="call" /><Label htmlFor="call" className="font-normal">Call</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="text" id="text" /><Label htmlFor="text" className="font-normal">Text</Label></div></RadioGroup></div>
+                  <div className="flex items-start space-x-3"><Checkbox id="consent" checked={formData.consent} onCheckedChange={(checked) => setFormData(prev => ({ ...prev, consent: !!checked }))} /><Label htmlFor="consent" className="text-sm font-normal leading-relaxed">I consent to be contacted at the phone number provided regarding my refill request.</Label></div>
+                  <Button type="button" onClick={() => setStep(2)} disabled={!formData.name || !formData.phone || !formData.consent} className="w-full" size="lg">Continue<ArrowRight className="h-4 w-4 ml-2" /></Button>
+                </div>
+              )}
+              {step === 2 && (
+                <div className="space-y-6">
+                  <div><Label>Prescription Numbers</Label><div className="space-y-3 mt-2">{formData.prescriptions.map((rx, index) => (<div key={index} className="flex gap-2"><Input value={rx} onChange={(e) => updatePrescription(index, e.target.value)} placeholder={`Prescription #${index + 1}`} />{formData.prescriptions.length > 1 && (<Button type="button" variant="outline" size="icon" onClick={() => removePrescription(index)}><Trash2 className="h-4 w-4" /></Button>)}</div>))}</div><Button type="button" variant="ghost" size="sm" onClick={addPrescription} className="mt-2"><Plus className="h-4 w-4 mr-2" />Add Another</Button></div>
+                  <div><Label>Pickup or Delivery</Label><RadioGroup value={formData.deliveryType} onValueChange={(value) => setFormData(prev => ({ ...prev, deliveryType: value }))} className="mt-2 grid grid-cols-2 gap-4"><label className={cn("flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-colors", formData.deliveryType === "pickup" ? "border-primary bg-primary/5" : "border-border hover:border-muted-foreground/50")}><RadioGroupItem value="pickup" id="pickup" className="sr-only" /><span className="font-medium">Pickup</span></label><label className={cn("flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-colors", formData.deliveryType === "delivery" ? "border-primary bg-primary/5" : "border-border hover:border-muted-foreground/50")}><RadioGroupItem value="delivery" id="delivery" className="sr-only" /><span className="font-medium">Delivery</span></label></RadioGroup></div>
+                  {formData.deliveryType === "delivery" && (<div className="space-y-4 p-4 bg-muted rounded-xl"><div><Label htmlFor="address">Street Address *</Label><Input id="address" value={formData.address} onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))} required={formData.deliveryType === "delivery"} className="mt-2" /></div><div className="grid grid-cols-2 gap-4"><div><Label htmlFor="city">City</Label><Input id="city" value={formData.city} onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))} className="mt-2" defaultValue="Edmonton" /></div><div><Label htmlFor="postalCode">Postal Code</Label><Input id="postalCode" value={formData.postalCode} onChange={(e) => setFormData(prev => ({ ...prev, postalCode: e.target.value }))} className="mt-2" /></div></div></div>)}
+                  <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will confirm everything by phone.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
+                  <div className="flex gap-4"><Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1" size="lg"><ArrowLeft className="h-4 w-4 mr-2" />Back</Button><Button type="submit" className="flex-1" size="lg">Submit Request</Button></div>
+                </div>
+              )}
+            </form>
           </div>
         </div>
       </section>
-
-      {/* Info Cards */}
-      <section className="py-8 bg-white border-b border-border">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex items-center gap-4 p-4 bg-success/10 rounded-xl">
-              <Clock className="h-8 w-8 text-success flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-foreground">Quick Turnaround</h3>
-                <p className="text-sm text-muted-foreground">Most refills ready same day</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-4 bg-success/10 rounded-xl">
-              <Truck className="h-8 w-8 text-success flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-foreground">Free Delivery</h3>
-                <p className="text-sm text-muted-foreground">Local delivery available</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4 p-4 bg-success/10 rounded-xl">
-              <CheckCircle className="h-8 w-8 text-success flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-foreground">We'll Notify You</h3>
-                <p className="text-sm text-muted-foreground">Get a call when it's ready</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Refill Form */}
-      <section className="py-16 md:py-20 bg-secondary">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Form */}
-            <div className="lg:col-span-2">
-              <Card className="border-0 shadow-warm">
-                <CardHeader>
-                  <CardTitle>Refill Request Form</CardTitle>
-                  <CardDescription>
-                    Fill out the form below and we'll process your refill request.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Personal Information */}
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-4">Personal Information</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="firstName">First Name *</Label>
-                          <Input
-                            id="firstName"
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="lastName">Last Name *</Label>
-                          <Input
-                            id="lastName"
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email *</Label>
-                          <Input
-                            id="email"
-                            name="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">Phone *</Label>
-                          <Input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                        <div className="space-y-2 md:col-span-2">
-                          <Label htmlFor="dateOfBirth">Date of Birth *</Label>
-                          <Input
-                            id="dateOfBirth"
-                            name="dateOfBirth"
-                            type="date"
-                            value={formData.dateOfBirth}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Prescription Information */}
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-4">Prescription Information</h3>
-                      <div className="space-y-2">
-                        <Label htmlFor="prescriptionNumbers">Prescription Number(s) *</Label>
-                        <Textarea
-                          id="prescriptionNumbers"
-                          name="prescriptionNumbers"
-                          placeholder="Enter one prescription number per line, or describe the medications you need refilled"
-                          value={formData.prescriptionNumbers}
-                          onChange={handleInputChange}
-                          rows={4}
-                          required
-                        />
-                        <p className="text-sm text-muted-foreground">
-                          You can find your prescription number on your medication label.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Pickup Method */}
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-4">Pickup Method</h3>
-                      <RadioGroup
-                        value={formData.pickupMethod}
-                        onValueChange={(value) =>
-                          setFormData((prev) => ({ ...prev, pickupMethod: value }))
-                        }
-                        className="space-y-3"
-                      >
-                        <div className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-muted transition-colors bg-white">
-                          <RadioGroupItem value="pickup" id="pickup" />
-                          <Label htmlFor="pickup" className="flex-1 cursor-pointer">
-                            <span className="font-medium">In-Store Pickup</span>
-                            <p className="text-sm text-muted-foreground">
-                              Pick up at 7004 98 Ave NW, Edmonton
-                            </p>
-                          </Label>
-                        </div>
-                        <div className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-muted transition-colors bg-white">
-                          <RadioGroupItem value="delivery" id="delivery" />
-                          <Label htmlFor="delivery" className="flex-1 cursor-pointer">
-                            <span className="font-medium">Free Delivery</span>
-                            <p className="text-sm text-muted-foreground">
-                              Free local delivery to your address
-                            </p>
-                          </Label>
-                        </div>
-                      </RadioGroup>
-
-                      {formData.pickupMethod === "delivery" && (
-                        <div className="mt-4 space-y-2">
-                          <Label htmlFor="deliveryAddress">Delivery Address *</Label>
-                          <Textarea
-                            id="deliveryAddress"
-                            name="deliveryAddress"
-                            placeholder="Enter your complete delivery address"
-                            value={formData.deliveryAddress}
-                            onChange={handleInputChange}
-                            rows={2}
-                            required={formData.pickupMethod === "delivery"}
-                          />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Additional Notes */}
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-4">Additional Notes</h3>
-                      <div className="space-y-2">
-                        <Label htmlFor="notes">Notes (Optional)</Label>
-                        <Textarea
-                          id="notes"
-                          name="notes"
-                          placeholder="Any special instructions or questions?"
-                          value={formData.notes}
-                          onChange={handleInputChange}
-                          rows={3}
-                        />
-                      </div>
-                    </div>
-
-                    <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={isSubmitting}>
-                      {isSubmitting ? "Submitting..." : "Submit Refill Request"}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Sidebar */}
-            <div className="space-y-6">
-              <Card className="bg-accent text-accent-foreground border-0">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Info className="h-5 w-5" />
-                    Need Help?
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-sm opacity-90">
-                    If you have questions about your prescription or need immediate assistance, please call us directly.
-                  </p>
-                  <Button asChild variant="secondary" className="w-full">
-                    <a href="tel:780-440-4555">
-                      <Phone className="h-4 w-4 mr-2" />
-                      Call 780.440.4555
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-warm">
-                <CardHeader>
-                  <CardTitle>What to Expect</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ol className="space-y-4">
-                    <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-medium">
-                        1
-                      </span>
-                      <div>
-                        <p className="font-medium text-foreground">Submit Request</p>
-                        <p className="text-sm text-muted-foreground">Fill out the form with your details</p>
-                      </div>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-medium">
-                        2
-                      </span>
-                      <div>
-                        <p className="font-medium text-foreground">We Process</p>
-                        <p className="text-sm text-muted-foreground">Our team prepares your prescription</p>
-                      </div>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-medium">
-                        3
-                      </span>
-                      <div>
-                        <p className="font-medium text-foreground">You're Notified</p>
-                        <p className="text-sm text-muted-foreground">We call when it's ready</p>
-                      </div>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-medium">
-                        4
-                      </span>
-                      <div>
-                        <p className="font-medium text-foreground">Pickup or Delivery</p>
-                        <p className="text-sm text-muted-foreground">Get your medications your way</p>
-                      </div>
-                    </li>
-                  </ol>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-warm">
-                <CardHeader>
-                  <CardTitle>Hours of Operation</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Monday - Friday</span>
-                      <span className="font-medium">9:00 AM - 5:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Saturday - Sunday</span>
-                      <span className="font-medium">By Appointment</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="h-16 md:hidden" />
     </Layout>
   );
 }

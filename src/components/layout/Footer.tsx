@@ -1,46 +1,93 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { VillageIdaLogo } from "@/components/VillageIdaLogo";
+import { MapPin, Phone, Printer, Mail, Clock } from "lucide-react";
 
 const quickLinks = [
-  { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
-  { name: "Our Services", href: "/services" },
-  { name: "Products", href: "/products" },
-  { name: "Refill RX", href: "/refill" },
+  { name: "Refill Request", href: "/refill" },
+  { name: "Transfer to Us", href: "/transfer" },
+  { name: "Request Appointment", href: "/appointments" },
+  { name: "Services", href: "/services" },
+  { name: "Compounding", href: "/compounding" },
   { name: "Contact", href: "/contact" },
 ];
 
-const services = [
-  "Prescription Services",
-  "Compounding",
-  "Flu Shots & Immunizations",
-  "Blister Packaging",
-  "Free Delivery",
+const hours = [
+  { day: "Monday – Friday", time: "9:00 AM – 5:00 PM" },
+  { day: "Saturday & Sunday", time: "By Appointment" },
 ];
 
 export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Logo and About */}
-          <div>
-            <VillageIdaLogo size="default" className="mb-4" />
-            <p className="text-sm opacity-80 leading-relaxed mt-4">
-              Your trusted neighborhood pharmacy in Edmonton, providing personalized care and quality health services to our community for over 25 years.
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          {/* Brand & About */}
+          <div className="lg:col-span-1">
+            <Link to="/" className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-primary-foreground/20 flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-lg">V</span>
+              </div>
+              <div>
+                <div className="font-semibold">Village IDA</div>
+                <div className="text-xs opacity-80">Pharmacy</div>
+              </div>
+            </Link>
+            <p className="text-sm opacity-80 leading-relaxed">
+              Your local Edmonton pharmacy for personalized care, prescription services, and trusted health advice.
             </p>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="font-semibold mb-4 text-lg">Contact</h3>
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-start gap-3">
+                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-80" />
+                <span className="opacity-90">7004 98 Ave, Edmonton, AB T6A 0A5</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="h-4 w-4 flex-shrink-0 opacity-80" />
+                <a href="tel:780-440-4555" className="opacity-90 hover:opacity-100 transition-opacity">
+                  780-440-4555
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Printer className="h-4 w-4 flex-shrink-0 opacity-80" />
+                <span className="opacity-90">780-440-1931</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="h-4 w-4 flex-shrink-0 opacity-80" />
+                <a href="mailto:villida@telus.net" className="opacity-90 hover:opacity-100 transition-opacity">
+                  villida@telus.net
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Hours */}
+          <div>
+            <h3 className="font-semibold mb-4 text-lg">Hours</h3>
+            <ul className="space-y-2 text-sm">
+              {hours.map((item) => (
+                <li key={item.day} className="flex items-start gap-3">
+                  <Clock className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-80" />
+                  <div>
+                    <div className="opacity-90 font-medium">{item.day}</div>
+                    <div className="opacity-70">{item.time}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-lg mb-4 border-b border-white/20 pb-2">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="font-semibold mb-4 text-lg">Quick Links</h3>
+            <ul className="space-y-2 text-sm">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-sm opacity-80 hover:opacity-100 hover:underline transition-opacity"
+                    className="opacity-80 hover:opacity-100 transition-opacity inline-block py-0.5"
                   >
                     {link.name}
                   </Link>
@@ -48,68 +95,15 @@ export function Footer() {
               ))}
             </ul>
           </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4 border-b border-white/20 pb-2">Our Services</h3>
-            <ul className="space-y-2">
-              {services.map((service) => (
-                <li key={service} className="text-sm opacity-80">
-                  {service}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4 border-b border-white/20 pb-2">Contact Us</h3>
-            <ul className="space-y-4">
-              <li>
-                <a
-                  href="tel:780-440-4555"
-                  className="flex items-start gap-3 text-sm hover:opacity-100 transition-opacity group"
-                >
-                  <Phone className="h-5 w-5 mt-0.5 flex-shrink-0 text-accent" />
-                  <div>
-                    <div className="font-bold text-lg group-hover:underline">780.440.4555</div>
-                    <div className="text-xs opacity-70">Fax: 780.440.1931</div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:villida@telus.net"
-                  className="flex items-center gap-3 text-sm opacity-80 hover:opacity-100 transition-opacity"
-                >
-                  <Mail className="h-5 w-5 flex-shrink-0 text-accent" />
-                  <span>villida@telus.net</span>
-                </a>
-              </li>
-              <li className="flex items-start gap-3 text-sm opacity-80">
-                <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0 text-accent" />
-                <span>7004 98 Ave NW<br />Edmonton, AB T6B 0K7</span>
-              </li>
-              <li className="flex items-start gap-3 text-sm opacity-80">
-                <Clock className="h-5 w-5 mt-0.5 flex-shrink-0 text-success" />
-                <div>
-                  <div>Mon-Fri: 9:00 AM - 5:00 PM</div>
-                  <div>Sat-Sun: By Appointment</div>
-                </div>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-primary-foreground/20 bg-primary/90">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm opacity-80">
+      {/* Bottom Bar */}
+      <div className="border-t border-primary-foreground/20">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-sm opacity-70">
             <p>© {new Date().getFullYear()} Village IDA Pharmacy. All rights reserved.</p>
-            <p className="text-center md:text-right text-xs">
-              This pharmacy is licensed by the Alberta College of Pharmacy.
-            </p>
+            <p>Member of the IDA Pharmacy Group</p>
           </div>
         </div>
       </div>
