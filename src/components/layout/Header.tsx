@@ -52,14 +52,14 @@ export function Header() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <div className="flex flex-col items-center justify-center bg-primary rounded-lg px-3 py-1.5">
-                <span className="text-white font-bold tracking-[0.25em] uppercase text-[7px]">
+              <div className="flex flex-col items-center justify-center bg-primary rounded-lg px-4 py-2">
+                <span className="text-white font-bold tracking-[0.25em] uppercase text-[8px]">
                   Village
                 </span>
                 <span 
                   className="font-black leading-none text-white"
                   style={{ 
-                    fontSize: 18,
+                    fontSize: 22,
                     textShadow: '1.5px 0 0 hsl(0,70%,50%), -1.5px 0 0 hsl(0,70%,50%), 0 1.5px 0 hsl(0,70%,50%), 0 -1.5px 0 hsl(0,70%,50%), 1px 1px 0 hsl(0,70%,50%), -1px -1px 0 hsl(0,70%,50%), 1px -1px 0 hsl(0,70%,50%), -1px 1px 0 hsl(0,70%,50%)',
                     fontFamily: 'Arial Black, Impact, sans-serif',
                     letterSpacing: '0.02em'
@@ -67,7 +67,7 @@ export function Header() {
                 >
                   I.D.A.
                 </span>
-                <span className="text-white font-bold tracking-[0.2em] uppercase text-[6px]">
+                <span className="text-white font-bold tracking-[0.2em] uppercase text-[7px]">
                   Pharmacy
                 </span>
               </div>
