@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
@@ -18,9 +19,9 @@ const services = [
   "Health Consultations",
 ];
 
-export function Footer() {
+export const Footer = forwardRef<HTMLElement>(function Footer(_, ref) {
   return (
-    <footer className="bg-foreground text-background">
+    <footer ref={ref} className="bg-foreground text-background">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About */}
@@ -123,4 +124,6 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+Footer.displayName = "Footer";
