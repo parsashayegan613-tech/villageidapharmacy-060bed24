@@ -1,295 +1,279 @@
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CTABand } from "@/components/CTABand";
+import {
+  Truck,
+  Package,
+  ClipboardCheck,
+  HeartPulse,
+  Cigarette,
+  Syringe,
+  FlaskConical,
+  Home as HomeIcon,
+  X,
+  CheckCircle,
+  Clock,
+  FileText,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import {
-  Pill,
-  Stethoscope,
-  Syringe,
-  Heart,
-  Package,
-  Truck,
-  FlaskConical,
-  Thermometer,
-  ClipboardCheck,
-  Users,
-  ArrowRight,
-  CheckCircle,
-} from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
-// Import images
-import pharmacistConsultation from "@/assets/pharmacist-consultation.jpg";
-import compoundingService from "@/assets/compounding-service.jpg";
-import fluShotService from "@/assets/flu-shot-service.jpg";
-import deliveryService from "@/assets/delivery-service.jpg";
+const categories = [
+  { id: "all", label: "All" },
+  { id: "medication", label: "Medication Support" },
+  { id: "delivery", label: "Delivery" },
+  { id: "injections", label: "Injections" },
+  { id: "compounding", label: "Compounding" },
+  { id: "wellness", label: "Wellness" },
+];
 
 const services = [
   {
-    icon: Pill,
-    title: "Prescription Services",
-    description: "Fast, accurate prescription filling with personalized consultation for every patient.",
-    features: [
-      "New prescription filling",
-      "Prescription refills",
-      "Prescription transfers",
-      "Drug interaction checks",
-      "Insurance processing",
-    ],
+    id: "delivery",
+    icon: Truck,
+    title: "Delivery",
+    description: "Free prescription delivery to your door.",
+    category: "delivery",
+    whoItsFor: "Anyone in Edmonton who prefers home delivery.",
+    howItWorks: "Request delivery when you refill — we'll call to confirm.",
+    whatToBring: "Nothing required for delivery.",
+    timing: "Same-day delivery available for most orders.",
+    ctaLabel: "Request Refill with Delivery",
+    ctaHref: "/refill",
   },
   {
-    icon: FlaskConical,
-    title: "Compounding",
-    description: "Custom-formulated medications tailored to your specific health needs.",
-    image: compoundingService,
-    features: [
-      "Hormone replacement",
-      "Pediatric formulations",
-      "Allergen-free options",
-      "Custom dosage forms",
-    ],
-  },
-  {
-    icon: Syringe,
-    title: "Immunizations",
-    description: "Convenient vaccination services administered by certified pharmacists.",
-    image: fluShotService,
-    features: [
-      "Flu shots (seasonal)",
-      "COVID-19 vaccines",
-      "Travel vaccines",
-      "Shingles vaccine",
-    ],
-  },
-  {
-    icon: Stethoscope,
-    title: "Health Consultations",
-    description: "One-on-one sessions with our pharmacists for comprehensive medication reviews.",
-    image: pharmacistConsultation,
-    features: [
-      "Medication reviews",
-      "Diabetes management",
-      "Blood pressure monitoring",
-      "Smoking cessation",
-    ],
-  },
-  {
+    id: "blister",
     icon: Package,
     title: "Blister Packaging",
-    description: "Organized medication packaging for easier daily management and compliance.",
-    features: [
-      "Weekly organizers",
-      "Multi-dose packaging",
-      "Clear labeling",
-      "Ideal for seniors",
-    ],
+    description: "Medications organized by day and time.",
+    category: "medication",
+    whoItsFor: "Patients managing multiple medications daily.",
+    howItWorks: "We pre-sort your medications into easy weekly packs.",
+    whatToBring: "List of current medications.",
+    timing: "Setup takes 1-2 days, then weekly refills.",
+    ctaLabel: "Contact Us",
+    ctaHref: "/contact",
   },
   {
-    icon: Truck,
-    title: "Free Delivery",
-    description: "Convenient prescription delivery right to your home or office.",
-    image: deliveryService,
-    features: [
-      "Free local delivery",
-      "Same-day available",
-      "Scheduled deliveries",
-      "Delivery reminders",
-    ],
-  },
-];
-
-const additionalServices = [
-  {
-    icon: Thermometer,
-    title: "Medical Equipment",
-    description: "Blood pressure monitors, glucometers, mobility aids, and more.",
-  },
-  {
+    id: "medication-reviews",
     icon: ClipboardCheck,
-    title: "Insurance & Claims",
-    description: "We work with all major insurance providers to process your claims.",
+    title: "Medication Reviews",
+    description: "One-on-one review of your medications.",
+    category: "medication",
+    whoItsFor: "Anyone wanting to understand their medications better.",
+    howItWorks: "Book a private session with our pharmacist.",
+    whatToBring: "All current medications or a list.",
+    timing: "Sessions typically last 15-30 minutes.",
+    ctaLabel: "Request Appointment",
+    ctaHref: "/appointments",
   },
   {
-    icon: Users,
-    title: "Long-Term Care",
-    description: "Specialized services for nursing homes and assisted living facilities.",
+    id: "diabetes",
+    icon: HeartPulse,
+    title: "Diabetes Support",
+    description: "Personalized diabetes management help.",
+    category: "wellness",
+    whoItsFor: "Patients managing Type 1 or Type 2 diabetes.",
+    howItWorks: "We review your medications, devices, and lifestyle.",
+    whatToBring: "Blood glucose records if available.",
+    timing: "Initial consultation: 30 minutes.",
+    ctaLabel: "Request Appointment",
+    ctaHref: "/appointments?type=diabetes",
   },
   {
-    icon: Heart,
-    title: "Wellness Programs",
-    description: "Health screenings, education, and preventive care programs.",
+    id: "smoking",
+    icon: Cigarette,
+    title: "Smoking Cessation",
+    description: "Support to help you quit smoking.",
+    category: "wellness",
+    whoItsFor: "Anyone ready to quit or thinking about it.",
+    howItWorks: "Meet with our pharmacist to build a quit plan.",
+    whatToBring: "Nothing required.",
+    timing: "First session: 20-30 minutes.",
+    ctaLabel: "Request Appointment",
+    ctaHref: "/appointments?type=smoking",
+  },
+  {
+    id: "injections",
+    icon: Syringe,
+    title: "Injection Services",
+    description: "Flu shots, vaccines, and more.",
+    category: "injections",
+    whoItsFor: "Adults seeking immunizations or injections.",
+    howItWorks: "Walk in or book an appointment.",
+    whatToBring: "Alberta Health Care card.",
+    timing: "Walk-ins welcome, appointments preferred.",
+    ctaLabel: "Request Appointment",
+    ctaHref: "/appointments?type=injection",
+  },
+  {
+    id: "compounding",
+    icon: FlaskConical,
+    title: "Compounding",
+    description: "Custom medications made for you.",
+    category: "compounding",
+    whoItsFor: "Patients who need specialized formulations.",
+    howItWorks: "We create medications tailored to your needs.",
+    whatToBring: "Prescription from your doctor.",
+    timing: "Most compounds ready in 1-3 days.",
+    ctaLabel: "Learn More",
+    ctaHref: "/compounding",
+  },
+  {
+    id: "home-health",
+    icon: HomeIcon,
+    title: "Home Health Care",
+    description: "Medical supplies and equipment.",
+    category: "wellness",
+    whoItsFor: "Patients needing home care products.",
+    howItWorks: "Browse our selection or ask our team.",
+    whatToBring: "Nothing required.",
+    timing: "Most items available same-day.",
+    ctaLabel: "Contact Us",
+    ctaHref: "/contact",
   },
 ];
 
 export default function Services() {
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
+
+  const filteredServices = activeCategory === "all" 
+    ? services 
+    : services.filter(s => s.category === activeCategory);
+
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-28 bg-primary text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 right-20 w-64 h-64 rounded-full border-4 border-white" />
-          <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full border-4 border-white" />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl">
-            <span className="text-accent font-semibold uppercase tracking-wider">What We Offer</span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-2 mb-6">
-              Our Pharmacy Services
+      {/* Hero */}
+      <section className="py-16 md:py-24 bg-secondary">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Our Services
             </h1>
-            <p className="text-xl opacity-90">
-              Comprehensive health services designed to meet all your pharmaceutical needs. From prescription filling to specialized compounding, we're here to help.
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              More than just prescriptions — we offer a full range of pharmacy services to support your health.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Main Services Grid */}
-      <section className="py-20 bg-secondary">
+      {/* Filter Pills */}
+      <section className="sticky top-[64px] z-40 bg-card border-b border-border py-4">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {services.map((service) => (
-              <Card key={service.title} className="overflow-hidden border-0 shadow-warm-lg group hover:shadow-2xl transition-shadow">
-                {service.image ? (
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={service.image} 
-                      alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4 flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
-                        <service.icon className="h-6 w-6 text-accent-foreground" />
-                      </div>
-                      <h3 className="text-xl font-bold text-white">{service.title}</h3>
-                    </div>
-                  </div>
-                ) : (
-                  <CardHeader className="bg-primary pb-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center">
-                        <service.icon className="h-7 w-7 text-primary-foreground" />
-                      </div>
-                      <CardTitle className="text-xl text-primary-foreground">{service.title}</CardTitle>
-                    </div>
-                  </CardHeader>
+          <div className="flex gap-2 overflow-x-auto pb-2 -mb-2 scrollbar-hide">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={cn(
+                  "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors focus-ring",
+                  activeCategory === cat.id
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-muted/80"
                 )}
-                <CardContent className="p-6">
-                  <p className="text-muted-foreground mb-4">{service.description}</p>
-                  <ul className="grid grid-cols-2 gap-2">
-                    {service.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 text-success flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+              >
+                {cat.label}
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Additional Services */}
-      <section className="py-20 bg-white">
+      {/* Services Grid */}
+      <section className="py-12 md:py-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <span className="text-primary font-semibold text-sm uppercase tracking-wider">More Services</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-              Additional Services
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              We offer a range of additional services to support your health and wellness
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {additionalServices.map((service) => (
-              <Card key={service.title} className="text-center bg-ida-cream border-0 shadow-warm hover:shadow-warm-lg transition-shadow">
-                <CardContent className="p-8">
-                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <service.icon className="h-8 w-8 text-primary" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredServices.map((service) => (
+              <button
+                key={service.id}
+                onClick={() => setSelectedService(service)}
+                className="text-left bg-card rounded-2xl p-6 shadow-soft hover:shadow-lift hover:-translate-y-1 transition-all duration-300 border border-border/50 focus-ring"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <service.icon className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {service.description}
-                  </p>
-                </CardContent>
-              </Card>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">{service.title}</h3>
+                    <p className="text-sm text-muted-foreground">{service.description}</p>
+                  </div>
+                </div>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Compounding Highlight */}
-      <section className="py-20 bg-ida-cream">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
-              <div className="relative">
-                <img 
-                  src={compoundingService}
-                  alt="Compounding Services"
-                  className="rounded-2xl shadow-warm-lg w-full"
-                />
-                <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground p-6 rounded-xl shadow-lg hidden lg:block">
-                  <FlaskConical className="h-8 w-8 mb-2" />
-                  <div className="text-sm font-bold">Custom Medications</div>
+      {/* Service Detail Sheet */}
+      <Sheet open={!!selectedService} onOpenChange={() => setSelectedService(null)}>
+        <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
+          {selectedService && (
+            <>
+              <SheetHeader className="text-left">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <selectedService.icon className="h-7 w-7 text-primary" />
+                  </div>
+                  <SheetTitle className="text-2xl">{selectedService.title}</SheetTitle>
                 </div>
+                <p className="text-muted-foreground">{selectedService.description}</p>
+              </SheetHeader>
+
+              <div className="mt-8 space-y-6">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-medium text-foreground">Who it's for</h4>
+                      <p className="text-sm text-muted-foreground">{selectedService.whoItsFor}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <FileText className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-medium text-foreground">How it works</h4>
+                      <p className="text-sm text-muted-foreground">{selectedService.howItWorks}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Package className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-medium text-foreground">What to bring</h4>
+                      <p className="text-sm text-muted-foreground">{selectedService.whatToBring}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Clock className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-medium text-foreground">Typical timing</h4>
+                      <p className="text-sm text-muted-foreground">{selectedService.timing}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <Button asChild className="w-full" size="lg">
+                  <Link to={selectedService.ctaHref} onClick={() => setSelectedService(null)}>
+                    {selectedService.ctaLabel}
+                  </Link>
+                </Button>
               </div>
-            </div>
-            <div className="order-1 md:order-2">
-              <span className="text-accent font-semibold text-sm uppercase tracking-wider">Specialized Service</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-6">
-                Custom Medications for Your Unique Needs
-              </h2>
-              <p className="text-muted-foreground mb-6 text-lg">
-                Not everyone responds the same way to standard medications. Our compounding pharmacy can create custom medications tailored specifically to your needs.
-              </p>
-              <ul className="space-y-3 mb-8">
-                {[
-                  "Personalized formulations",
-                  "Quality-tested ingredients",
-                  "Expert pharmacist consultations",
-                  "Allergen-free options available",
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-success" />
-                    <span className="text-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                <Link to="/contact">
-                  Inquire About Compounding
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+            </>
+          )}
+        </SheetContent>
+      </Sheet>
 
       {/* CTA */}
-      <section className="py-20 ida-gradient-blue text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Get Started?
-          </h2>
-          <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-            Whether you need a prescription refill or want to learn more about our services, we're here to help.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg">
-              <Link to="/refill">Refill Prescription</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-              <Link to="/contact">Contact Us</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CTABand
+        headline="Questions about our services?"
+        primaryAction={{ label: "Contact Us", href: "/contact" }}
+        secondaryAction={{ label: "Call Now", href: "tel:780-440-4555", external: true }}
+      />
+
+      {/* Spacer for mobile dock */}
+      <div className="h-16 md:hidden" />
     </Layout>
   );
 }

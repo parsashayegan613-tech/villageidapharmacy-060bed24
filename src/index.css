@@ -2,116 +2,120 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Village IDA Pharmacy Design System - Warm & Trustworthy */
-/* Brand Colors: IDA Blue, Red, Green, White */
+/* Village IDA Pharmacy - Premium Evergreen Design System */
+/* Deep Evergreen Primary | Warm Off-White Backgrounds | Mint Accent | Charcoal Text */
 
 @layer base {
   :root {
-    /* Village IDA Brand Palette */
-    --background: 0 0% 100%;
-    --foreground: 215 30% 15%;
+    /* Core Palette */
+    --background: 40 33% 98%;
+    --foreground: 210 11% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 30% 15%;
+    --card-foreground: 210 11% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 30% 15%;
+    --popover-foreground: 210 11% 20%;
 
-    /* Primary - IDA Blue (vibrant royal blue from their header) */
-    --primary: 215 85% 35%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary - Deep Evergreen */
+    --primary: 160 35% 22%;
+    --primary-foreground: 40 33% 98%;
 
-    /* Secondary - Warm light cream/gray background */
-    --secondary: 40 20% 96%;
-    --secondary-foreground: 215 85% 30%;
+    /* Secondary - Warm Off-White */
+    --secondary: 40 25% 94%;
+    --secondary-foreground: 160 35% 22%;
 
-    --muted: 215 15% 94%;
-    --muted-foreground: 215 15% 40%;
+    --muted: 40 20% 92%;
+    --muted-foreground: 210 11% 45%;
 
-    /* Accent - IDA Red (vibrant red from their CTA cards) */
-    --accent: 0 75% 50%;
+    /* Accent - Mint (interactive states only) */
+    --accent: 160 45% 45%;
     --accent-foreground: 0 0% 100%;
 
-    /* Success/Green - IDA Green (from their navigation accent) */
-    --success: 145 60% 40%;
+    /* Success - Soft green */
+    --success: 145 40% 42%;
     --success-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 20% 88%;
-    --input: 215 20% 88%;
-    --ring: 215 85% 35%;
+    --border: 40 15% 88%;
+    --input: 40 15% 88%;
+    --ring: 160 35% 22%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
     /* Custom Village IDA tokens */
-    --ida-blue: 215 85% 35%;
-    --ida-blue-dark: 215 90% 25%;
-    --ida-blue-light: 215 70% 95%;
-    --ida-red: 0 75% 50%;
-    --ida-red-dark: 0 80% 40%;
-    --ida-green: 145 60% 40%;
-    --ida-green-light: 145 50% 92%;
-    --ida-cream: 40 30% 97%;
-    --ida-warm-white: 40 20% 99%;
+    --evergreen: 160 35% 22%;
+    --evergreen-dark: 160 40% 15%;
+    --evergreen-light: 160 25% 95%;
+    --mint: 160 45% 45%;
+    --mint-light: 160 40% 92%;
+    --warm-white: 40 33% 98%;
+    --warm-cream: 40 25% 94%;
+    --charcoal: 210 11% 20%;
+    --charcoal-light: 210 11% 45%;
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 215 30% 15%;
-    --sidebar-primary: 215 85% 35%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 20% 96%;
-    --sidebar-accent-foreground: 215 85% 30%;
-    --sidebar-border: 215 20% 88%;
-    --sidebar-ring: 215 85% 35%;
+    --sidebar-foreground: 210 11% 20%;
+    --sidebar-primary: 160 35% 22%;
+    --sidebar-primary-foreground: 40 33% 98%;
+    --sidebar-accent: 40 25% 94%;
+    --sidebar-accent-foreground: 160 35% 22%;
+    --sidebar-border: 40 15% 88%;
+    --sidebar-ring: 160 35% 22%;
   }
 
   .dark {
-    --background: 215 30% 8%;
-    --foreground: 215 15% 95%;
+    --background: 210 15% 8%;
+    --foreground: 40 20% 95%;
 
-    --card: 215 30% 10%;
-    --card-foreground: 215 15% 95%;
+    --card: 210 15% 10%;
+    --card-foreground: 40 20% 95%;
 
-    --popover: 215 30% 10%;
-    --popover-foreground: 215 15% 95%;
+    --popover: 210 15% 10%;
+    --popover-foreground: 40 20% 95%;
 
-    --primary: 215 75% 55%;
-    --primary-foreground: 215 30% 8%;
+    --primary: 160 40% 40%;
+    --primary-foreground: 210 15% 8%;
 
-    --secondary: 215 25% 15%;
-    --secondary-foreground: 215 70% 80%;
+    --secondary: 210 15% 15%;
+    --secondary-foreground: 160 35% 70%;
 
-    --muted: 215 20% 18%;
-    --muted-foreground: 215 15% 60%;
+    --muted: 210 12% 18%;
+    --muted-foreground: 210 10% 60%;
 
-    --accent: 0 70% 55%;
+    --accent: 160 45% 50%;
     --accent-foreground: 0 0% 100%;
 
-    --success: 145 55% 45%;
+    --success: 145 45% 45%;
     --success-foreground: 0 0% 100%;
 
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 20% 20%;
-    --input: 215 20% 20%;
-    --ring: 215 75% 55%;
+    --border: 210 15% 20%;
+    --input: 210 15% 20%;
+    --ring: 160 40% 40%;
 
-    --sidebar-background: 215 30% 8%;
-    --sidebar-foreground: 215 15% 95%;
-    --sidebar-primary: 215 75% 55%;
-    --sidebar-primary-foreground: 215 30% 8%;
-    --sidebar-accent: 215 25% 15%;
-    --sidebar-accent-foreground: 215 70% 80%;
-    --sidebar-border: 215 20% 20%;
-    --sidebar-ring: 215 75% 55%;
+    --sidebar-background: 210 15% 8%;
+    --sidebar-foreground: 40 20% 95%;
+    --sidebar-primary: 160 40% 40%;
+    --sidebar-primary-foreground: 210 15% 8%;
+    --sidebar-accent: 210 15% 15%;
+    --sidebar-accent-foreground: 160 35% 70%;
+    --sidebar-border: 210 15% 20%;
+    --sidebar-ring: 160 40% 40%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -121,42 +125,72 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
+    font-family: 'Inter', system-ui, sans-serif;
   }
 }
 
 @layer utilities {
-  /* Village IDA branded gradients */
-  .ida-gradient-blue {
-    background: linear-gradient(180deg, hsl(var(--ida-blue)) 0%, hsl(var(--ida-blue-dark)) 100%);
+  /* Premium shadows */
+  .shadow-soft {
+    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.08), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
   }
 
-  .ida-gradient-hero {
-    background: linear-gradient(135deg, hsl(var(--ida-blue)) 0%, hsl(215 80% 45%) 50%, hsl(var(--ida-blue-dark)) 100%);
+  .shadow-soft-lg {
+    box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.12), 0 4px 16px -4px rgba(0, 0, 0, 0.06);
   }
 
-  .ida-gradient-green {
-    background: linear-gradient(180deg, hsl(var(--ida-green)) 0%, hsl(145 65% 35%) 100%);
+  .shadow-lift {
+    box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.15), 0 6px 20px -6px rgba(0, 0, 0, 0.08);
   }
 
-  .ida-card-red {
-    background: hsl(var(--ida-red));
-    color: white;
+  /* Hover lift effect */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
   }
 
-  .ida-card-red:hover {
-    background: hsl(var(--ida-red-dark));
+  .hover-lift:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.15), 0 6px 20px -6px rgba(0, 0, 0, 0.08);
   }
+
+  /* Fade in animation */
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Stagger children */
+  .stagger-children > * {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+  .stagger-children > *:nth-child(7) { animation-delay: 0.7s; }
+  .stagger-children > *:nth-child(8) { animation-delay: 0.8s; }
 
   .text-balance {
     text-wrap: balance;
   }
 
-  /* Warm shadow for cards */
-  .shadow-warm {
-    box-shadow: 0 4px 20px -4px rgba(0, 47, 108, 0.12), 0 2px 8px -2px rgba(0, 47, 108, 0.08);
-  }
-
-  .shadow-warm-lg {
-    box-shadow: 0 8px 32px -8px rgba(0, 47, 108, 0.15), 0 4px 16px -4px rgba(0, 47, 108, 0.1);
+  /* Focus states */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
   }
 }
