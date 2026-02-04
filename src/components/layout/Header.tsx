@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { VillageIdaLogoInline } from "@/components/VillageIdaLogo";
+import villageIdaLogo from "@/assets/village-ida-logo.jpg";
 
 const navigation = [
   {
@@ -52,7 +52,11 @@ export function Header() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <VillageIdaLogoInline />
+              <img 
+                src={villageIdaLogo} 
+                alt="Village I.D.A. Pharmacy" 
+                className="h-12 w-auto rounded"
+              />
             </Link>
 
             {/* Desktop Navigation */}
