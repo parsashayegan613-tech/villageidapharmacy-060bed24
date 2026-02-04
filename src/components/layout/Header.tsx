@@ -52,22 +52,22 @@ export function Header() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <div className="flex flex-col items-center justify-center bg-[hsl(215,85%,40%)] rounded-lg px-5 py-2">
-                <span className="text-white font-bold tracking-[0.25em] uppercase text-[9px]">
+              <div className="flex flex-col items-center justify-center bg-primary rounded-lg px-3 py-1.5">
+                <span className="text-white font-bold tracking-[0.25em] uppercase text-[7px]">
                   Village
                 </span>
                 <span 
                   className="font-black leading-none text-white"
                   style={{ 
-                    fontSize: 26,
-                    textShadow: '2px 0 0 hsl(0,70%,50%), -2px 0 0 hsl(0,70%,50%), 0 2px 0 hsl(0,70%,50%), 0 -2px 0 hsl(0,70%,50%), 1.5px 1.5px 0 hsl(0,70%,50%), -1.5px -1.5px 0 hsl(0,70%,50%), 1.5px -1.5px 0 hsl(0,70%,50%), -1.5px 1.5px 0 hsl(0,70%,50%)',
+                    fontSize: 18,
+                    textShadow: '1.5px 0 0 hsl(0,70%,50%), -1.5px 0 0 hsl(0,70%,50%), 0 1.5px 0 hsl(0,70%,50%), 0 -1.5px 0 hsl(0,70%,50%), 1px 1px 0 hsl(0,70%,50%), -1px -1px 0 hsl(0,70%,50%), 1px -1px 0 hsl(0,70%,50%), -1px 1px 0 hsl(0,70%,50%)',
                     fontFamily: 'Arial Black, Impact, sans-serif',
                     letterSpacing: '0.02em'
                   }}
                 >
                   I.D.A.
                 </span>
-                <span className="text-white font-bold tracking-[0.2em] uppercase text-[8px]">
+                <span className="text-white font-bold tracking-[0.2em] uppercase text-[6px]">
                   Pharmacy
                 </span>
               </div>
