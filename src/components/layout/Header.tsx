@@ -52,11 +52,13 @@ export function Header() {
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center">
-              <img 
-                src={villageIdaLogo} 
-                alt="Village I.D.A. Pharmacy" 
-                className="h-12 w-auto rounded"
-              />
+              <div className="h-12 overflow-hidden rounded">
+                <img 
+                  src={villageIdaLogo} 
+                  alt="Village I.D.A. Pharmacy" 
+                  className="h-12 w-auto object-cover object-left scale-[1.15]"
+                />
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
