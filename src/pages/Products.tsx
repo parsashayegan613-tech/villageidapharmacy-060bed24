@@ -56,11 +56,11 @@ export default function Products() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-secondary py-16 md:py-24">
+      <section className="bg-ida-cream py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Our Products
+              Product Spotlight
             </h1>
             <p className="text-lg text-muted-foreground">
               Quality health and wellness products carefully selected by our pharmacists. From premium skincare to essential vitamins, we carry what you need for your health.
@@ -70,7 +70,7 @@ export default function Products() {
       </section>
 
       {/* Featured Product - Riversol */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -78,26 +78,26 @@ export default function Products() {
             </h2>
           </div>
           {featuredProducts.map((product) => (
-            <Card key={product.name} className="max-w-4xl mx-auto overflow-hidden">
+            <Card key={product.name} className="max-w-4xl mx-auto overflow-hidden border-0 shadow-warm-lg">
               <div className="grid md:grid-cols-2">
-                <div className="bg-gradient-to-br from-primary/10 to-accent/10 p-8 md:p-12 flex items-center justify-center">
+                <div className="bg-gradient-to-br from-primary/10 to-success/10 p-8 md:p-12 flex items-center justify-center">
                   <div className="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center">
                     <Sparkles className="h-16 w-16 text-primary" />
                   </div>
                 </div>
                 <div className="p-8 md:p-12">
-                  <div className="text-sm text-primary font-medium mb-2">{product.category}</div>
+                  <div className="text-sm text-accent font-medium mb-2">{product.category}</div>
                   <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">{product.name}</h3>
                   <p className="text-muted-foreground mb-6">{product.description}</p>
                   <ul className="space-y-2 mb-6">
                     {product.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-success" />
                         {feature}
                       </li>
                     ))}
                   </ul>
-                  <Button asChild>
+                  <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
                     <Link to="/contact">Ask About This Product</Link>
                   </Button>
                 </div>
@@ -108,7 +108,7 @@ export default function Products() {
       </section>
 
       {/* Product Categories */}
-      <section className="py-16 md:py-24 bg-secondary">
+      <section className="py-16 md:py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -120,9 +120,9 @@ export default function Products() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {productCategories.map((category) => (
-              <Card key={category.name} className="bg-background border-0">
+              <Card key={category.name} className="bg-white border-0 shadow-warm">
                 <CardHeader>
-                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                     <category.icon className="h-7 w-7 text-primary" />
                   </div>
                   <CardTitle className="text-xl">{category.name}</CardTitle>
@@ -134,7 +134,7 @@ export default function Products() {
                   <ul className="space-y-1">
                     {category.items.map((item, index) => (
                       <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <div className="w-1 h-1 rounded-full bg-primary" />
+                        <div className="w-1 h-1 rounded-full bg-success" />
                         {item}
                       </li>
                     ))}
@@ -147,7 +147,7 @@ export default function Products() {
       </section>
 
       {/* Special Orders */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -157,11 +157,11 @@ export default function Products() {
               We're happy to special order products for you. Whether it's a specific brand, a hard-to-find item, or a product you've seen elsewhere, just ask and we'll do our best to get it for you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg">
+              <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 <Link to="/contact">Request a Product</Link>
               </Button>
-              <Button asChild variant="outline" size="lg">
-                <a href="tel:780-440-4555">Call (780) 440-4555</a>
+              <Button asChild variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <a href="tel:780-440-4555">Call 780.440.4555</a>
               </Button>
             </div>
           </div>
@@ -169,7 +169,7 @@ export default function Products() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
+      <section className="py-16 md:py-20 ida-gradient-blue text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Visit Our Pharmacy
@@ -177,7 +177,7 @@ export default function Products() {
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
             Come see our full selection of products in store. Our knowledgeable staff can help you find exactly what you need.
           </p>
-          <Button asChild size="lg" variant="secondary">
+          <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
             <Link to="/contact">Get Directions</Link>
           </Button>
         </div>

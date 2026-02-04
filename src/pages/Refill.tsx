@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Clock, Truck, CheckCircle, Phone, Info } from "lucide-react";
+import { Clock, Truck, CheckCircle, Phone, Info, Pill } from "lucide-react";
 
 export default function Refill() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,39 +56,47 @@ export default function Refill() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="bg-secondary py-16 md:py-24">
+      <section className="bg-ida-cream py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Prescription Refill
-            </h1>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-16 h-16 rounded-xl bg-accent flex items-center justify-center">
+                <Pill className="h-8 w-8 text-accent-foreground" />
+              </div>
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+                  Refill Rx
+                </h1>
+                <p className="text-muted-foreground">Quick and easy prescription refills</p>
+              </div>
+            </div>
             <p className="text-lg text-muted-foreground">
-              Request your prescription refill online. We'll prepare it and notify you when it's ready for pickup or delivery.
+              Refilling your prescription is as simple as filling out the form below. We'll prepare it and notify you when it's ready for pickup or delivery.
             </p>
           </div>
         </div>
       </section>
 
       {/* Info Cards */}
-      <section className="py-8 bg-background border-b border-border">
+      <section className="py-8 bg-white border-b border-border">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex items-center gap-4 p-4 bg-secondary rounded-lg">
-              <Clock className="h-8 w-8 text-primary flex-shrink-0" />
+            <div className="flex items-center gap-4 p-4 bg-success/10 rounded-xl">
+              <Clock className="h-8 w-8 text-success flex-shrink-0" />
               <div>
                 <h3 className="font-semibold text-foreground">Quick Turnaround</h3>
                 <p className="text-sm text-muted-foreground">Most refills ready same day</p>
               </div>
             </div>
-            <div className="flex items-center gap-4 p-4 bg-secondary rounded-lg">
-              <Truck className="h-8 w-8 text-primary flex-shrink-0" />
+            <div className="flex items-center gap-4 p-4 bg-success/10 rounded-xl">
+              <Truck className="h-8 w-8 text-success flex-shrink-0" />
               <div>
                 <h3 className="font-semibold text-foreground">Free Delivery</h3>
                 <p className="text-sm text-muted-foreground">Local delivery available</p>
               </div>
             </div>
-            <div className="flex items-center gap-4 p-4 bg-secondary rounded-lg">
-              <CheckCircle className="h-8 w-8 text-primary flex-shrink-0" />
+            <div className="flex items-center gap-4 p-4 bg-success/10 rounded-xl">
+              <CheckCircle className="h-8 w-8 text-success flex-shrink-0" />
               <div>
                 <h3 className="font-semibold text-foreground">We'll Notify You</h3>
                 <p className="text-sm text-muted-foreground">Get a call when it's ready</p>
@@ -99,12 +107,12 @@ export default function Refill() {
       </section>
 
       {/* Refill Form */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-16 md:py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Form */}
             <div className="lg:col-span-2">
-              <Card>
+              <Card className="border-0 shadow-warm">
                 <CardHeader>
                   <CardTitle>Refill Request Form</CardTitle>
                   <CardDescription>
@@ -203,7 +211,7 @@ export default function Refill() {
                         }
                         className="space-y-3"
                       >
-                        <div className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-secondary transition-colors">
+                        <div className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-muted transition-colors bg-white">
                           <RadioGroupItem value="pickup" id="pickup" />
                           <Label htmlFor="pickup" className="flex-1 cursor-pointer">
                             <span className="font-medium">In-Store Pickup</span>
@@ -212,10 +220,10 @@ export default function Refill() {
                             </p>
                           </Label>
                         </div>
-                        <div className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-secondary transition-colors">
+                        <div className="flex items-center space-x-3 p-4 border border-border rounded-lg hover:bg-muted transition-colors bg-white">
                           <RadioGroupItem value="delivery" id="delivery" />
                           <Label htmlFor="delivery" className="flex-1 cursor-pointer">
-                            <span className="font-medium">Delivery</span>
+                            <span className="font-medium">Free Delivery</span>
                             <p className="text-sm text-muted-foreground">
                               Free local delivery to your address
                             </p>
@@ -255,7 +263,7 @@ export default function Refill() {
                       </div>
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                    <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={isSubmitting}>
                       {isSubmitting ? "Submitting..." : "Submit Refill Request"}
                     </Button>
                   </form>
@@ -265,7 +273,7 @@ export default function Refill() {
 
             {/* Sidebar */}
             <div className="space-y-6">
-              <Card className="bg-secondary border-0">
+              <Card className="bg-accent text-accent-foreground border-0">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Info className="h-5 w-5" />
@@ -273,19 +281,19 @@ export default function Refill() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-sm opacity-90">
                     If you have questions about your prescription or need immediate assistance, please call us directly.
                   </p>
-                  <Button asChild variant="outline" className="w-full">
+                  <Button asChild variant="secondary" className="w-full">
                     <a href="tel:780-440-4555">
                       <Phone className="h-4 w-4 mr-2" />
-                      Call (780) 440-4555
+                      Call 780.440.4555
                     </a>
                   </Button>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-0 shadow-warm">
                 <CardHeader>
                   <CardTitle>What to Expect</CardTitle>
                 </CardHeader>
@@ -331,7 +339,7 @@ export default function Refill() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-0 shadow-warm">
                 <CardHeader>
                   <CardTitle>Hours of Operation</CardTitle>
                 </CardHeader>
@@ -339,15 +347,11 @@ export default function Refill() {
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Monday - Friday</span>
-                      <span className="font-medium">9:00 AM - 6:00 PM</span>
+                      <span className="font-medium">9:00 AM - 5:00 PM</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-muted-foreground">Saturday</span>
-                      <span className="font-medium">10:00 AM - 2:00 PM</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Sunday</span>
-                      <span className="font-medium">Closed</span>
+                      <span className="text-muted-foreground">Saturday - Sunday</span>
+                      <span className="font-medium">By Appointment</span>
                     </div>
                   </div>
                 </CardContent>
