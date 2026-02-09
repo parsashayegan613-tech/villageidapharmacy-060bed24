@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -24,6 +25,7 @@ export default function Contact() {
 
   return (
     <Layout>
+      <SEOHead title="Contact Us | Village IDA Pharmacy Edmonton" description="Get in touch with Village IDA Pharmacy. Call 780-440-4555 or visit us at 7004 98 Ave, Edmonton. Hours: Mon-Fri 9-5." />
       <section className="py-12 md:py-16 bg-secondary">
         <div className="container mx-auto px-4"><div className="max-w-2xl"><h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Contact Us</h1><p className="text-muted-foreground text-lg">Have a question? We're here to help.</p></div></div>
       </section>

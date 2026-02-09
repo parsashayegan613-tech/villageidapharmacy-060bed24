@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -70,6 +71,7 @@ export default function Transfer() {
 
   return (
     <Layout>
+      <SEOHead title="Transfer Prescriptions | Village IDA Pharmacy" description="Transfer your prescriptions to Village IDA. We handle all the paperwork with your old pharmacy. Free delivery available." />
       {/* Hero */}
       <section className="py-12 md:py-16 bg-secondary">
         <div className="container mx-auto px-4">

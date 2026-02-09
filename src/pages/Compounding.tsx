@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { CTABand } from "@/components/CTABand";
@@ -87,6 +88,7 @@ const faqs = [
 export default function Compounding() {
   return (
     <Layout>
+      <SEOHead title="Compounding Pharmacy | Village IDA Edmonton" description="Custom compounded medications tailored to your needs. Dye-free, flavored, and alternative dosage forms available." />
       {/* Hero */}
       <section className="py-16 md:py-24 bg-secondary">
         <div className="container mx-auto px-4">
