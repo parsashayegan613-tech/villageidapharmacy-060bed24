@@ -1,111 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Village IDA Pharmacy - Premium Evergreen Design System */
-/* Deep Evergreen Primary | Warm Off-White Backgrounds | Mint Accent | Charcoal Text */
+/* Village IDA Pharmacy — Bold & Modern Design System */
 
 @layer base {
   :root {
-    /* Core Palette */
-    --background: 40 33% 98%;
-    --foreground: 210 11% 20%;
+    /* Core — deep navy slate + warm cream */
+    --background: 45 30% 97%;
+    --foreground: 220 25% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 11% 20%;
+    --card-foreground: 220 25% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 11% 20%;
+    --popover-foreground: 220 25% 12%;
 
-    /* Primary - IDA Blue (matching logo) */
-    --primary: 215 85% 40%;
+    /* Primary — punchy IDA blue */
+    --primary: 215 85% 42%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Warm Off-White */
-    --secondary: 40 25% 94%;
-    --secondary-foreground: 215 85% 35%;
+    /* Secondary — soft warm wash */
+    --secondary: 220 20% 95%;
+    --secondary-foreground: 215 70% 35%;
 
-    --muted: 40 20% 92%;
-    --muted-foreground: 210 11% 45%;
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 46%;
 
-    /* Accent - IDA Red */
-    --accent: 0 75% 50%;
+    /* Accent — warm coral-red (IDA red, elevated) */
+    --accent: 4 80% 56%;
     --accent-foreground: 0 0% 100%;
 
-    /* Success - Soft green */
-    --success: 145 40% 42%;
+    /* Success */
+    --success: 152 50% 40%;
     --success-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 15% 88%;
-    --input: 40 15% 88%;
-    --ring: 215 85% 35%;
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 215 85% 42%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    /* Custom Village IDA tokens */
-    --ida-blue: 215 85% 40%;
-    --ida-blue-dark: 215 90% 30%;
+    /* Extended tokens */
+    --ida-blue: 215 85% 42%;
+    --ida-blue-dark: 215 90% 28%;
     --ida-blue-light: 215 60% 95%;
-    --ida-red: 0 75% 50%;
-    --ida-red-light: 0 60% 95%;
-    --warm-white: 40 33% 98%;
+    --ida-red: 4 80% 56%;
+    --ida-red-light: 4 60% 95%;
+    --warm-white: 45 30% 97%;
     --warm-cream: 40 25% 94%;
-    --charcoal: 210 11% 20%;
-    --charcoal-light: 210 11% 45%;
+    --charcoal: 220 25% 12%;
+    --charcoal-light: 220 12% 46%;
+
+    /* Gradient tokens */
+    --gradient-hero: linear-gradient(135deg, hsl(215 85% 42%), hsl(220 90% 28%));
+    --gradient-warm: linear-gradient(135deg, hsl(45 30% 97%), hsl(40 25% 94%));
+    --gradient-accent: linear-gradient(135deg, hsl(4 80% 56%), hsl(20 85% 52%));
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 210 11% 20%;
-    --sidebar-primary: 215 85% 35%;
+    --sidebar-foreground: 220 25% 12%;
+    --sidebar-primary: 215 85% 42%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 25% 94%;
-    --sidebar-accent-foreground: 215 85% 35%;
-    --sidebar-border: 40 15% 88%;
-    --sidebar-ring: 215 85% 35%;
+    --sidebar-accent: 220 20% 95%;
+    --sidebar-accent-foreground: 215 70% 35%;
+    --sidebar-border: 220 15% 90%;
+    --sidebar-ring: 215 85% 42%;
   }
 
   .dark {
-    --background: 210 15% 8%;
-    --foreground: 40 20% 95%;
+    --background: 220 20% 7%;
+    --foreground: 45 20% 95%;
 
-    --card: 210 15% 10%;
-    --card-foreground: 40 20% 95%;
+    --card: 220 18% 10%;
+    --card-foreground: 45 20% 95%;
 
-    --popover: 210 15% 10%;
-    --popover-foreground: 40 20% 95%;
+    --popover: 220 18% 10%;
+    --popover-foreground: 45 20% 95%;
 
-    --primary: 215 70% 50%;
+    --primary: 215 75% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 15% 15%;
+    --secondary: 220 18% 14%;
     --secondary-foreground: 215 60% 70%;
 
-    --muted: 210 12% 18%;
-    --muted-foreground: 210 10% 60%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 60%;
 
-    --accent: 0 65% 55%;
+    --accent: 4 70% 58%;
     --accent-foreground: 0 0% 100%;
 
-    --success: 145 45% 45%;
+    --success: 152 50% 45%;
     --success-foreground: 0 0% 100%;
 
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 15% 20%;
-    --input: 210 15% 20%;
-    --ring: 215 70% 50%;
+    --border: 220 18% 18%;
+    --input: 220 18% 18%;
+    --ring: 215 75% 55%;
 
-    --sidebar-background: 210 15% 8%;
-    --sidebar-foreground: 40 20% 95%;
-    --sidebar-primary: 215 70% 50%;
+    --sidebar-background: 220 20% 7%;
+    --sidebar-foreground: 45 20% 95%;
+    --sidebar-primary: 215 75% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 15% 15%;
+    --sidebar-accent: 220 18% 14%;
     --sidebar-accent-foreground: 215 60% 70%;
-    --sidebar-border: 210 15% 20%;
-    --sidebar-ring: 215 70% 50%;
+    --sidebar-border: 220 18% 18%;
+    --sidebar-ring: 215 75% 55%;
   }
 }
 
@@ -120,37 +126,71 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    @apply tracking-tight;
+    font-weight: 400;
+  }
+
+  h4, h5, h6 {
+    font-family: 'DM Sans', system-ui, sans-serif;
     @apply font-semibold tracking-tight;
-    font-family: 'Inter', system-ui, sans-serif;
   }
 }
 
 @layer utilities {
   /* Premium shadows */
   .shadow-soft {
-    box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.08), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 16px -4px rgba(0, 0, 0, 0.06), 0 1px 4px -1px rgba(0, 0, 0, 0.03);
   }
 
   .shadow-soft-lg {
-    box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.12), 0 4px 16px -4px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 40px -8px rgba(0, 0, 0, 0.1), 0 4px 16px -4px rgba(0, 0, 0, 0.05);
   }
 
   .shadow-lift {
-    box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.15), 0 6px 20px -6px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.12), 0 8px 24px -8px rgba(0, 0, 0, 0.06);
   }
 
-  /* Hover lift effect */
+  /* Glass effect */
+  .glass {
+    @apply backdrop-blur-xl bg-card/80;
+  }
+
+  /* Hover lift */
   .hover-lift {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-500 ease-out;
+  }
+  .hover-lift:hover {
+    @apply -translate-y-1.5;
+    box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.12), 0 8px 24px -8px rgba(0, 0, 0, 0.06);
   }
 
-  .hover-lift:hover {
-    @apply -translate-y-1;
-    box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.15), 0 6px 20px -6px rgba(0, 0, 0, 0.08);
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+
+  /* Noise texture overlay */
+  .noise::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none opacity-[0.03];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
+
+  /* Section divider */
+  .section-divider {
+    @apply relative;
+  }
+  .section-divider::before {
+    content: '';
+    @apply absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
   }
 
   /* Fade in animation */
@@ -160,14 +200,8 @@
   }
 
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   /* Stagger children */
@@ -175,15 +209,14 @@
     opacity: 0;
     animation: fadeInUp 0.5s ease-out forwards;
   }
-
-  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
-  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
-  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
-  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
-  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
-  .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
-  .stagger-children > *:nth-child(7) { animation-delay: 0.7s; }
-  .stagger-children > *:nth-child(8) { animation-delay: 0.8s; }
+  .stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+  .stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
 
   .text-balance {
     text-wrap: balance;
