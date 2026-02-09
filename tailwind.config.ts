@@ -14,7 +14,7 @@ export default {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1280px",
       },
     },
     extend: {
@@ -92,9 +92,15 @@ export default {
         sm: "calc(var(--radius) - 4px)",
         xl: "calc(var(--radius) + 4px)",
         "2xl": "calc(var(--radius) + 8px)",
+        "3xl": "1.5rem",
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ["'DM Sans'", "system-ui", "-apple-system", "sans-serif"],
+        serif: ["'DM Serif Display'", "Georgia", "serif"],
+      },
+      fontSize: {
+        "display": ["4rem", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
+        "display-sm": ["3rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
       },
       keyframes: {
         "accordion-down": {
