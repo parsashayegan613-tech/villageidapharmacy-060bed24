@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -96,6 +97,7 @@ export default function Appointments() {
 
   return (
     <Layout>
+      <SEOHead title="Request Appointment | Village IDA Pharmacy" description="Book a pharmacy appointment for injections, medication reviews, diabetes support, smoking cessation, or compounding consultations." />
       {/* Hero */}
       <section className="py-12 md:py-16 bg-secondary">
         <div className="container mx-auto px-4">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -49,6 +50,7 @@ export default function Refill() {
 
   return (
     <Layout>
+      <SEOHead title="Refill Request | Village IDA Pharmacy Edmonton" description="Request a prescription refill online. Most refills ready in 15-20 minutes. Free delivery available in Edmonton." />
       <section className="py-12 md:py-16 bg-secondary">
         <div className="container mx-auto px-4"><div className="max-w-2xl"><h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Refill Request</h1><p className="text-muted-foreground text-lg">Submit your refill request online. We'll confirm and have it ready for pickup or delivery.</p></div></div>
       </section>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
+import { SEOHead } from "@/components/SEOHead";
 import { CTABand } from "@/components/CTABand";
 import {
   Truck,
@@ -146,6 +147,7 @@ export default function Services() {
 
   return (
     <Layout>
+      <SEOHead title="Pharmacy Services | Village IDA Pharmacy Edmonton" description="Explore our full range of pharmacy services including delivery, blister packaging, medication reviews, injections, compounding, and more." />
       {/* Hero */}
       <section className="py-16 md:py-24 bg-secondary">
         <div className="container mx-auto px-4">
