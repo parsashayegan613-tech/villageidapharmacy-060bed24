@@ -10,7 +10,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Syringe, ClipboardCheck, HeartPulse, Cigarette, FlaskConical, HelpCircle, CheckCircle, Phone, Home, ArrowRight } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { format } from "date-fns";
+import { Syringe, ClipboardCheck, HeartPulse, Cigarette, FlaskConical, HelpCircle, CheckCircle, Phone, Home, ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const appointmentTypes = [
@@ -22,7 +26,6 @@ const appointmentTypes = [
   { id: "other", label: "Other", icon: HelpCircle },
 ];
 
-const dayOptions = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const timeOptions = ["Morning (9-12)", "Afternoon (12-3)", "Late Afternoon (3-5)"];
 
 export default function Appointments() {
@@ -33,12 +36,12 @@ export default function Appointments() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [selectedType, setSelectedType] = useState(preselectedType);
+  const [date, setDate] = useState<Date>();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     contactMethod: "call",
-    preferredDay: "",
     preferredTime: "",
     notes: ""
   });
@@ -64,7 +67,7 @@ export default function Appointments() {
           client_name: formData.name,
           client_email: formData.email,
           client_phone: formData.phone,
-          appointment_date: formData.preferredDay || "Any day",
+          appointment_date: date ? format(date, "PPP") : "Any day",
           appointment_time: formData.preferredTime || "Any time",
           service_type: selectedType,
           notes: formData.notes,
@@ -102,7 +105,7 @@ export default function Appointments() {
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between"><span className="text-muted-foreground">Name:</span><span className="font-medium">{formData.name}</span></div>
                   <div className="flex justify-between"><span className="text-muted-foreground">Service:</span><span className="font-medium capitalize">{selectedType.replace("-", " ")}</span></div>
-                  <div className="flex justify-between"><span className="text-muted-foreground">Preferred Day:</span><span className="font-medium">{formData.preferredDay || "Any day"}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Preferred Date:</span><span className="font-medium">{date ? format(date, "PPP") : "Any day"}</span></div>
                   <div className="flex justify-between"><span className="text-muted-foreground">Preferred Time:</span><span className="font-medium">{formData.preferredTime || "Any time"}</span></div>
                 </div>
               </div>
@@ -165,11 +168,51 @@ export default function Appointments() {
                   <div><Label htmlFor="phone">Phone Number *</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-2" /></div>
                 </div>
                 <div><Label>Preferred Contact Method</Label><RadioGroup value={formData.contactMethod} onValueChange={(value) => setFormData(prev => ({ ...prev, contactMethod: value }))} className="mt-2 flex gap-4"><div className="flex items-center space-x-2"><RadioGroupItem value="call" id="call" /><Label htmlFor="call" className="font-normal">Call</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="text" id="text" /><Label htmlFor="text" className="font-normal">Text</Label></div></RadioGroup></div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div><Label>Preferred Day</Label><select value={formData.preferredDay} onChange={(e) => setFormData(prev => ({ ...prev, preferredDay: e.target.value }))} className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><option value="">Any day</option>{dayOptions.map(day => (<option key={day} value={day}>{day}</option>))}</select></div>
-                  <div><Label>Preferred Time</Label><select value={formData.preferredTime} onChange={(e) => setFormData(prev => ({ ...prev, preferredTime: e.target.value }))} className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><option value="">Any time</option>{timeOptions.map(time => (<option key={time} value={time}>{time}</option>))}</select></div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label>Preferred Date</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-full justify-start text-left font-normal h-11 bg-background border-input",
+                            !date && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={date}
+                          onSelect={setDate}
+                          disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Preferred Time</Label>
+                    <Select value={formData.preferredTime} onValueChange={(val) => setFormData(prev => ({ ...prev, preferredTime: val }))}>
+                      <SelectTrigger className="h-11 bg-background border-input">
+                        <SelectValue placeholder="Select a time" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {timeOptions.map((time) => (
+                          <SelectItem key={time} value={time}>{time}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-                <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will discuss in person.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
+
+                <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will discuss in person.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} className="bg-background border-input" /></div>
                 <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2" size="lg">
                   {isSubmitting ? "Submitting..." : "Submit Request"} <ArrowRight className="h-4 w-4" />
                 </Button>
