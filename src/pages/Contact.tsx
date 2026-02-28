@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/components/auth/AuthProvider";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -17,16 +20,54 @@ const contactInfo = [
 
 export default function Contact() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { user } = useAuth();
+  const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
+
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.user_metadata?.full_name || prev.name,
+        phone: user.user_metadata?.phone || prev.phone,
+      }));
+    }
+  }, [user]);
 
   const copyToClipboard = async (text: string, index: number) => { await navigator.clipboard.writeText(text); setCopiedIndex(index); setTimeout(() => setCopiedIndex(null), 2000); };
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.from("contact_messages").insert([
+        {
+          full_name: formData.name,
+          phone: formData.phone,
+          message: formData.message,
+          status: "unread",
+          user_id: user?.id || null
+        }
+      ]);
+
+      if (error) throw error;
+
+      setSubmitted(true);
+      toast.success("Message sent successfully!");
+    } catch (error: any) {
+      console.error("Error sending message:", error.message);
+      toast.error("Failed to send message. Please try again or call us.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Layout>
       <SEOHead title="Contact Us | Village IDA Pharmacy Edmonton" description="Get in touch with Village IDA Pharmacy. Call 780-440-4555 or visit us at 7004 98 Ave, Edmonton. Hours: Mon-Fri 9-5." />
-      
+
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl">
@@ -80,15 +121,22 @@ export default function Contact() {
                 {submitted ? (
                   <div className="text-center py-8">
                     <div className="w-14 h-14 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-4"><Check className="h-7 w-7 text-success" /></div>
-                    <p className="text-foreground font-medium">Message sent!</p>
-                    <p className="text-sm text-muted-foreground">We'll get back to you soon.</p>
+                    <p className="text-foreground font-medium text-lg mb-1">Message sent!</p>
+                    <p className="text-sm text-muted-foreground mb-6">We'll get back to you soon.</p>
+
+                    <div className="bg-card/50 rounded-xl p-4 text-left border border-border/40 inline-block w-full text-sm space-y-2">
+                      <div className="flex justify-between"><span className="text-muted-foreground">Name:</span><span className="font-medium">{formData.name}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">Phone:</span><span className="font-medium">{formData.phone}</span></div>
+                    </div>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div><Label htmlFor="name">Name</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-1.5" /></div>
                     <div><Label htmlFor="phone">Phone</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-1.5" /></div>
                     <div><Label htmlFor="message">Message</Label><Textarea id="message" value={formData.message} onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))} required rows={4} className="mt-1.5" /></div>
-                    <Button type="submit" className="w-full rounded-full">Send Message</Button>
+                    <Button type="submit" disabled={isSubmitting} className="w-full rounded-full">
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </Button>
                   </form>
                 )}
               </div>
@@ -96,6 +144,26 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Google Maps */}
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <div className="rounded-2xl overflow-hidden border border-border/60 shadow-soft">
+            <iframe
+              title="Village IDA Pharmacy Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2371.7!2d-113.4285!3d53.5271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVillage+IDA+Pharmacy!5e0!3m2!1sen!2sca!4v1"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full"
+            />
+          </div>
+        </div>
+      </section>
+
       <div className="h-16 md:hidden" />
     </Layout>
   );

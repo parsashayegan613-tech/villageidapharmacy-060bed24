@@ -20,19 +20,19 @@ export function Footer() {
     <footer className="bg-foreground text-background relative overflow-hidden">
       {/* Subtle gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/5 pointer-events-none" />
-      
+
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="inline-block mb-5">
-              <div className="flex flex-col items-center justify-center bg-background rounded-xl px-4 py-2">
-                <span className="text-foreground font-bold tracking-[0.2em] uppercase text-[7px] leading-tight">
+            <Link to="/" className="inline-block mb-5 group">
+              <div className="flex flex-col items-center justify-center bg-primary rounded-xl px-3.5 py-1.5 group-hover:bg-primary/90 transition-colors">
+                <span className="text-primary-foreground font-bold tracking-[0.2em] uppercase text-[7px] leading-tight">
                   Village
                 </span>
-                <span 
-                  className="font-black leading-none text-foreground"
-                  style={{ 
+                <span
+                  className="font-black leading-none text-primary-foreground"
+                  style={{
                     fontSize: 20,
                     textShadow: '1.5px 0 0 hsl(4,80%,56%), -1.5px 0 0 hsl(4,80%,56%), 0 1.5px 0 hsl(4,80%,56%), 0 -1.5px 0 hsl(4,80%,56%)',
                     fontFamily: "'DM Sans', Arial Black, sans-serif",
@@ -41,7 +41,7 @@ export function Footer() {
                 >
                   I.D.A.
                 </span>
-                <span className="text-foreground font-bold tracking-[0.15em] uppercase text-[6px] leading-tight">
+                <span className="text-primary-foreground font-bold tracking-[0.15em] uppercase text-[6px] leading-tight">
                   Pharmacy
                 </span>
               </div>
@@ -115,7 +115,11 @@ export function Footer() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs opacity-40">
             <p>© {new Date().getFullYear()} Village IDA Pharmacy. All rights reserved.</p>
-            <p>Member of the IDA Pharmacy Group</p>
+            <div className="flex items-center gap-4">
+              <Link to="/privacy" className="hover:opacity-80 transition-opacity">Privacy Policy</Link>
+              <Link to="/terms" className="hover:opacity-80 transition-opacity">Terms of Service</Link>
+              <span>Member of the IDA Pharmacy Group</span>
+            </div>
           </div>
         </div>
       </div>

@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/components/auth/AuthProvider";
+import { toast } from "sonner";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -10,10 +13,49 @@ import { StepCard } from "@/components/StepCard";
 import { CheckCircle, Phone, Home, MessageSquare, Truck, ArrowRight } from "lucide-react";
 
 export default function Transfer() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { user } = useAuth();
   const [formData, setFormData] = useState({ name: "", phone: "", currentPharmacy: "", currentPharmacyPhone: "", notes: "" });
 
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true); };
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.user_metadata?.full_name || prev.name,
+        phone: user.user_metadata?.phone || prev.phone,
+      }));
+    }
+  }, [user]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.from("transfers").insert([
+        {
+          full_name: formData.name,
+          phone: formData.phone,
+          current_pharmacy: formData.currentPharmacy,
+          current_pharmacy_phone: formData.currentPharmacyPhone,
+          notes: formData.notes,
+          status: "pending",
+          user_id: user?.id || null
+        }
+      ]);
+
+      if (error) throw error;
+
+      setSubmitted(true);
+      toast.success("Transfer request sent successfully!");
+    } catch (error: any) {
+      console.error("Error submitting transfer:", error.message);
+      toast.error("Failed to send request. Please try again or call us.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (submitted) {
     return (
@@ -26,6 +68,16 @@ export default function Transfer() {
               </div>
               <h1 className="text-3xl font-serif text-foreground mb-4">Transfer request received</h1>
               <p className="text-muted-foreground text-lg mb-8">We'll contact your old pharmacy and have everything ready within 1-2 business days.</p>
+
+              <div className="bg-card border border-border/60 rounded-2xl p-6 text-left mb-8 max-w-sm mx-auto shadow-soft">
+                <h3 className="font-semibold text-foreground mb-4 border-b border-border pb-2">Request Summary</h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between"><span className="text-muted-foreground">Name:</span><span className="font-medium">{formData.name}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">From:</span><span className="font-medium text-right max-w-[150px] truncate" title={formData.currentPharmacy}>{formData.currentPharmacy}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Their Phone:</span><span className="font-medium">{formData.currentPharmacyPhone}</span></div>
+                </div>
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="rounded-full px-8 gap-2"><a href="tel:780-440-4555"><Phone className="h-4 w-4" />Call Now</a></Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full px-8 gap-2"><Link to="/"><Home className="h-4 w-4" />Back to Home</Link></Button>
@@ -41,7 +93,7 @@ export default function Transfer() {
   return (
     <Layout>
       <SEOHead title="Transfer Prescriptions | Village IDA Pharmacy" description="Transfer your prescriptions to Village IDA. We handle all the paperwork with your old pharmacy. Free delivery available." />
-      
+
       <section className="py-16 md:py-20 bg-secondary relative overflow-hidden noise">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl">
@@ -83,7 +135,9 @@ export default function Transfer() {
               <div><Label htmlFor="currentPharmacy">Current Pharmacy Name *</Label><Input id="currentPharmacy" value={formData.currentPharmacy} onChange={(e) => setFormData(prev => ({ ...prev, currentPharmacy: e.target.value }))} required className="mt-2" placeholder="e.g., Shoppers Drug Mart on Whyte Ave" /></div>
               <div><Label htmlFor="currentPharmacyPhone">Current Pharmacy Phone (optional)</Label><Input id="currentPharmacyPhone" type="tel" value={formData.currentPharmacyPhone} onChange={(e) => setFormData(prev => ({ ...prev, currentPharmacyPhone: e.target.value }))} className="mt-2" placeholder="If you have it handy" /></div>
               <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will confirm everything by phone.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
-              <Button type="submit" className="w-full rounded-full gap-2" size="lg">Submit Transfer Request <ArrowRight className="h-4 w-4" /></Button>
+              <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2" size="lg">
+                {isSubmitting ? "Submitting..." : "Submit Transfer Request"} <ArrowRight className="h-4 w-4" />
+              </Button>
             </form>
 
             <div className="mt-12 p-8 bg-muted rounded-2xl text-center">

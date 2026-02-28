@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/components/auth/AuthProvider";
+import { toast } from "sonner";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -15,15 +18,61 @@ type Step = 1 | 2 | "confirmation";
 
 export default function Refill() {
   const [step, setStep] = useState<Step>(1);
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     name: "", phone: "", email: "", contactMethod: "call", consent: false,
     prescriptions: [""], deliveryType: "pickup", address: "", city: "", postalCode: "", notes: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.user_metadata?.full_name || prev.name,
+        email: user.email || prev.email,
+        phone: user.user_metadata?.phone || prev.phone,
+      }));
+    }
+  }, [user]);
   const addPrescription = () => setFormData(prev => ({ ...prev, prescriptions: [...prev.prescriptions, ""] }));
   const removePrescription = (index: number) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.filter((_, i) => i !== index) }));
   const updatePrescription = (index: number, value: string) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.map((p, i) => i === index ? value : p) }));
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setStep("confirmation"); };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.from("refills").insert([
+        {
+          full_name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          contact_method: formData.contactMethod,
+          prescriptions: formData.prescriptions.filter(rx => rx.trim() !== ""),
+          delivery_type: formData.deliveryType,
+          address: formData.deliveryType === "delivery" ? formData.address : null,
+          city: formData.deliveryType === "delivery" ? formData.city : null,
+          postal_code: formData.deliveryType === "delivery" ? formData.postalCode : null,
+          notes: formData.notes,
+          status: "pending",
+          user_id: user?.id || null
+        }
+      ]);
+
+      if (error) throw error;
+
+      setStep("confirmation");
+      toast.success("Refill request sent successfully!");
+    } catch (error: any) {
+      console.error("Error submitting refill:", error.message);
+      toast.error("Failed to send request. Please try again or call us.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (step === "confirmation") {
     return (
@@ -36,6 +85,17 @@ export default function Refill() {
               </div>
               <h1 className="text-3xl font-serif text-foreground mb-4">We received your request</h1>
               <p className="text-muted-foreground text-lg mb-8">We'll respond within 1 business day to confirm your refill.</p>
+
+              <div className="bg-card border border-border/60 rounded-2xl p-6 text-left mb-8 max-w-sm mx-auto shadow-soft">
+                <h3 className="font-semibold text-foreground mb-4 border-b border-border pb-2">Request Summary</h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between"><span className="text-muted-foreground">Name:</span><span className="font-medium">{formData.name}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Contact:</span><span className="font-medium">{formData.phone}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Delivery:</span><span className="font-medium capitalize">{formData.deliveryType}</span></div>
+                  <div className="flex justify-between"><span className="text-muted-foreground">Prescriptions:</span><span className="font-medium">{formData.prescriptions.filter(p => p.trim()).length} item(s)</span></div>
+                </div>
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="rounded-full px-8 gap-2"><a href="tel:780-440-4555"><Phone className="h-4 w-4" />Call Now</a></Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full px-8 gap-2"><Link to="/"><Home className="h-4 w-4" />Back to Home</Link></Button>
@@ -51,7 +111,7 @@ export default function Refill() {
   return (
     <Layout>
       <SEOHead title="Refill Request | Village IDA Pharmacy Edmonton" description="Request a prescription refill online. Most refills ready in 15-20 minutes. Free delivery available in Edmonton." />
-      
+
       <section className="py-16 md:py-20 bg-secondary relative overflow-hidden noise">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl">
@@ -99,7 +159,12 @@ export default function Refill() {
                   <div><Label>Pickup or Delivery</Label><RadioGroup value={formData.deliveryType} onValueChange={(value) => setFormData(prev => ({ ...prev, deliveryType: value }))} className="mt-2 grid grid-cols-2 gap-4"><label className={cn("flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all", formData.deliveryType === "pickup" ? "border-primary bg-primary/5" : "border-border hover:border-muted-foreground/50")}><RadioGroupItem value="pickup" id="pickup" className="sr-only" /><span className="font-medium">Pickup</span></label><label className={cn("flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all", formData.deliveryType === "delivery" ? "border-primary bg-primary/5" : "border-border hover:border-muted-foreground/50")}><RadioGroupItem value="delivery" id="delivery" className="sr-only" /><span className="font-medium">Delivery</span></label></RadioGroup></div>
                   {formData.deliveryType === "delivery" && (<div className="space-y-4 p-4 bg-muted rounded-xl"><div><Label htmlFor="address">Street Address *</Label><Input id="address" value={formData.address} onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))} required={formData.deliveryType === "delivery"} className="mt-2" /></div><div className="grid grid-cols-2 gap-4"><div><Label htmlFor="city">City</Label><Input id="city" value={formData.city} onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))} className="mt-2" defaultValue="Edmonton" /></div><div><Label htmlFor="postalCode">Postal Code</Label><Input id="postalCode" value={formData.postalCode} onChange={(e) => setFormData(prev => ({ ...prev, postalCode: e.target.value }))} className="mt-2" /></div></div></div>)}
                   <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will confirm everything by phone.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
-                  <div className="flex gap-4"><Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 rounded-full" size="lg"><ArrowLeft className="h-4 w-4 mr-2" />Back</Button><Button type="submit" className="flex-1 rounded-full" size="lg">Submit Request</Button></div>
+                  <div className="flex gap-4">
+                    <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 rounded-full" size="lg"><ArrowLeft className="h-4 w-4 mr-2" />Back</Button>
+                    <Button type="submit" disabled={isSubmitting} className="flex-1 rounded-full" size="lg">
+                      {isSubmitting ? "Submitting..." : "Submit Request"}
+                    </Button>
+                  </div>
                 </div>
               )}
             </form>
