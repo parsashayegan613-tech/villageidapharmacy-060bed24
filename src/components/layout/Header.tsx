@@ -10,7 +10,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@/components/auth/AuthProvider";
 
 const navigation = [
   {
@@ -32,7 +31,6 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showAnnouncement, setShowAnnouncement] = useState(true);
   const location = useLocation();
-  const { user, isAdmin, isLoading, signOut } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 w-full">
@@ -130,36 +128,6 @@ export function Header() {
 
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
-              {!isLoading && (
-                user ? (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <button className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition-colors focus-ring">
-                        <span className="text-xs font-bold text-primary">
-                          {user.email?.charAt(0).toUpperCase()}
-                        </span>
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48">
-                      <DropdownMenuItem asChild>
-                        <Link to={isAdmin ? "/admin" : "/account"} className="w-full">
-                          <User className="h-4 w-4 mr-2" />
-                          {isAdmin ? "Admin Portal" : "My Account"}
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={signOut}>
-                        <LogOut className="h-4 w-4 mr-2" />
-                        Sign Out
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                ) : (
-                  <Button asChild variant="ghost" size="sm" className="rounded-full px-4">
-                    <Link to="/login">Sign In</Link>
-                  </Button>
-                )
-              )}
               <Button asChild size="sm" className="rounded-full px-5 gap-2">
                 <Link to="/appointments">
                   <Calendar className="h-4 w-4" />
@@ -224,28 +192,6 @@ export function Header() {
               )
             )}
             <div className="pt-4 mt-4 border-t border-border space-y-2">
-              {!isLoading && (
-                user ? (
-                  <>
-                    <Button asChild variant="outline" className="w-full rounded-full" size="lg">
-                      <Link to={isAdmin ? "/admin" : "/account"} onClick={() => setMobileMenuOpen(false)}>
-                        <User className="h-4 w-4 mr-2" />
-                        {isAdmin ? "Admin Portal" : "My Account"}
-                      </Link>
-                    </Button>
-                    <Button variant="ghost" className="w-full rounded-full" size="lg" onClick={() => { signOut(); setMobileMenuOpen(false); }}>
-                      <LogOut className="h-4 w-4 mr-2" />
-                      Sign Out
-                    </Button>
-                  </>
-                ) : (
-                  <Button asChild variant="outline" className="w-full rounded-full" size="lg">
-                    <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                      Sign In
-                    </Link>
-                  </Button>
-                )
-              )}
               <Button asChild className="w-full rounded-full" size="lg">
                 <Link to="/appointments" onClick={() => setMobileMenuOpen(false)}>
                   <Calendar className="h-4 w-4 mr-2" />

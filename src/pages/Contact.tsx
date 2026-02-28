@@ -15,7 +15,7 @@ const contactInfo = [
   { icon: MapPin, label: "Address", value: "7004 98 Ave, Edmonton, AB T6A 0A5", copyable: true },
   { icon: Phone, label: "Phone", value: "780-440-4555", href: "tel:780-440-4555", copyable: true },
   { icon: Printer, label: "Fax", value: "780-440-1931", copyable: true },
-  { icon: Mail, label: "Email", value: "villida@telus.net", href: "mailto:villida@telus.net", copyable: true },
+  { icon: Mail, label: "Email", value: "villageidapharmacy@gmail.com", href: "mailto:villageidapharmacy@gmail.com", copyable: true },
 ];
 
 export default function Contact() {

@@ -14,7 +14,6 @@ import Transfer from "./pages/Transfer";
 import Appointments from "./pages/Appointments";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
-import Account from "./pages/Account";
 import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
@@ -44,14 +43,13 @@ const App = () => (
             <Route path="/transfer" element={<Transfer />} />
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/account" element={<Account />} />
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/login" element={<Navigate to="/admin/login" replace />} />
             <Route path="/about" element={<About />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
 
             {/* Admin Routes */}
-            <Route path="/admin/login" element={<Navigate to="/login" replace />} />
             <Route path="/admin" element={<AdminAuthProvider><AdminDashboard /></AdminAuthProvider>} />
             <Route path="/admin/appointments" element={<AdminAuthProvider><AdminAppointments /></AdminAuthProvider>} />
             <Route path="/admin/refills" element={<AdminAuthProvider><AdminRefills /></AdminAuthProvider>} />

@@ -69,7 +69,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 flex-shrink-0 opacity-50" />
-                <a href="mailto:villida@telus.net" className="opacity-70 hover:opacity-100 transition-opacity">villida@telus.net</a>
+                <a href="mailto:villageidapharmacy@gmail.com" className="opacity-70 hover:opacity-100 transition-opacity">villageidapharmacy@gmail.com</a>
               </li>
             </ul>
           </div>

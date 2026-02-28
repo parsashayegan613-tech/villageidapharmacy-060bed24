@@ -80,7 +80,7 @@ export default function Privacy() {
                                 <p className="font-semibold">Village IDA Pharmacy</p>
                                 <p>7004 98 Ave, Edmonton, AB T6A 0A5</p>
                                 <p>Phone: <a href="tel:780-440-4555" className="text-primary hover:underline">780-440-4555</a></p>
-                                <p>Email: <a href="mailto:villida@telus.net" className="text-primary hover:underline">villida@telus.net</a></p>
+                                <p>Email: <a href="mailto:villageidapharmacy@gmail.com" className="text-primary hover:underline">villageidapharmacy@gmail.com</a></p>
                             </div>
                         </section>
                     </div>
