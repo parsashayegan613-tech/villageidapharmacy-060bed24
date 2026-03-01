@@ -69,7 +69,7 @@ export default function Refill() {
         try {
           const bitmap = await createImageBitmap(file);
           // @ts-ignore
-          const detector = new window.BarcodeDetector();
+          const detector = new window.BarcodeDetector({ formats: ['qr_code', 'code_128', 'code_39', 'ean_13', 'ean_8', 'upc_a', 'upc_e'] });
           const barcodes = await detector.detect(bitmap);
           if (barcodes.length > 0) {
             scannedValue = barcodes[0].rawValue;
