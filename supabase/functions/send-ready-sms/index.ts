@@ -8,12 +8,20 @@ serve(async (req) => {
     const url = new URL(req.url);
     const name = url.searchParams.get("name") || "Patient";
     const number = url.searchParams.get("number");
+    const type = url.searchParams.get("type") || "pickup";
 
     if (!number) {
         return new Response("Missing number", { status: 400 });
     }
 
-    const message = `Village IDA Pharmacy: Hello ${name}, your prescription refill request is now complete and ready!`;
+    let message;
+    if (type === "delivery") {
+        message = `Village IDA Pharmacy: Hello ${name}, your prescription is out for delivery and will be dropped off soon!`;
+    } else if (type === "delivered") {
+        message = `Village IDA Pharmacy: Hello ${name}, your prescription has been delivered to your address!`;
+    } else {
+        message = `Village IDA Pharmacy: Hello ${name}, your prescription refill request is now complete and ready for pickup!`;
+    }
 
     const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${twilioAccountSid}/Messages.json`;
     const basicAuth = btoa(`${twilioAccountSid}:${twilioAuthToken}`);

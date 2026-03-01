@@ -20,7 +20,7 @@ export default function Refill() {
   const [step, setStep] = useState<Step>(1);
   const { user } = useAuth();
   const [formData, setFormData] = useState({
-    name: "", phone: "", email: "", contactMethod: "call", consent: false,
+    name: "", phone: "", email: "", consent: false,
     prescriptions: [""], deliveryType: "pickup", address: "", city: "", postalCode: "", notes: "",
   });
 
@@ -50,7 +50,7 @@ export default function Refill() {
           full_name: formData.name,
           phone: formData.phone,
           email: formData.email,
-          contact_method: formData.contactMethod,
+          contact_method: "text",
           prescriptions: formData.prescriptions.filter(rx => rx.trim() !== ""),
           delivery_type: formData.deliveryType,
           address: formData.deliveryType === "delivery" ? formData.address : null,
@@ -158,8 +158,7 @@ export default function Refill() {
                   <div><Label htmlFor="name">Full Name *</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-2" /></div>
                   <div><Label htmlFor="phone">Phone Number *</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-2" /></div>
                   <div><Label htmlFor="email">Email (optional)</Label><Input id="email" type="email" value={formData.email} onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))} className="mt-2" /></div>
-                  <div><Label>Preferred Contact Method *</Label><RadioGroup value={formData.contactMethod} onValueChange={(value) => setFormData(prev => ({ ...prev, contactMethod: value }))} className="mt-2 flex gap-4"><div className="flex items-center space-x-2"><RadioGroupItem value="call" id="call" /><Label htmlFor="call" className="font-normal">Call</Label></div><div className="flex items-center space-x-2"><RadioGroupItem value="text" id="text" /><Label htmlFor="text" className="font-normal">Text</Label></div></RadioGroup></div>
-                  <div className="flex items-start space-x-3"><Checkbox id="consent" checked={formData.consent} onCheckedChange={(checked) => setFormData(prev => ({ ...prev, consent: !!checked }))} /><Label htmlFor="consent" className="text-sm font-normal leading-relaxed">I consent to be contacted at the phone number provided regarding my refill request.</Label></div>
+                  <div className="flex items-start space-x-3"><Checkbox id="consent" checked={formData.consent} onCheckedChange={(checked) => setFormData(prev => ({ ...prev, consent: !!checked }))} /><Label htmlFor="consent" className="text-sm font-normal leading-relaxed">I consent to receive automated text messages regarding my refill request.</Label></div>
                   <Button type="button" onClick={() => setStep(2)} disabled={!formData.name || !formData.phone || !formData.consent} className="w-full rounded-full" size="lg">Continue<ArrowRight className="h-4 w-4 ml-2" /></Button>
                 </div>
               )}

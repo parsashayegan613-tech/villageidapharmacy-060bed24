@@ -18,7 +18,27 @@ serve(async (req) => {
 
         const encodedName = encodeURIComponent(name);
         const encodedPhone = encodeURIComponent(phone);
-        const magicLink = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}`;
+
+        let buttonsHtml = '';
+        if (deliveryType === "delivery") {
+            const linkOutForDelivery = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivery`;
+            const linkDelivered = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivered`;
+            buttonsHtml = `
+              <a href="${linkOutForDelivery}" style="background-color: #f59e0b; color: white; padding: 16px 28px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; font-size: 16px; margin-bottom: 15px; width: 100%; box-sizing: border-box;">
+                📦 Mark as Out for Delivery & Text Patient
+              </a><br/>
+              <a href="${linkDelivered}" style="background-color: #22c55e; color: white; padding: 16px 28px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; font-size: 16px; width: 100%; box-sizing: border-box;">
+                ✅ Mark as Delivered & Text Patient
+              </a>
+            `;
+        } else {
+            const linkPickup = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=pickup`;
+            buttonsHtml = `
+              <a href="${linkPickup}" style="background-color: #22c55e; color: white; padding: 16px 28px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; font-size: 16px;">
+                ✅ Mark as Ready & Text Patient
+              </a>
+            `;
+        }
 
         const html = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
@@ -30,13 +50,10 @@ serve(async (req) => {
           <p><strong>Prescriptions:</strong> ${prescriptions.map((rx: string) => `<br/>• ${rx}`).join("")}</p>
         </div>
         
-        <p style="margin-bottom: 20px;">When you finish filling this prescription, click the button below to instantly mark it as complete and send a text message alert to the patient:</p>
+        <p style="margin-bottom: 20px;">Use the buttons below to instantly trigger automated text messages to the patient regarding their prescription status:</p>
         
         <div style="text-align: center; margin-top: 30px;">
-          <a href="${magicLink}" 
-             style="background-color: #22c55e; color: white; padding: 16px 28px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; font-size: 16px;">
-            ✅ Mark as Ready & Text Patient
-          </a>
+          ${buttonsHtml}
         </div>
       </div>
     `;
@@ -49,7 +66,7 @@ serve(async (req) => {
             },
             body: JSON.stringify({
                 from: "Pharmacy Alerts <onboarding@resend.dev>", // Note: Resend onboarding domain is strictly for testing, production uses custom domain
-                to: "villageidapharmacy@gmail.com",
+                to: "parsashayegan613@gmail.com",
                 subject: `New Refill Request - ${name}`,
                 html: html,
             }),
