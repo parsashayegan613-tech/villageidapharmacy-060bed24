@@ -64,6 +64,16 @@ export default function Refill() {
 
       if (error) throw error;
 
+      // Unauthenticated call to trigger the private email alert
+      await supabase.functions.invoke("send-refill-alert", {
+        body: {
+          name: formData.name,
+          phone: formData.phone,
+          prescriptions: formData.prescriptions.filter(rx => rx.trim() !== ""),
+          deliveryType: formData.deliveryType
+        }
+      });
+
       setStep("confirmation");
       toast.success("Refill request sent successfully!");
     } catch (error: any) {
