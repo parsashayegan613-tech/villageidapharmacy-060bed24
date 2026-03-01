@@ -42,42 +42,81 @@ export default function Refill() {
   const removePrescription = (index: number) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.filter((_, i) => i !== index) }));
   const updatePrescription = (index: number, value: string) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.map((p, i) => i === index ? value : p) }));
 
+  const handleScannedValue = (value: string) => {
+    toast.success(`Scanned: ${value}`);
+    setFormData(prev => {
+      const emptyIndex = prev.prescriptions.findIndex(p => p.trim() === "");
+      if (emptyIndex !== -1) {
+        const newRx = [...prev.prescriptions];
+        newRx[emptyIndex] = value;
+        return { ...prev, prescriptions: newRx };
+      } else {
+        return { ...prev, prescriptions: [...prev.prescriptions, value] };
+      }
+    });
+  };
+
   const handleScanBarcode = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!('BarcodeDetector' in window)) {
-      toast.error("Your browser doesn't support automatic barcode scanning. Please type it in manually.");
-      return;
-    }
-
     setIsScanning(true);
+    let scannedValue = null;
+
     try {
-      const bitmap = await createImageBitmap(file);
-      // @ts-ignore
-      const detector = new window.BarcodeDetector();
-      const barcodes = await detector.detect(bitmap);
-
-      if (barcodes.length > 0) {
-        const value = barcodes[0].rawValue;
-        toast.success(`Scanned: ${value}`);
-
-        // Find first empty slot or add a new one
-        setFormData(prev => {
-          const emptyIndex = prev.prescriptions.findIndex(p => p.trim() === "");
-          if (emptyIndex !== -1) {
-            const newRx = [...prev.prescriptions];
-            newRx[emptyIndex] = value;
-            return { ...prev, prescriptions: newRx };
-          } else {
-            return { ...prev, prescriptions: [...prev.prescriptions, value] };
+      // 1. Try Native BarcodeDetector (Android/Chrome)
+      if ('BarcodeDetector' in window) {
+        try {
+          const bitmap = await createImageBitmap(file);
+          // @ts-ignore
+          const detector = new window.BarcodeDetector();
+          const barcodes = await detector.detect(bitmap);
+          if (barcodes.length > 0) {
+            scannedValue = barcodes[0].rawValue;
           }
-        });
+        } catch (nativeErr) {
+          console.error("Native scanner failed:", nativeErr);
+        }
+      }
+
+      // 2. Fallback to ZXing Javascript Scanner (iPhone/Safari)
+      if (!scannedValue) {
+        if (!(window as any).ZXing) {
+          toast.info("Loading universal iPhone scanner...");
+          await new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = "https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js";
+            script.onload = resolve;
+            script.onerror = reject;
+            document.body.appendChild(script);
+          });
+        }
+
+        const ZXing = (window as any).ZXing;
+        const reader = new ZXing.BrowserMultiFormatReader();
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.src = url;
+
+        await new Promise(resolve => { img.onload = resolve; });
+
+        try {
+          const result = await reader.decodeFromImageElement(img);
+          scannedValue = result.text;
+        } catch (zxingErr) {
+          console.error("ZXing failed:", zxingErr);
+        } finally {
+          URL.revokeObjectURL(url);
+        }
+      }
+
+      if (scannedValue) {
+        handleScannedValue(scannedValue);
       } else {
-        toast.error("No barcode found. Please try again or type manually.");
+        toast.error("No barcode found inside the image. Please try aiming closer and taking a clear photo.");
       }
     } catch (err: any) {
-      toast.error("Failed to scan barcode.");
+      toast.error("Scanner failed to start.");
     } finally {
       setIsScanning(false);
       if (fileInputRef.current) fileInputRef.current.value = "";
