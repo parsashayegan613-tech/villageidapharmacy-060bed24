@@ -9,8 +9,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { toast } from "sonner";
 import { format } from "date-fns";
-import { Search, RefreshCw, User, Mail, Phone, Truck, FileText, Pill } from "lucide-react";
+import { Search, RefreshCw, User, Mail, Phone, Truck, FileText, Pill, CheckSquare } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface Refill {
     id: string;
@@ -41,6 +42,8 @@ export default function AdminRefills() {
     const [isLoading, setIsLoading] = useState(true);
     const [adminNote, setAdminNote] = useState("");
     const [isSavingNote, setIsSavingNote] = useState(false);
+    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+    const [isProcessingBulk, setIsProcessingBulk] = useState(false);
 
     useEffect(() => {
         if (selected) setAdminNote(selected.admin_notes || "");
@@ -86,6 +89,59 @@ export default function AdminRefills() {
         if (selected?.id === id) setSelected(prev => prev ? { ...prev, status: newStatus } : null);
     };
 
+    const toggleSelectAll = () => {
+        if (selectedIds.size === filtered.length && filtered.length > 0) {
+            setSelectedIds(new Set());
+        } else {
+            setSelectedIds(new Set(filtered.map(r => r.id)));
+        }
+    };
+
+    const toggleSelectOne = (e: React.MouseEvent, id: string) => {
+        e.stopPropagation();
+        const newSet = new Set(selectedIds);
+        if (newSet.has(id)) newSet.delete(id);
+        else newSet.add(id);
+        setSelectedIds(newSet);
+    };
+
+    const handleBulkAction = async (type: "pickup" | "delivery" | "delivered") => {
+        if (selectedIds.size === 0) return;
+        setIsProcessingBulk(true);
+        let successCount = 0;
+        let failCount = 0;
+
+        for (const id of Array.from(selectedIds)) {
+            const refill = refills.find(r => r.id === id);
+            if (!refill) continue;
+
+            try {
+                // Update DB Status to completed
+                await supabase.from("refills").update({ status: "completed" }).eq("id", id);
+
+                // Ping Twilio Edge Function
+                const { error } = await supabase.functions.invoke("send-ready-sms", {
+                    body: { name: refill.full_name, number: refill.phone, type: type }
+                });
+
+                if (error) throw error;
+
+                // Update local state
+                setRefills(prev => prev.map(r => r.id === id ? { ...r, status: "completed" } : r));
+                successCount++;
+            } catch (err) {
+                console.error("Bulk action failed for", refill.full_name, err);
+                failCount++;
+            }
+        }
+
+        setIsProcessingBulk(false);
+        setSelectedIds(new Set());
+
+        if (successCount > 0) toast.success(`Successfully processed ${successCount} request(s)`);
+        if (failCount > 0) toast.error(`Failed to process ${failCount} request(s)`);
+    };
+
     return (
         <AdminLayout>
             <div className="mb-6">
@@ -114,6 +170,26 @@ export default function AdminRefills() {
                 </Select>
             </div>
 
+            {selectedIds.size > 0 && (
+                <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4">
+                    <div className="flex items-center gap-2 text-primary font-medium">
+                        <CheckSquare className="h-5 w-5" />
+                        <span>{selectedIds.size} request(s) selected</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                        <Button size="sm" variant="outline" className="bg-background" onClick={() => handleBulkAction("pickup")} disabled={isProcessingBulk}>
+                            ✅ Mark Ready (Pickup)
+                        </Button>
+                        <Button size="sm" variant="outline" className="bg-background text-amber-600 border-amber-200 hover:bg-amber-50" onClick={() => handleBulkAction("delivery")} disabled={isProcessingBulk}>
+                            📦 Out for Delivery
+                        </Button>
+                        <Button size="sm" variant="outline" className="bg-background text-green-600 border-green-200 hover:bg-green-50" onClick={() => handleBulkAction("delivered")} disabled={isProcessingBulk}>
+                            ✅ Delivered
+                        </Button>
+                    </div>
+                </div>
+            )}
+
             {isLoading ? (
                 <div className="border border-border/60 rounded-2xl overflow-hidden bg-card p-4 space-y-4">
                     {[1, 2, 3, 4].map(i => (
@@ -131,6 +207,13 @@ export default function AdminRefills() {
                         <table className="w-full text-sm">
                             <thead className="bg-muted/50 border-b border-border/60">
                                 <tr>
+                                    <th className="w-[40px] px-5 py-3 text-left">
+                                        <Checkbox
+                                            checked={filtered.length > 0 && selectedIds.size === filtered.length}
+                                            onCheckedChange={toggleSelectAll}
+                                            aria-label="Select all"
+                                        />
+                                    </th>
                                     <th className="text-left px-5 py-3 font-semibold text-muted-foreground">Client</th>
                                     <th className="text-left px-5 py-3 font-semibold text-muted-foreground hidden md:table-cell">Delivery</th>
                                     <th className="text-left px-5 py-3 font-semibold text-muted-foreground hidden lg:table-cell">Prescriptions</th>
@@ -141,6 +224,13 @@ export default function AdminRefills() {
                             <tbody className="divide-y divide-border/60">
                                 {filtered.map(r => (
                                     <tr key={r.id} onClick={() => setSelected(r)} className="hover:bg-muted/30 cursor-pointer transition-colors">
+                                        <td className="px-5 py-3.5" onClick={(e) => e.stopPropagation()}>
+                                            <Checkbox
+                                                checked={selectedIds.has(r.id)}
+                                                onCheckedChange={() => toggleSelectOne({ stopPropagation: () => { } } as React.MouseEvent, r.id)}
+                                                aria-label={`Select ${r.full_name}`}
+                                            />
+                                        </td>
                                         <td className="px-5 py-3.5">
                                             <p className="font-medium text-foreground">{r.full_name}</p>
                                             <p className="text-xs text-muted-foreground">{r.phone}</p>
