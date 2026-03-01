@@ -74,7 +74,7 @@ export default function AdminLogin() {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="villida@telus.net"
+                                placeholder="villageidapharmacy@gmail.com"
                                 required
                                 className="mt-1.5"
                             />
