@@ -160,7 +160,19 @@ export default function AdminTransfers() {
                                 <DetailRow icon={Phone} label="Phone" value={selected.phone} />
                                 <DetailRow icon={Building2} label="Old Pharmacy" value={selected.current_pharmacy} />
                                 {selected.current_pharmacy_phone && <DetailRow icon={Phone} label="Old Pharmacy Phone" value={selected.current_pharmacy_phone} />}
-                                {selected.notes && <DetailRow icon={FileText} label="Notes" value={selected.notes} />}
+                                {selected.notes?.includes("[PHOTO_ATTACHED]") ? (
+                                    <>
+                                        <div className="rounded-xl overflow-hidden border-2 border-primary/20 bg-muted/30 mb-4">
+                                            <p className="bg-primary/5 text-primary tracking-wider uppercase text-[10px] font-bold p-2 border-b border-primary/10 pl-3">Prescription Photo Attached</p>
+                                            <img src={selected.notes.split("\n\nNotes:\n")[0].replace("[PHOTO_ATTACHED]\n", "")} alt="Prescription" className="w-full h-auto object-contain max-h-[400px]" />
+                                        </div>
+                                        {selected.notes.split("\n\nNotes:\n")[1] && selected.notes.split("\n\nNotes:\n")[1].trim() !== "" && (
+                                            <DetailRow icon={FileText} label="Notes" value={selected.notes.split("\n\nNotes:\n")[1]} />
+                                        )}
+                                    </>
+                                ) : (
+                                    selected.notes && <DetailRow icon={FileText} label="Notes" value={selected.notes} />
+                                )}
                                 <div className="pt-4 border-t border-border/60">
                                     <p className="text-sm font-medium text-foreground mb-2">Admin Notes</p>
                                     <div className="flex flex-col gap-2">

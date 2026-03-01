@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/components/auth/AuthProvider";
@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { CheckCircle, Plus, Trash2, Phone, Home, ArrowRight, ArrowLeft } from "lucide-react";
+import { CheckCircle, Plus, Trash2, Phone, Home, ArrowRight, ArrowLeft, ScanLine } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Step = 1 | 2 | "confirmation";
@@ -25,6 +25,8 @@ export default function Refill() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isScanning, setIsScanning] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (user) {
@@ -39,6 +41,48 @@ export default function Refill() {
   const addPrescription = () => setFormData(prev => ({ ...prev, prescriptions: [...prev.prescriptions, ""] }));
   const removePrescription = (index: number) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.filter((_, i) => i !== index) }));
   const updatePrescription = (index: number, value: string) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.map((p, i) => i === index ? value : p) }));
+
+  const handleScanBarcode = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!('BarcodeDetector' in window)) {
+      toast.error("Your browser doesn't support automatic barcode scanning. Please type it in manually.");
+      return;
+    }
+
+    setIsScanning(true);
+    try {
+      const bitmap = await createImageBitmap(file);
+      // @ts-ignore
+      const detector = new window.BarcodeDetector();
+      const barcodes = await detector.detect(bitmap);
+
+      if (barcodes.length > 0) {
+        const value = barcodes[0].rawValue;
+        toast.success(`Scanned: ${value}`);
+
+        // Find first empty slot or add a new one
+        setFormData(prev => {
+          const emptyIndex = prev.prescriptions.findIndex(p => p.trim() === "");
+          if (emptyIndex !== -1) {
+            const newRx = [...prev.prescriptions];
+            newRx[emptyIndex] = value;
+            return { ...prev, prescriptions: newRx };
+          } else {
+            return { ...prev, prescriptions: [...prev.prescriptions, value] };
+          }
+        });
+      } else {
+        toast.error("No barcode found. Please try again or type manually.");
+      }
+    } catch (err: any) {
+      toast.error("Failed to scan barcode.");
+    } finally {
+      setIsScanning(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -155,7 +199,16 @@ export default function Refill() {
               )}
               {step === 2 && (
                 <div className="space-y-6">
-                  <div><Label>Prescription Numbers</Label><div className="space-y-3 mt-2">{formData.prescriptions.map((rx, index) => (<div key={index} className="flex gap-2"><Input value={rx} onChange={(e) => updatePrescription(index, e.target.value)} placeholder={`Prescription #${index + 1}`} />{formData.prescriptions.length > 1 && (<Button type="button" variant="outline" size="icon" onClick={() => removePrescription(index)}><Trash2 className="h-4 w-4" /></Button>)}</div>))}</div><Button type="button" variant="ghost" size="sm" onClick={addPrescription} className="mt-2"><Plus className="h-4 w-4 mr-2" />Add Another</Button></div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <Label>Prescription Numbers</Label>
+                      <Button type="button" variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} disabled={isScanning} className="gap-2 text-primary border-primary/20 hover:bg-primary/5">
+                        <ScanLine className="h-4 w-4" /> {isScanning ? "Scanning..." : "Scan Bottle"}
+                      </Button>
+                      <input ref={fileInputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={handleScanBarcode} />
+                    </div>
+                    <div className="space-y-3 mt-2">{formData.prescriptions.map((rx, index) => (<div key={index} className="flex gap-2"><Input value={rx} onChange={(e) => updatePrescription(index, e.target.value)} placeholder={`Prescription #${index + 1}`} />{formData.prescriptions.length > 1 && (<Button type="button" variant="outline" size="icon" onClick={() => removePrescription(index)}><Trash2 className="h-4 w-4" /></Button>)}</div>))}</div><Button type="button" variant="ghost" size="sm" onClick={addPrescription} className="mt-2 text-muted-foreground"><Plus className="h-4 w-4 mr-2" />Add Another</Button>
+                  </div>
                   <div><Label>Pickup or Delivery</Label><RadioGroup value={formData.deliveryType} onValueChange={(value) => setFormData(prev => ({ ...prev, deliveryType: value }))} className="mt-2 grid grid-cols-2 gap-4"><label className={cn("flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all", formData.deliveryType === "pickup" ? "border-primary bg-primary/5" : "border-border hover:border-muted-foreground/50")}><RadioGroupItem value="pickup" id="pickup" className="sr-only" /><span className="font-medium">Pickup</span></label><label className={cn("flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all", formData.deliveryType === "delivery" ? "border-primary bg-primary/5" : "border-border hover:border-muted-foreground/50")}><RadioGroupItem value="delivery" id="delivery" className="sr-only" /><span className="font-medium">Delivery</span></label></RadioGroup></div>
                   {formData.deliveryType === "delivery" && (<div className="space-y-4 p-4 bg-muted rounded-xl"><div><Label htmlFor="address">Street Address *</Label><Input id="address" value={formData.address} onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))} required={formData.deliveryType === "delivery"} className="mt-2" /></div><div className="grid grid-cols-2 gap-4"><div><Label htmlFor="city">City</Label><Input id="city" value={formData.city} onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))} className="mt-2" defaultValue="Edmonton" /></div><div><Label htmlFor="postalCode">Postal Code</Label><Input id="postalCode" value={formData.postalCode} onChange={(e) => setFormData(prev => ({ ...prev, postalCode: e.target.value }))} className="mt-2" /></div></div></div>)}
                   <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will confirm everything by phone.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
