@@ -1748,6 +1748,7 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/node_modules/next/navigation.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$integrations$2f$supabase$2f$client$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/integrations/supabase/client.ts [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$layout$2f$Layout$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/components/layout/Layout.tsx [app-client] (ecmascript)");
@@ -1777,6 +1778,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skil
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -1862,7 +1864,7 @@ const timeSlots = [
 ];
 function Appointments() {
     _s();
-    const [searchParams] = useSearchParams();
+    const searchParams = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"])();
     const preselectedType = searchParams.get("type") || "";
     const [selectedType, setSelectedType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(preselectedType);
     const [date, setDate] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
@@ -1947,12 +1949,12 @@ function Appointments() {
                                         className: "h-10 w-10 text-success"
                                     }, void 0, false, {
                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                        lineNumber: 127,
+                                        lineNumber: 128,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                    lineNumber: 126,
+                                    lineNumber: 127,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -1960,7 +1962,7 @@ function Appointments() {
                                     children: "Request received"
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                    lineNumber: 129,
+                                    lineNumber: 130,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1968,7 +1970,7 @@ function Appointments() {
                                     children: "We'll contact you within 1 business day to confirm your appointment."
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                    lineNumber: 130,
+                                    lineNumber: 131,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1979,7 +1981,7 @@ function Appointments() {
                                             children: "Request Summary"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                            lineNumber: 133,
+                                            lineNumber: 134,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1993,7 +1995,7 @@ function Appointments() {
                                                             children: "Name:"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                            lineNumber: 135,
+                                                            lineNumber: 136,
                                                             columnNumber: 57
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2001,33 +2003,8 @@ function Appointments() {
                                                             children: formData.name
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                            lineNumber: 135,
+                                                            lineNumber: 136,
                                                             columnNumber: 109
-                                                        }, this)
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                    lineNumber: 135,
-                                                    columnNumber: 19
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex justify-between",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "text-muted-foreground",
-                                                            children: "Service:"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                            lineNumber: 136,
-                                                            columnNumber: 57
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "font-medium capitalize",
-                                                            children: selectedType.replace("-", " ")
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                            lineNumber: 136,
-                                                            columnNumber: 112
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
@@ -2040,10 +2017,35 @@ function Appointments() {
                                                     children: [
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                             className: "text-muted-foreground",
-                                                            children: "Date & Time:"
+                                                            children: "Service:"
                                                         }, void 0, false, {
                                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
                                                             lineNumber: 137,
+                                                            columnNumber: 57
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "font-medium capitalize",
+                                                            children: selectedType.replace("-", " ")
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
+                                                            lineNumber: 137,
+                                                            columnNumber: 112
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
+                                                    lineNumber: 137,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex justify-between",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-muted-foreground",
+                                                            children: "Date & Time:"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
+                                                            lineNumber: 138,
                                                             columnNumber: 57
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2055,25 +2057,25 @@ function Appointments() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                            lineNumber: 137,
+                                                            lineNumber: 138,
                                                             columnNumber: 116
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                    lineNumber: 137,
+                                                    lineNumber: 138,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                            lineNumber: 134,
+                                            lineNumber: 135,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                    lineNumber: 132,
+                                    lineNumber: 133,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2084,7 +2086,7 @@ function Appointments() {
                                             children: "Need something urgent?"
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                            lineNumber: 142,
+                                            lineNumber: 143,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2092,7 +2094,7 @@ function Appointments() {
                                             children: "Call us directly and we'll do our best to fit you in."
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                            lineNumber: 143,
+                                            lineNumber: 144,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2105,25 +2107,25 @@ function Appointments() {
                                                         className: "h-4 w-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                        lineNumber: 144,
+                                                        lineNumber: 145,
                                                         columnNumber: 91
                                                     }, this),
                                                     "780-440-4555"
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 144,
+                                                lineNumber: 145,
                                                 columnNumber: 64
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                            lineNumber: 144,
+                                            lineNumber: 145,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                    lineNumber: 141,
+                                    lineNumber: 142,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2138,48 +2140,48 @@ function Appointments() {
                                                 className: "h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 146,
+                                                lineNumber: 147,
                                                 columnNumber: 105
                                             }, this),
                                             "Back to Home"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                        lineNumber: 146,
+                                        lineNumber: 147,
                                         columnNumber: 90
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                    lineNumber: 146,
+                                    lineNumber: 147,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                            lineNumber: 125,
+                            lineNumber: 126,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                        lineNumber: 124,
+                        lineNumber: 125,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                    lineNumber: 123,
+                    lineNumber: 124,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "h-16 md:hidden"
                 }, void 0, false, {
                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                    lineNumber: 150,
+                    lineNumber: 151,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-            lineNumber: 122,
+            lineNumber: 123,
             columnNumber: 7
         }, this);
     }
@@ -2190,7 +2192,7 @@ function Appointments() {
                 description: "Book a pharmacy appointment for injections, medication reviews, diabetes support, smoking cessation, or compounding consultations."
             }, void 0, false, {
                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                lineNumber: 157,
+                lineNumber: 158,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2205,7 +2207,7 @@ function Appointments() {
                                 children: "Appointments"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                lineNumber: 162,
+                                lineNumber: 163,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -2213,7 +2215,7 @@ function Appointments() {
                                 children: "Request an Appointment"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                lineNumber: 163,
+                                lineNumber: 164,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2221,23 +2223,23 @@ function Appointments() {
                                 children: "Select the type of appointment you need, and we'll be in touch to confirm a time."
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                lineNumber: 164,
+                                lineNumber: 165,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                        lineNumber: 161,
+                        lineNumber: 162,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                    lineNumber: 160,
+                    lineNumber: 161,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                lineNumber: 159,
+                lineNumber: 160,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2252,7 +2254,7 @@ function Appointments() {
                                 children: "What do you need?"
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                lineNumber: 172,
+                                lineNumber: 173,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2265,7 +2267,7 @@ function Appointments() {
                                                 className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cn"])("h-5 w-5 mb-2", selectedType === type.id ? "text-primary" : "text-muted-foreground")
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 185,
+                                                lineNumber: 186,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2273,18 +2275,18 @@ function Appointments() {
                                                 children: type.label
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 186,
+                                                lineNumber: 187,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, type.id, true, {
                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                        lineNumber: 175,
+                                        lineNumber: 176,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                lineNumber: 173,
+                                lineNumber: 174,
                                 columnNumber: 13
                             }, this),
                             selectedType && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -2298,7 +2300,7 @@ function Appointments() {
                                                 children: "Your Full Name *"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 193,
+                                                lineNumber: 194,
                                                 columnNumber: 22
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -2312,13 +2314,13 @@ function Appointments() {
                                                 className: "mt-2"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 193,
+                                                lineNumber: 194,
                                                 columnNumber: 68
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                        lineNumber: 193,
+                                        lineNumber: 194,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2331,7 +2333,7 @@ function Appointments() {
                                                         children: "Email Address *"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                        lineNumber: 195,
+                                                        lineNumber: 196,
                                                         columnNumber: 24
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -2346,13 +2348,13 @@ function Appointments() {
                                                         className: "mt-2"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                        lineNumber: 195,
+                                                        lineNumber: 196,
                                                         columnNumber: 70
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 195,
+                                                lineNumber: 196,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2362,7 +2364,7 @@ function Appointments() {
                                                         children: "Phone Number *"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                        lineNumber: 196,
+                                                        lineNumber: 197,
                                                         columnNumber: 24
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$input$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Input"], {
@@ -2377,19 +2379,19 @@ function Appointments() {
                                                         className: "mt-2"
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                        lineNumber: 196,
+                                                        lineNumber: 197,
                                                         columnNumber: 69
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 196,
+                                                lineNumber: 197,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                        lineNumber: 194,
+                                        lineNumber: 195,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2398,7 +2400,7 @@ function Appointments() {
                                                 children: "Preferred Contact Method"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 198,
+                                                lineNumber: 199,
                                                 columnNumber: 22
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$radio$2d$group$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RadioGroup"], {
@@ -2417,7 +2419,7 @@ function Appointments() {
                                                                 id: "call"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                lineNumber: 198,
+                                                                lineNumber: 199,
                                                                 columnNumber: 261
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -2426,13 +2428,13 @@ function Appointments() {
                                                                 children: "Call"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                lineNumber: 198,
+                                                                lineNumber: 199,
                                                                 columnNumber: 302
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                        lineNumber: 198,
+                                                        lineNumber: 199,
                                                         columnNumber: 216
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2443,7 +2445,7 @@ function Appointments() {
                                                                 id: "text"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                lineNumber: 198,
+                                                                lineNumber: 199,
                                                                 columnNumber: 411
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$label$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Label"], {
@@ -2452,25 +2454,25 @@ function Appointments() {
                                                                 children: "Text"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                lineNumber: 198,
+                                                                lineNumber: 199,
                                                                 columnNumber: 452
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                        lineNumber: 198,
+                                                        lineNumber: 199,
                                                         columnNumber: 366
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 198,
+                                                lineNumber: 199,
                                                 columnNumber: 61
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                        lineNumber: 198,
+                                        lineNumber: 199,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2480,7 +2482,7 @@ function Appointments() {
                                                 children: "Preferred Date & Time"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 201,
+                                                lineNumber: 202,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$popover$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Popover"], {
@@ -2495,25 +2497,25 @@ function Appointments() {
                                                                     className: "mr-2 h-4 w-4"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                    lineNumber: 211,
+                                                                    lineNumber: 212,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 date && formData.preferredTime ? `${(0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$date$2d$fns$2f$format$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["format"])(date, "PPP")} at ${formData.preferredTime}` : date ? `${(0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$date$2d$fns$2f$format$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__["format"])(date, "PPP")} (Select a time)` : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                     children: "Pick a date & time"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                    lineNumber: 217,
+                                                                    lineNumber: 218,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                            lineNumber: 204,
+                                                            lineNumber: 205,
                                                             columnNumber: 23
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                        lineNumber: 203,
+                                                        lineNumber: 204,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$popover$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PopoverContent"], {
@@ -2531,12 +2533,12 @@ function Appointments() {
                                                                     className: "border-none"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                    lineNumber: 223,
+                                                                    lineNumber: 224,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                lineNumber: 222,
+                                                                lineNumber: 223,
                                                                 columnNumber: 23
                                                             }, this),
                                                             date && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2547,7 +2549,7 @@ function Appointments() {
                                                                         children: "Available Times"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                        lineNumber: 234,
+                                                                        lineNumber: 235,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     availableTimeSlots.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2563,43 +2565,43 @@ function Appointments() {
                                                                                 children: time
                                                                             }, time, false, {
                                                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                                lineNumber: 238,
+                                                                                lineNumber: 239,
                                                                                 columnNumber: 33
                                                                             }, this))
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                        lineNumber: 236,
+                                                                        lineNumber: 237,
                                                                         columnNumber: 29
                                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                         className: "text-sm text-muted-foreground text-center py-8",
                                                                         children: "No more times available today."
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                        lineNumber: 250,
+                                                                        lineNumber: 251,
                                                                         columnNumber: 29
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                                lineNumber: 233,
+                                                                lineNumber: 234,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                        lineNumber: 221,
+                                                        lineNumber: 222,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 202,
+                                                lineNumber: 203,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                        lineNumber: 200,
+                                        lineNumber: 201,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2609,7 +2611,7 @@ function Appointments() {
                                                 children: "Additional Notes"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 260,
+                                                lineNumber: 261,
                                                 columnNumber: 22
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2617,7 +2619,7 @@ function Appointments() {
                                                 children: "Please do not include medical details here. We will discuss in person."
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 260,
+                                                lineNumber: 261,
                                                 columnNumber: 69
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$textarea$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Textarea"], {
@@ -2631,13 +2633,13 @@ function Appointments() {
                                                 className: "bg-background border-input"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 260,
+                                                lineNumber: 261,
                                                 columnNumber: 198
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                        lineNumber: 260,
+                                        lineNumber: 261,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Button"], {
@@ -2652,52 +2654,56 @@ function Appointments() {
                                                 className: "h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                                lineNumber: 262,
+                                                lineNumber: 263,
                                                 columnNumber: 71
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                        lineNumber: 261,
+                                        lineNumber: 262,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                                lineNumber: 192,
+                                lineNumber: 193,
                                 columnNumber: 15
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                        lineNumber: 171,
+                        lineNumber: 172,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                    lineNumber: 170,
+                    lineNumber: 171,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                lineNumber: 169,
+                lineNumber: 170,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "h-16 md:hidden"
             }, void 0, false, {
                 fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-                lineNumber: 269,
+                lineNumber: 270,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/Desktop/AntiGravity Skills/village-ida-pharmacy/villageidapharmacy-060bed24/src/app/appointments/page.tsx",
-        lineNumber: 156,
+        lineNumber: 157,
         columnNumber: 5
     }, this);
 }
-_s(Appointments, "vn1P+lJqy9iJ4fKWByKF8iaDtZc=", true);
+_s(Appointments, "UfZTjpDvB6u2N7L5D1NmO0Eqrog=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$Desktop$2f$AntiGravity__Skills$2f$village$2d$ida$2d$pharmacy$2f$villageidapharmacy$2d$060bed24$2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"]
+    ];
+});
 _c = Appointments;
 var _c;
 __turbopack_context__.k.register(_c, "Appointments");

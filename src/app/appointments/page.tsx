@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Layout } from "@/components/layout/Layout";
@@ -39,7 +40,7 @@ const timeSlots = [
 ];
 
 export default function Appointments() {
-  const [searchParams] = useSearchParams();
+  const searchParams = useSearchParams();
   const preselectedType = searchParams.get("type") || "";
   const [selectedType, setSelectedType] = useState(preselectedType);
   const [date, setDate] = useState<Date>();

@@ -6,7 +6,7 @@
   "static/chunks/f3beb_@supabase_auth-js_dist_module_1ef8af84._.js",
   "static/chunks/f3beb_date-fns_d8fd8f0b._.js",
   "static/chunks/f3beb_react-day-picker_dist_index_esm_de0e788d.js",
-  "static/chunks/f3beb_1e3bc60e._.js"
+  "static/chunks/f3beb_e66a640c._.js"
 ],
     source: "dynamic"
 });
