@@ -114,11 +114,11 @@ export default function Contact() {
               </div>
             </div>
             <div className="space-y-8">
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-soft-lg border border-border/60">
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg border border-border/60 bg-muted">
                 <img
                   src={contactImage}
                   alt="Pharmacist answering patient questions on the phone"
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-center"
                   loading="lazy"
                 />
               </div>
