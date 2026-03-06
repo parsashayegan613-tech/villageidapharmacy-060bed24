@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/components/auth/AuthProvider";
 import { toast } from "sonner";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -15,20 +14,9 @@ import { CheckCircle, Phone, Home, MessageSquare, Truck, ArrowRight, Camera, Upl
 export default function Transfer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const { user } = useAuth();
   const [formData, setFormData] = useState({ name: "", phone: "", currentPharmacy: "", currentPharmacyPhone: "", notes: "" });
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (user) {
-      setFormData(prev => ({
-        ...prev,
-        name: user.user_metadata?.full_name || prev.name,
-        phone: user.user_metadata?.phone || prev.phone,
-      }));
-    }
-  }, [user]);
 
   const handlePhotoCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -84,7 +72,7 @@ export default function Transfer() {
           current_pharmacy_phone: formData.currentPharmacyPhone,
           notes: photoPreview ? `[PHOTO_ATTACHED]\n${photoPreview}\n\nNotes:\n${formData.notes}` : formData.notes,
           status: "pending",
-          user_id: user?.id || null
+          user_id: null
         }
       ]);
 

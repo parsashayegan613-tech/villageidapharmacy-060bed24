@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/components/auth/AuthProvider";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,18 +22,7 @@ export default function Contact() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const { user } = useAuth();
   const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
-
-  useEffect(() => {
-    if (user) {
-      setFormData(prev => ({
-        ...prev,
-        name: user.user_metadata?.full_name || prev.name,
-        phone: user.user_metadata?.phone || prev.phone,
-      }));
-    }
-  }, [user]);
 
   const copyToClipboard = async (text: string, index: number) => { await navigator.clipboard.writeText(text); setCopiedIndex(index); setTimeout(() => setCopiedIndex(null), 2000); };
 
@@ -49,7 +37,7 @@ export default function Contact() {
           phone: formData.phone,
           message: formData.message,
           status: "unread",
-          user_id: user?.id || null
+          user_id: null
         }
       ]);
 

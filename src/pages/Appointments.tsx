@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/components/auth/AuthProvider";
 import { toast } from "sonner";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -40,12 +39,11 @@ const timeSlots = [
 export default function Appointments() {
   const [searchParams] = useSearchParams();
   const preselectedType = searchParams.get("type") || "";
-  const { user } = useAuth();
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [selectedType, setSelectedType] = useState(preselectedType);
   const [date, setDate] = useState<Date>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -54,17 +52,6 @@ export default function Appointments() {
     preferredTime: "",
     notes: ""
   });
-
-  useEffect(() => {
-    if (user) {
-      setFormData(prev => ({
-        ...prev,
-        name: user.user_metadata?.full_name || prev.name,
-        email: user.email || prev.email,
-        phone: user.user_metadata?.phone || prev.phone,
-      }));
-    }
-  }, [user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,7 +68,7 @@ export default function Appointments() {
           service_type: selectedType,
           notes: formData.notes,
           status: "pending",
-          user_id: user?.id || null
+          user_id: null
         }
       ]);
 

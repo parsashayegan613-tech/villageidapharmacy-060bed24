@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/components/auth/AuthProvider";
 import { toast } from "sonner";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -18,23 +17,12 @@ type Step = 1 | 2 | "confirmation";
 
 export default function Refill() {
   const [step, setStep] = useState<Step>(1);
-  const { user } = useAuth();
   const [formData, setFormData] = useState({
     name: "", phone: "", email: "", consent: false,
     prescriptions: [""], deliveryType: "pickup", address: "", city: "", postalCode: "", notes: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  useEffect(() => {
-    if (user) {
-      setFormData(prev => ({
-        ...prev,
-        name: user.user_metadata?.full_name || prev.name,
-        email: user.email || prev.email,
-        phone: user.user_metadata?.phone || prev.phone,
-      }));
-    }
-  }, [user]);
   const addPrescription = () => setFormData(prev => ({ ...prev, prescriptions: [...prev.prescriptions, ""] }));
   const removePrescription = (index: number) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.filter((_, i) => i !== index) }));
   const updatePrescription = (index: number, value: string) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.map((p, i) => i === index ? value : p) }));
@@ -58,7 +46,7 @@ export default function Refill() {
           postal_code: formData.deliveryType === "delivery" ? formData.postalCode : null,
           notes: formData.notes,
           status: "pending",
-          user_id: user?.id || null
+          user_id: null
         }
       ]);
 
