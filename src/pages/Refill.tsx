@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CheckCircle, Plus, Trash2, Phone, Home, ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -18,7 +17,7 @@ type Step = 1 | 2 | "confirmation";
 export default function Refill() {
   const [step, setStep] = useState<Step>(1);
   const [formData, setFormData] = useState({
-    name: "", phone: "", email: "", consent: false,
+    name: "", phone: "", email: "",
     prescriptions: [""], deliveryType: "pickup", address: "", city: "", postalCode: "", notes: "",
   });
 
@@ -146,8 +145,7 @@ export default function Refill() {
                   <div><Label htmlFor="name">Full Name *</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-2" /></div>
                   <div><Label htmlFor="phone">Phone Number *</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-2" /></div>
                   <div><Label htmlFor="email">Email (optional)</Label><Input id="email" type="email" value={formData.email} onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))} className="mt-2" /></div>
-                  <div className="flex items-start space-x-3"><Checkbox id="consent" checked={formData.consent} onCheckedChange={(checked) => setFormData(prev => ({ ...prev, consent: !!checked }))} /><Label htmlFor="consent" className="text-sm font-normal leading-relaxed">I consent to receive automated text messages regarding my refill request.</Label></div>
-                  <Button type="button" onClick={() => setStep(2)} disabled={!formData.name || !formData.phone || !formData.consent} className="w-full rounded-full" size="lg">Continue<ArrowRight className="h-4 w-4 ml-2" /></Button>
+                  <Button type="button" onClick={() => setStep(2)} disabled={!formData.name || !formData.phone} className="w-full rounded-full" size="lg">Continue<ArrowRight className="h-4 w-4 ml-2" /></Button>
                 </div>
               )}
               {step === 2 && (
