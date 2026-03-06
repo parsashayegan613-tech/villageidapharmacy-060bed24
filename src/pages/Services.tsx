@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import heroImage from "@/assets/_DSC3877.jpg";
 
 const categories = [
   { id: "all", label: "All" },
@@ -40,18 +41,28 @@ export default function Services() {
   return (
     <Layout>
       <SEOHead title="Pharmacy Services | Village IDA Pharmacy Edmonton" description="Explore our full range of pharmacy services including delivery, blister packaging, medication reviews, injections, compounding, and more." />
-      
+
       {/* Hero */}
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Services</p>
-            <h1 className="text-display-sm md:text-display font-serif text-foreground mb-6">
-              Everything your pharmacy <span className="italic">should</span> do.
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              More than just prescriptions — we offer a full range of services to support your health.
-            </p>
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Services</p>
+              <h1 className="text-display-sm md:text-display font-serif text-foreground mb-6">
+                Everything your pharmacy <span className="italic">should</span> do.
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                More than just prescriptions — we offer a full range of services to support your health.
+              </p>
+            </div>
+            <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-lift hidden md:block">
+              <img
+                src={heroImage}
+                alt="Pharmacist preparing blister packaging"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </section>

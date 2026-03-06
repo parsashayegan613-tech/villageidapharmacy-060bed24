@@ -15,8 +15,8 @@ import {
   MessageSquare, CheckCircle, ChevronRight, ChevronLeft, Calendar, ArrowRight,
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
-import heroImage from "@/assets/pharmacy-hero-new.jpg";
-import compoundingImage from "@/assets/compounding-closeup.jpg";
+import heroImage from "@/assets/_DSC3861.jpg";
+import compoundingImage from "@/assets/_DSC3900.jpg";
 
 // Services data
 const services = [

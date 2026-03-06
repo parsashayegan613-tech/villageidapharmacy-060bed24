@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { CTABand } from "@/components/CTABand";
 import { StepCard } from "@/components/StepCard";
+import compoundingImage from "@/assets/_DSC3900.jpg";
 import {
   FlaskConical, Droplets, Palette, Pill, TestTube, Sparkles,
   CheckCircle, Phone, FileText, MessageSquare, Package, Calendar,
@@ -40,7 +41,7 @@ export default function Compounding() {
   return (
     <Layout>
       <SEOHead title="Compounding Pharmacy | Village IDA Edmonton" description="Custom compounded medications tailored to your needs. Dye-free, flavored, and alternative dosage forms available." />
-      
+
       {/* Hero */}
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
         <div className="container mx-auto px-4 relative z-10">
@@ -62,8 +63,13 @@ export default function Compounding() {
                 </Button>
               </div>
             </div>
-            <div className="aspect-square rounded-3xl bg-gradient-to-br from-primary/10 to-accent/5 flex items-center justify-center border border-border/60">
-              <FlaskConical className="h-28 w-28 text-primary/20" />
+            <div className="aspect-square rounded-3xl overflow-hidden shadow-lift border border-border/60">
+              <img
+                src={compoundingImage}
+                alt="Pharmacist compounding medications"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

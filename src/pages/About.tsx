@@ -3,6 +3,7 @@ import { SEOHead } from "@/components/SEOHead";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CTABand } from "@/components/CTABand";
 import { Heart, Users, Award, Truck, Clock, ShieldCheck } from "lucide-react";
+import storyImage from "@/assets/_DSC3857.jpg";
 
 const values = [
     { icon: Heart, title: "Personal Care", description: "We take the time to know each patient by name, understand their health goals, and provide tailored advice." },
@@ -83,22 +84,32 @@ export default function About() {
                             </div>
                         </ScrollReveal>
                         <ScrollReveal direction="right">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-card rounded-2xl p-6 border border-border/60 shadow-soft text-center">
-                                    <div className="text-3xl font-serif font-bold text-primary mb-1">4.9</div>
-                                    <div className="text-sm text-muted-foreground">Google Rating</div>
+                            <div className="space-y-6">
+                                <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-lift">
+                                    <img
+                                        src={storyImage}
+                                        alt="Pharmacist answering patient questions on the phone"
+                                        className="w-full h-full object-cover"
+                                        loading="lazy"
+                                    />
                                 </div>
-                                <div className="bg-card rounded-2xl p-6 border border-border/60 shadow-soft text-center">
-                                    <div className="text-3xl font-serif font-bold text-primary mb-1">Free</div>
-                                    <div className="text-sm text-muted-foreground">Delivery</div>
-                                </div>
-                                <div className="bg-card rounded-2xl p-6 border border-border/60 shadow-soft text-center">
-                                    <div className="text-3xl font-serif font-bold text-primary mb-1">IDA</div>
-                                    <div className="text-sm text-muted-foreground">Member Pharmacy</div>
-                                </div>
-                                <div className="bg-card rounded-2xl p-6 border border-border/60 shadow-soft text-center">
-                                    <div className="text-3xl font-serif font-bold text-primary mb-1">8+</div>
-                                    <div className="text-sm text-muted-foreground">Services Offered</div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="bg-card rounded-2xl p-6 border border-border/60 shadow-soft text-center">
+                                        <div className="text-3xl font-serif font-bold text-primary mb-1">4.9</div>
+                                        <div className="text-sm text-muted-foreground">Google Rating</div>
+                                    </div>
+                                    <div className="bg-card rounded-2xl p-6 border border-border/60 shadow-soft text-center">
+                                        <div className="text-3xl font-serif font-bold text-primary mb-1">Free</div>
+                                        <div className="text-sm text-muted-foreground">Delivery</div>
+                                    </div>
+                                    <div className="bg-card rounded-2xl p-6 border border-border/60 shadow-soft text-center">
+                                        <div className="text-3xl font-serif font-bold text-primary mb-1">IDA</div>
+                                        <div className="text-sm text-muted-foreground">Member Pharmacy</div>
+                                    </div>
+                                    <div className="bg-card rounded-2xl p-6 border border-border/60 shadow-soft text-center">
+                                        <div className="text-3xl font-serif font-bold text-primary mb-1">8+</div>
+                                        <div className="text-sm text-muted-foreground">Services Offered</div>
+                                    </div>
                                 </div>
                             </div>
                         </ScrollReveal>
