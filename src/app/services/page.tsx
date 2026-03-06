@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -8,7 +10,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import heroImage from "@/assets/_DSC3877.jpg";
 
@@ -147,7 +149,7 @@ export default function Services() {
                   </div>
                 ))}
                 <Button asChild className="w-full rounded-full" size="lg">
-                  <Link to={selectedService.ctaHref} onClick={() => setSelectedService(null)}>
+                  <Link href={selectedService.ctaHref} onClick={() => setSelectedService(null)}>
                     {selectedService.ctaLabel}
                   </Link>
                 </Button>

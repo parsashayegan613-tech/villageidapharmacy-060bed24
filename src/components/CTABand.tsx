@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -34,7 +36,7 @@ export function CTABand({ headline, primaryAction, secondaryAction, className }:
             </Button>
           ) : (
             <Button asChild size="lg" variant="secondary" className="rounded-full px-8 shadow-soft gap-2">
-              <Link to={primaryAction.href}>{primaryAction.label}<ArrowRight className="h-4 w-4" /></Link>
+              <Link href={primaryAction.href}>{primaryAction.label}<ArrowRight className="h-4 w-4" /></Link>
             </Button>
           )}
           {secondaryAction && (
@@ -44,7 +46,7 @@ export function CTABand({ headline, primaryAction, secondaryAction, className }:
               </Button>
             ) : (
               <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-primary-foreground/20 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-                <Link to={secondaryAction.href}>{secondaryAction.label}</Link>
+                <Link href={secondaryAction.href}>{secondaryAction.label}</Link>
               </Button>
             )
           )}

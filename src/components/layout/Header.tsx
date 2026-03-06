@@ -1,5 +1,8 @@
+"use client";
+
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Calendar, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,7 +33,7 @@ const navigation = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showAnnouncement, setShowAnnouncement] = useState(true);
-  const location = useLocation();
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 w-full">
@@ -53,7 +56,7 @@ export function Header() {
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center gap-3 group">
               <div className="flex flex-col items-center justify-center bg-primary rounded-xl px-3.5 py-1.5 group-hover:bg-primary/90 transition-colors">
                 <span className="text-primary-foreground font-bold tracking-[0.2em] uppercase text-[7px] leading-tight">
                   Village
@@ -84,7 +87,7 @@ export function Header() {
                       <button
                         className={cn(
                           "px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-1 focus-ring",
-                          location.pathname.startsWith("/services") || location.pathname === "/compounding"
+                          pathname.startsWith("/services") || pathname === "/compounding"
                             ? "text-primary"
                             : "text-muted-foreground hover:text-foreground"
                         )}
@@ -97,10 +100,10 @@ export function Header() {
                       {item.dropdown.map((subItem) => (
                         <DropdownMenuItem key={subItem.name} asChild>
                           <Link
-                            to={subItem.href}
+                            href={subItem.href}
                             className={cn(
                               "w-full",
-                              location.pathname === subItem.href && "text-primary"
+                              pathname === subItem.href && "text-primary"
                             )}
                           >
                             {subItem.name}
@@ -112,10 +115,10 @@ export function Header() {
                 ) : (
                   <Link
                     key={item.name}
-                    to={item.href}
+                    href={item.href}
                     className={cn(
                       "px-4 py-2 text-sm font-medium rounded-lg transition-all focus-ring",
-                      location.pathname === item.href
+                      pathname === item.href
                         ? "text-primary"
                         : "text-muted-foreground hover:text-foreground"
                     )}
@@ -129,7 +132,7 @@ export function Header() {
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
               <Button asChild size="sm" className="rounded-full px-5 gap-2">
-                <Link to="/appointments">
+                <Link href="/appointments">
                   <Calendar className="h-4 w-4" />
                   Book Appointment
                 </Link>
@@ -162,11 +165,11 @@ export function Header() {
                   {item.dropdown.map((subItem) => (
                     <Link
                       key={subItem.name}
-                      to={subItem.href}
+                      href={subItem.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={cn(
                         "block pl-8 pr-4 py-3 rounded-xl text-base font-medium transition-colors",
-                        location.pathname === subItem.href
+                        pathname === subItem.href
                           ? "bg-primary text-primary-foreground"
                           : "text-foreground hover:bg-muted"
                       )}
@@ -178,11 +181,11 @@ export function Header() {
               ) : (
                 <Link
                   key={item.name}
-                  to={item.href}
+                  href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={cn(
                     "block px-4 py-3 rounded-xl text-base font-medium transition-colors",
-                    location.pathname === item.href
+                    pathname === item.href
                       ? "bg-primary text-primary-foreground"
                       : "text-foreground hover:bg-muted"
                   )}
@@ -193,7 +196,7 @@ export function Header() {
             )}
             <div className="pt-4 mt-4 border-t border-border space-y-2">
               <Button asChild className="w-full rounded-full" size="lg">
-                <Link to="/appointments" onClick={() => setMobileMenuOpen(false)}>
+                <Link href="/appointments" onClick={() => setMobileMenuOpen(false)}>
                   <Calendar className="h-4 w-4 mr-2" />
                   Book Appointment
                 </Link>

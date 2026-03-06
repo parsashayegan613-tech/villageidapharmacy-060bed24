@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Layout } from "@/components/layout/Layout";
@@ -88,7 +90,7 @@ export default function Transfer() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="rounded-full px-8 gap-2"><a href="tel:780-440-4555"><Phone className="h-4 w-4" />Call Now</a></Button>
-                <Button asChild size="lg" variant="outline" className="rounded-full px-8 gap-2"><Link to="/"><Home className="h-4 w-4" />Back to Home</Link></Button>
+                <Button asChild size="lg" variant="outline" className="rounded-full px-8 gap-2"><Link href="/"><Home className="h-4 w-4" />Back to Home</Link></Button>
               </div>
             </div>
           </div>

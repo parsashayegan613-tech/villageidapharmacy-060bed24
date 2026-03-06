@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { MapPin, Phone, Printer, Mail, Clock, ArrowUpRight } from "lucide-react";
 
 const quickLinks = [
@@ -25,7 +27,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="inline-block mb-5 group">
+            <Link href="/" className="inline-block mb-5 group">
               <div className="flex flex-col items-center justify-center bg-primary rounded-xl px-3.5 py-1.5 group-hover:bg-primary/90 transition-colors">
                 <span className="text-primary-foreground font-bold tracking-[0.2em] uppercase text-[7px] leading-tight">
                   Village
@@ -97,7 +99,7 @@ export function Footer() {
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
-                    to={link.href}
+                    href={link.href}
                     className="opacity-60 hover:opacity-100 transition-opacity inline-flex items-center gap-1 group"
                   >
                     {link.name}
@@ -116,8 +118,8 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs opacity-40">
             <p>© {new Date().getFullYear()} Village IDA Pharmacy. All rights reserved.</p>
             <div className="flex items-center gap-4">
-              <Link to="/privacy" className="hover:opacity-80 transition-opacity">Privacy Policy</Link>
-              <Link to="/terms" className="hover:opacity-80 transition-opacity">Terms of Service</Link>
+              <Link href="/privacy" className="hover:opacity-80 transition-opacity">Privacy Policy</Link>
+              <Link href="/terms" className="hover:opacity-80 transition-opacity">Terms of Service</Link>
               <span>Member of the IDA Pharmacy Group</span>
             </div>
           </div>

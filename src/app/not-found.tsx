@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -20,32 +20,32 @@ export default function NotFound() {
           </p>
 
           <Button asChild size="lg" className="rounded-full px-8 gap-2 mb-10">
-            <Link to="/"><Home className="h-4 w-4" /> Go Home</Link>
+            <Link href="/"><Home className="h-4 w-4" /> Go Home</Link>
           </Button>
 
           <div className="border-t border-border pt-8">
             <p className="text-sm text-muted-foreground mb-4">Looking for one of these?</p>
             <div className="grid grid-cols-2 gap-3">
               <Button asChild variant="outline" className="rounded-xl h-auto py-3 flex flex-col gap-1">
-                <Link to="/refill">
+                <Link href="/refill">
                   <RefreshCw className="h-4 w-4 text-primary" />
                   <span className="text-xs">Refill Request</span>
                 </Link>
               </Button>
               <Button asChild variant="outline" className="rounded-xl h-auto py-3 flex flex-col gap-1">
-                <Link to="/transfer">
+                <Link href="/transfer">
                   <ArrowRightLeft className="h-4 w-4 text-primary" />
                   <span className="text-xs">Transfer Rx</span>
                 </Link>
               </Button>
               <Button asChild variant="outline" className="rounded-xl h-auto py-3 flex flex-col gap-1">
-                <Link to="/appointments">
+                <Link href="/appointments">
                   <Calendar className="h-4 w-4 text-primary" />
                   <span className="text-xs">Appointments</span>
                 </Link>
               </Button>
               <Button asChild variant="outline" className="rounded-xl h-auto py-3 flex flex-col gap-1">
-                <Link to="/contact">
+                <Link href="/contact">
                   <Phone className="h-4 w-4 text-primary" />
                   <span className="text-xs">Contact Us</span>
                 </Link>

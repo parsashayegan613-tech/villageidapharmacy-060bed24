@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { Phone, MapPin, RefreshCw, ArrowRightLeft } from "lucide-react";
 
 const actions = [
@@ -27,7 +29,7 @@ export function MobileActionDock() {
           ) : (
             <Link
               key={action.label}
-              to={action.href}
+              href={action.href}
               className="flex flex-col items-center justify-center py-3 text-muted-foreground hover:text-primary hover:bg-muted transition-colors focus-ring"
             >
               <action.icon className="h-5 w-5 mb-1" />

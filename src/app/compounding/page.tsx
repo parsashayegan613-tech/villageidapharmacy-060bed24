@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
@@ -56,7 +56,7 @@ export default function Compounding() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button asChild size="lg" className="rounded-full px-8 gap-2">
-                  <Link to="/appointments?type=compounding"><Calendar className="h-4 w-4" />Request a Consult</Link>
+                  <Link href="/appointments?type=compounding"><Calendar className="h-4 w-4" />Request a Consult</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full px-8 gap-2">
                   <a href="tel:780-440-4555"><Phone className="h-4 w-4" />Call to Discuss</a>

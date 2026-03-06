@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import Link from "next/link";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Layout } from "@/components/layout/Layout";
@@ -141,7 +143,7 @@ export default function Appointments() {
                 <p className="text-sm text-muted-foreground mb-4">Call us directly and we'll do our best to fit you in.</p>
                 <Button asChild className="rounded-full gap-2"><a href="tel:780-440-4555"><Phone className="h-4 w-4" />780-440-4555</a></Button>
               </div>
-              <Button asChild variant="outline" size="lg" className="rounded-full gap-2"><Link to="/"><Home className="h-4 w-4" />Back to Home</Link></Button>
+              <Button asChild variant="outline" size="lg" className="rounded-full gap-2"><Link href="/"><Home className="h-4 w-4" />Back to Home</Link></Button>
             </div>
           </div>
         </section>

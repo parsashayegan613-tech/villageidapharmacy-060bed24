@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { SEOHead } from "@/components/SEOHead";
@@ -7,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { MapPin, Phone, Printer, Mail, Clock, Copy, Check, RefreshCw, ArrowRightLeft, ExternalLink } from "lucide-react";
 import contactImage from "@/assets/_DSC3857.jpg";
 
@@ -80,8 +82,8 @@ export default function Contact() {
           <div className="flex flex-wrap gap-2">
             <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full"><a href="tel:780-440-4555"><Phone className="h-4 w-4" />Call</a></Button>
             <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full"><a href="https://maps.google.com/?q=7004+98+Ave+Edmonton+AB+T6A+0A5" target="_blank" rel="noopener noreferrer"><ExternalLink className="h-4 w-4" />Directions</a></Button>
-            <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full"><Link to="/refill"><RefreshCw className="h-4 w-4" />Refill</Link></Button>
-            <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full"><Link to="/transfer"><ArrowRightLeft className="h-4 w-4" />Transfer</Link></Button>
+            <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full"><Link href="/refill"><RefreshCw className="h-4 w-4" />Refill</Link></Button>
+            <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full"><Link href="/transfer"><ArrowRightLeft className="h-4 w-4" />Transfer</Link></Button>
           </div>
         </div>
       </section>

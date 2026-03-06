@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -113,10 +115,10 @@ export default function Index() {
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <Button asChild size="lg" className="rounded-full px-8 gap-2 shadow-lift">
-                <Link to="/refill">Refill Request <ArrowRight className="h-4 w-4" /></Link>
+                <Link href="/refill">Refill Request <ArrowRight className="h-4 w-4" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-background/20 bg-transparent text-background hover:bg-background/10 hover:text-background">
-                <Link to="/transfer">Transfer to Us</Link>
+                <Link href="/transfer">Transfer to Us</Link>
               </Button>
             </motion.div>
 
@@ -146,10 +148,10 @@ export default function Index() {
               <a href="tel:780-440-4555"><Phone className="h-4 w-4" />Call</a>
             </Button>
             <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full text-muted-foreground hover:text-foreground">
-              <Link to="/refill"><FileText className="h-4 w-4" />Refill</Link>
+              <Link href="/refill"><FileText className="h-4 w-4" />Refill</Link>
             </Button>
             <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full text-muted-foreground hover:text-foreground">
-              <Link to="/transfer"><ArrowRightLeft className="h-4 w-4" />Transfer</Link>
+              <Link href="/transfer"><ArrowRightLeft className="h-4 w-4" />Transfer</Link>
             </Button>
           </div>
         </div>
@@ -193,7 +195,7 @@ export default function Index() {
                   <StepCard icon={CheckCircle} step={3} title="Pick up or get delivery" description="Your medications are ready — choose pickup or free delivery." />
                 </div>
                 <Button asChild className="mt-10 rounded-full px-6 gap-2" variant="outline">
-                  <Link to="/transfer">Start a Transfer <ArrowRight className="h-4 w-4" /></Link>
+                  <Link href="/transfer">Start a Transfer <ArrowRight className="h-4 w-4" /></Link>
                 </Button>
               </div>
             </ScrollReveal>
@@ -208,7 +210,7 @@ export default function Index() {
                   <StepCard icon={Truck} step={3} title="Pick up or get delivery" description="Come in when it's ready or we'll bring it to you." />
                 </div>
                 <Button asChild className="mt-10 rounded-full px-6 gap-2" variant="outline">
-                  <Link to="/refill">Request a Refill <ArrowRight className="h-4 w-4" /></Link>
+                  <Link href="/refill">Request a Refill <ArrowRight className="h-4 w-4" /></Link>
                 </Button>
               </div>
             </ScrollReveal>
@@ -253,10 +255,10 @@ export default function Index() {
                 </ul>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button asChild className="rounded-full px-6">
-                    <Link to="/compounding">Learn More</Link>
+                    <Link href="/compounding">Learn More</Link>
                   </Button>
                   <Button asChild variant="outline" className="rounded-full px-6 gap-2">
-                    <Link to="/appointments?type=compounding">
+                    <Link href="/appointments?type=compounding">
                       <Calendar className="h-4 w-4" />
                       Request a Consult
                     </Link>
