@@ -3,27 +3,38 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 const resendApiKey = Deno.env.get("RESEND_API_KEY")!;
 
 const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
 serve(async (req) => {
-    if (req.method === 'OPTIONS') {
-        return new Response('ok', { headers: corsHeaders });
-    }
+  if (req.method === 'OPTIONS') {
+    return new Response('ok', { headers: corsHeaders });
+  }
 
-    try {
-        const payload = await req.json();
-        const { name, phone, prescriptions, deliveryType } = payload;
+  try {
+    const payload = await req.json();
+    const { name, phone, prescriptions, deliveryType } = payload;
 
-        const encodedName = encodeURIComponent(name);
-        const encodedPhone = encodeURIComponent(phone);
+    const encodedName = encodeURIComponent(name);
+    const encodedPhone = encodeURIComponent(phone);
 
-        let buttonsHtml = '';
-        if (deliveryType === "delivery") {
-            const linkOutForDelivery = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivery`;
-            const linkDelivered = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivered`;
-            buttonsHtml = `
+    // Security: Generate a HMAC token to prevent unauthorized access to the SMS endpoint
+    const secret = Deno.env.get("RESEND_API_KEY") || "secret";
+    const encoder = new TextEncoder();
+    const generateToken = async (payload: string) => {
+      const key = await crypto.subtle.importKey('raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+      const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(payload));
+      return Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('');
+    };
+
+    let buttonsHtml = '';
+    if (deliveryType === "delivery") {
+      const tokenOut = await generateToken(name + phone + "delivery");
+      const tokenDelivered = await generateToken(name + phone + "delivered");
+      const linkOutForDelivery = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivery&token=${tokenOut}`;
+      const linkDelivered = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivered&token=${tokenDelivered}`;
+      buttonsHtml = `
               <a href="${linkOutForDelivery}" style="background-color: #f59e0b; color: white; padding: 16px 28px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; font-size: 16px; margin-bottom: 15px; width: 100%; box-sizing: border-box;">
                 📦 Mark as Out for Delivery & Text Patient
               </a><br/>
@@ -31,16 +42,17 @@ serve(async (req) => {
                 ✅ Mark as Delivered & Text Patient
               </a>
             `;
-        } else {
-            const linkPickup = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=pickup`;
-            buttonsHtml = `
+    } else {
+      const tokenPickup = await generateToken(name + phone + "pickup");
+      const linkPickup = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=pickup&token=${tokenPickup}`;
+      buttonsHtml = `
               <a href="${linkPickup}" style="background-color: #22c55e; color: white; padding: 16px 28px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; font-size: 16px;">
                 ✅ Mark as Ready & Text Patient
               </a>
             `;
-        }
+    }
 
-        const html = `
+    const html = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
         <h2 style="color: #0f172a;">New Refill Request 💊</h2>
         <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
@@ -58,28 +70,28 @@ serve(async (req) => {
       </div>
     `;
 
-        const res = await fetch("https://api.resend.com/emails", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${resendApiKey}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                from: "Pharmacy Alerts <onboarding@resend.dev>", // Note: Resend onboarding domain is strictly for testing, production uses custom domain
-                to: "parsashayegan613@gmail.com",
-                subject: `New Refill Request - ${name}`,
-                html: html,
-            }),
-        });
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Pharmacy Alerts <onboarding@resend.dev>", // Note: Resend onboarding domain is strictly for testing, production uses custom domain
+        to: "parsashayegan613@gmail.com",
+        subject: `New Refill Request - ${name}`,
+        html: html,
+      }),
+    });
 
-        const data = await res.json();
-        return new Response(JSON.stringify(data), {
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
-        });
-    } catch (error: any) {
-        return new Response(JSON.stringify({ error: error.message }), {
-            status: 500,
-            headers: corsHeaders
-        });
-    }
+    const data = await res.json();
+    return new Response(JSON.stringify(data), {
+      headers: { ...corsHeaders, "Content-Type": "application/json" }
+    });
+  } catch (error: any) {
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: corsHeaders
+    });
+  }
 });

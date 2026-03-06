@@ -19,10 +19,21 @@ serve(async (req) => {
     const encodedName = encodeURIComponent(name);
     const encodedPhone = encodeURIComponent(phone);
 
+    // Security: Generate a HMAC token to prevent unauthorized access to the SMS endpoint
+    const secret = Deno.env.get("RESEND_API_KEY") || "secret";
+    const encoder = new TextEncoder();
+    const generateToken = async (payload: string) => {
+      const key = await crypto.subtle.importKey('raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+      const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(payload));
+      return Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('');
+    };
+
     let buttonsHtml = '';
     if (deliveryType === "delivery") {
-      const linkOutForDelivery = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivery`;
-      const linkDelivered = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivered`;
+      const tokenOut = await generateToken(name + phone + "delivery");
+      const tokenDelivered = await generateToken(name + phone + "delivered");
+      const linkOutForDelivery = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivery&token=${tokenOut}`;
+      const linkDelivered = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=delivered&token=${tokenDelivered}`;
       buttonsHtml = `
               <a href="${linkOutForDelivery}" style="background-color: #f59e0b; color: white; padding: 16px 28px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; font-size: 16px; margin-bottom: 15px; width: 100%; box-sizing: border-box;">
                 📦 Mark as Out for Delivery & Text Patient
@@ -32,7 +43,8 @@ serve(async (req) => {
               </a>
             `;
     } else {
-      const linkPickup = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=pickup`;
+      const tokenPickup = await generateToken(name + phone + "pickup");
+      const linkPickup = `https://nbbpchwweyzpiurlluzz.supabase.co/functions/v1/send-ready-sms?name=${encodedName}&number=${encodedPhone}&type=pickup&token=${tokenPickup}`;
       buttonsHtml = `
               <a href="${linkPickup}" style="background-color: #22c55e; color: white; padding: 16px 28px; text-decoration: none; font-weight: bold; border-radius: 8px; display: inline-block; font-size: 16px;">
                 ✅ Mark as Ready & Text Patient

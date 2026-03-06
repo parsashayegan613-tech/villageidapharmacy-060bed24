@@ -18,6 +18,7 @@ serve(async (req) => {
         let name = "Patient";
         let number: string | null = null;
         let type = "pickup";
+        let token: string | null = null;
 
         if (req.method === 'POST') {
             const body = await req.json();
@@ -29,14 +30,30 @@ serve(async (req) => {
             name = url.searchParams.get("name") || name;
             number = url.searchParams.get("number");
             type = url.searchParams.get("type") || type;
+            token = url.searchParams.get("token");
         }
 
-        if (!number) {
-            return new Response(JSON.stringify({ error: "Missing number" }), {
+        if (!number || !token) {
+            return new Response(JSON.stringify({ error: "Missing number or authorization token" }), {
                 status: 400,
                 headers: { ...corsHeaders, "Content-Type": "application/json" }
             });
         }
+
+        const secret = Deno.env.get("RESEND_API_KEY") || "secret";
+        const encoder = new TextEncoder();
+        const key = await crypto.subtle.importKey('raw', encoder.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+        const signatureBytes = await crypto.subtle.sign('HMAC', key, encoder.encode(name + number + type));
+        const expectedToken = Array.from(new Uint8Array(signatureBytes)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+        if (token !== expectedToken) {
+            return new Response(JSON.stringify({ error: "Unauthorized: Invalid request signature" }), {
+                status: 401,
+                headers: { ...corsHeaders, "Content-Type": "application/json" }
+            });
+        }
+
+
 
         let message;
         if (type === "delivery") {
