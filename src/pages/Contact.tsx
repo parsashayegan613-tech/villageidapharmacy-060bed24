@@ -43,6 +43,14 @@ export default function Contact() {
 
       if (error) throw error;
 
+      await supabase.functions.invoke("send-contact-alert", {
+        body: {
+          name: formData.name,
+          phone: formData.phone,
+          message: formData.message
+        }
+      });
+
       setSubmitted(true);
       toast.success("Message sent successfully!");
     } catch (error: any) {
