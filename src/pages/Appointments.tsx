@@ -92,6 +92,19 @@ export default function Appointments() {
 
       if (error) throw error;
 
+      await supabase.functions.invoke("send-appointment-alert", {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          contactMethod: formData.contactMethod,
+          date: date ? format(date, "PPP") : "Any day",
+          time: formData.preferredTime || "Any time",
+          serviceType: selectedType,
+          notes: formData.notes
+        }
+      });
+
       setSubmitted(true);
       toast.success("Appointment request sent successfully!");
     } catch (error: any) {
