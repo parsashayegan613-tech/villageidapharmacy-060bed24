@@ -16,7 +16,7 @@ export function LocationCard({ className }: LocationCardProps) {
       {/* Map */}
       <div className="aspect-video w-full">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2370.8892558788584!2d-113.4688693!3d53.4683889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a0193c8b5a8e1f%3A0x1b5f3b6b5f3f5f3f!2s7004%2098%20Ave%20NW%2C%20Edmonton%2C%20AB%20T6A%200A5!5e0!3m2!1sen!2sca!4v1234567890"
+          src="https://maps.google.com/maps?q=Village+IDA+Pharmacy+7004+98+Ave+Edmonton+AB&t=&z=14&ie=UTF8&iwloc=&output=embed"
           width="100%"
           height="100%"
           style={{ border: 0 }}

@@ -153,7 +153,7 @@ export default function Contact() {
           <div className="rounded-2xl overflow-hidden border border-border/60 shadow-soft">
             <iframe
               title="Village IDA Pharmacy Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2371.7!2d-113.4285!3d53.5271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVillage+IDA+Pharmacy!5e0!3m2!1sen!2sca!4v1"
+              src="https://maps.google.com/maps?q=Village+IDA+Pharmacy+7004+98+Ave+Edmonton+AB&t=&z=14&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="400"
               style={{ border: 0 }}
