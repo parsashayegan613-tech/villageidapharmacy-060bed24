@@ -44,6 +44,7 @@ const SMS_TEMPLATES: Record<string, string> = {
 export default function AdminRefills() {
     const [refills, setRefills] = useState<Refill[]>([]);
     const [loading, setLoading] = useState(true);
+    const [queryError, setQueryError] = useState<string | null>(null);
     const [search, setSearch] = useState("");
     const [filterStatus, setFilterStatus] = useState("all");
     const [selected, setSelected] = useState<Refill | null>(null);
@@ -53,7 +54,11 @@ export default function AdminRefills() {
     useEffect(() => { fetchRefills(); }, []);
 
     async function fetchRefills() {
-        const { data } = await supabase.from("refills").select("*").order("created_at", { ascending: false });
+        const { data, error } = await supabase.from("refills").select("*").order("created_at", { ascending: false });
+        if (error) {
+            console.error("Refills query error:", error);
+            setQueryError(`${error.code}: ${error.message}`);
+        }
         setRefills(data || []);
         setLoading(false);
     }
@@ -103,6 +108,13 @@ export default function AdminRefills() {
                     <p className="text-zinc-400 text-sm mt-1">{pending} pending</p>
                 </div>
             </div>
+
+            {queryError && (
+                <div className="mb-5 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                    <p className="text-red-400 text-sm font-semibold mb-1">Query Error (share this with your developer):</p>
+                    <code className="text-red-300 text-xs break-all">{queryError}</code>
+                </div>
+            )}
 
             <div className="flex flex-col sm:flex-row gap-3 mb-5">
                 <div className="relative flex-1">
