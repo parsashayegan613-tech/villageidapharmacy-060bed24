@@ -19,19 +19,19 @@ const team = [
         name: "Heidi",
         role: "Owner & Lead Pharmacist",
         statement: "Every patient deserves to feel heard and cared for. That's what drives us every day.",
-        image: heidiImage,
+        image: "/staff_heidi.png",
     },
     {
         name: "Anoosh",
         role: "Pharmacist",
         statement: "We treat every customer like family — because to us, they are.",
-        image: anooshImage,
+        image: "/staff_anoosh.png",
     },
     {
         name: "Team Member",
         role: "Pharmacy Technician",
         statement: "Helping our patients manage their health is the most rewarding part of what we do.",
-        image: techImage,
+        image: "/staff_tech.png",
     },
 ];
 
