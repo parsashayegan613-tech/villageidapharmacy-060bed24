@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { supabase } from "@/integrations/supabase/client";
@@ -39,7 +39,7 @@ const timeSlots = [
   "5:00 PM"
 ];
 
-export default function Appointments() {
+function AppointmentsContent() {
   const searchParams = useSearchParams();
   const preselectedType = searchParams.get("type") || "";
   const [selectedType, setSelectedType] = useState(preselectedType);
@@ -269,5 +269,13 @@ export default function Appointments() {
       </section>
       <div className="h-16 md:hidden" />
     </Layout>
+  );
+}
+
+export default function Appointments() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" /></div>}>
+      <AppointmentsContent />
+    </Suspense>
   );
 }
