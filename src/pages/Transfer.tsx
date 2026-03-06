@@ -8,62 +8,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { StepCard } from "@/components/StepCard";
-import { CheckCircle, Phone, Home, MessageSquare, Truck, ArrowRight, Camera, Upload, X, Plus, Trash2 } from "lucide-react";
+import { CheckCircle, Phone, Home, MessageSquare, Truck, ArrowRight, Plus, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function Transfer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: "", phone: "", currentPharmacy: "", currentPharmacyPhone: "", notes: "", medications: [""], deliveryType: "pickup", address: "", city: "", postalCode: "" });
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [formData, setFormData] = useState({ name: "", phone: "", currentPharmacy: "", currentPharmacyPhone: "", notes: "", medications: [""] });
 
   const addMedication = () => setFormData(prev => ({ ...prev, medications: [...prev.medications, ""] }));
   const removeMedication = (index: number) => setFormData(prev => ({ ...prev, medications: prev.medications.filter((_, i) => i !== index) }));
   const updateMedication = (index: number, value: string) => setFormData(prev => ({ ...prev, medications: prev.medications.map((m, i) => i === index ? value : m) }));
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handlePhotoCapture = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (file.size > 10 * 1024 * 1024) {
-      toast.error("File size must be under 10MB");
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const img = new Image();
-      img.onload = () => {
-        // Compress image using canvas
-        const canvas = document.createElement("canvas");
-        let width = img.width;
-        let height = img.height;
-        const maxSize = 1200;
-
-        if (width > height && width > maxSize) {
-          height *= maxSize / width;
-          width = maxSize;
-        } else if (height > maxSize) {
-          width *= maxSize / height;
-          height = maxSize;
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext("2d");
-        ctx?.drawImage(img, 0, 0, width, height);
-
-        // Convert back to base64, heavily compressed
-        const compressedBase64 = canvas.toDataURL("image/jpeg", 0.6);
-        setPhotoPreview(compressedBase64);
-      };
-      img.src = event.target?.result as string;
-    };
-    reader.readAsDataURL(file);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,9 +30,7 @@ export default function Transfer() {
       const medicationsText = formData.medications.filter(m => m.trim() !== "").length > 0
         ? `Medications to Transfer:\n${formData.medications.filter(m => m.trim() !== "").map(m => `- ${m}`).join("\n")}\n\n`
         : '';
-      const deliveryText = `Delivery Type: ${formData.deliveryType}\n${formData.deliveryType === 'delivery' ? `Address: ${formData.address}, ${formData.city}, ${formData.postalCode}\n\n` : '\n'}`;
-
-      const fullNotes = `${medicationsText}${deliveryText}${photoPreview ? `[PHOTO_ATTACHED]\n${photoPreview}\n\n` : ''}Notes:\n${formData.notes}`;
+      const fullNotes = `${medicationsText}Notes:\n${formData.notes}`;
 
       const { error } = await supabase.from("transfers").insert([
         {
@@ -96,8 +51,7 @@ export default function Transfer() {
           name: formData.name,
           phone: formData.phone,
           currentPharmacy: formData.currentPharmacy,
-          medications: formData.medications.filter(rx => rx.trim() !== ""),
-          deliveryType: formData.deliveryType
+          medications: formData.medications.filter(rx => rx.trim() !== "")
         }
       });
 
@@ -200,41 +154,7 @@ export default function Transfer() {
                 <Button type="button" variant="ghost" size="sm" onClick={addMedication} className="mt-2 text-muted-foreground"><Plus className="h-4 w-4 mr-2" />Add Another</Button>
               </div>
 
-              <div className="bg-muted/30 border border-border/50 rounded-xl p-5 mt-4">
-                <Label className="text-base font-serif mb-2 block">Upload Prescription Photo (Fastest)</Label>
-                <p className="text-sm text-muted-foreground mb-4">Skip the pharmacy details—just take a photo of your pill bottle, and we will handle the rest!</p>
 
-                {!photoPreview ? (
-                  <div className="flex gap-3">
-                    <Button type="button" variant="outline" className="w-full gap-2 border-primary/20 hover:bg-primary/5 text-primary" onClick={() => { fileInputRef.current?.setAttribute('capture', 'environment'); fileInputRef.current?.click(); }}>
-                      <Camera className="h-4 w-4" /> Take Photo
-                    </Button>
-                    <Button type="button" variant="outline" className="w-full gap-2" onClick={() => { fileInputRef.current?.removeAttribute('capture'); fileInputRef.current?.click(); }}>
-                      <Upload className="h-4 w-4" /> Choose File
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="relative inline-block w-full">
-                    <div className="border-2 border-primary/20 rounded-xl overflow-hidden aspect-[16/9] w-full bg-black/5 flex items-center justify-center">
-                      <img src={photoPreview} alt="Prescription preview" className="object-contain w-full h-full max-h-64" />
-                    </div>
-                    <Button type="button" variant="destructive" size="icon" className="absolute top-2 right-2 rounded-full h-8 w-8 shadow-md" onClick={() => setPhotoPreview(null)}>
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                )}
-                <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoCapture} />
-              </div>
-
-              <div className="pt-4 border-t border-border mt-6">
-                <Label>Pickup or Delivery</Label>
-                <RadioGroup value={formData.deliveryType} onValueChange={(value) => setFormData(prev => ({ ...prev, deliveryType: value }))} className="mt-2 grid grid-cols-2 gap-4">
-                  <label className={cn("flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all", formData.deliveryType === "pickup" ? "border-primary bg-primary/5" : "border-border hover:border-muted-foreground/50")}><RadioGroupItem value="pickup" id="pickup" className="sr-only" /><span className="font-medium">Pickup</span></label>
-                  <label className={cn("flex items-center justify-center p-4 rounded-xl border-2 cursor-pointer transition-all", formData.deliveryType === "delivery" ? "border-primary bg-primary/5" : "border-border hover:border-muted-foreground/50")}><RadioGroupItem value="delivery" id="delivery" className="sr-only" /><span className="font-medium">Delivery</span></label>
-                </RadioGroup>
-              </div>
-
-              {formData.deliveryType === "delivery" && (<div className="space-y-4 p-4 bg-muted rounded-xl"><div><Label htmlFor="address">Street Address *</Label><Input id="address" value={formData.address} onChange={(e) => setFormData(prev => ({ ...prev, address: e.target.value }))} required={formData.deliveryType === "delivery"} className="mt-2" /></div><div className="grid grid-cols-2 gap-4"><div><Label htmlFor="city">City</Label><Input id="city" value={formData.city} onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))} className="mt-2" defaultValue="Edmonton" /></div><div><Label htmlFor="postalCode">Postal Code</Label><Input id="postalCode" value={formData.postalCode} onChange={(e) => setFormData(prev => ({ ...prev, postalCode: e.target.value }))} className="mt-2" /></div></div></div>)}
 
               <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will confirm everything by phone.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
               <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2" size="lg">
