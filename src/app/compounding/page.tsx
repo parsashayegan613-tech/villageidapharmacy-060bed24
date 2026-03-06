@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { CTABand } from "@/components/CTABand";
 import { StepCard } from "@/components/StepCard";
-import compoundingImage from "@/assets/_DSC3900.jpg";
 import {
   FlaskConical, Droplets, Palette, Pill, TestTube, Sparkles,
   CheckCircle, Phone, FileText, MessageSquare, Package, Calendar,
@@ -65,7 +64,7 @@ export default function Compounding() {
             </div>
             <div className="aspect-square rounded-3xl overflow-hidden shadow-lift border border-border/60">
               <img
-                src={compoundingImage}
+                src="/_DSC3900.jpg"
                 alt="Pharmacist compounding medications"
                 className="w-full h-full object-cover"
                 loading="lazy"

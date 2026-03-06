@@ -4,10 +4,6 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 import { CTABand } from "@/components/CTABand";
 import { Heart, Users, Award, Truck, Clock, ShieldCheck } from "lucide-react";
 
-import storyImage from "@/assets/team_group.png";
-import heidiImage from "@/assets/staff_heidi.png";
-import anooshImage from "@/assets/staff_anoosh.png";
-import techImage from "@/assets/staff_tech.png";
 
 const values = [
     { icon: Heart, title: "Personal Care", description: "We take the time to know each patient by name, understand their health goals, and provide tailored advice." },
@@ -94,7 +90,7 @@ export default function About() {
                             <div className="space-y-6">
                                 <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-lift">
                                     <img
-                                        src={storyImage}
+                                        src="/team_group.png"
                                         alt="Village IDA Pharmacy Team"
                                         className="w-full h-full object-cover"
                                         loading="lazy"

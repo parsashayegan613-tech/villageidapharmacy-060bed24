@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import heroImage from "@/assets/_DSC3877.jpg";
 
 const categories = [
   { id: "all", label: "All" },
@@ -59,7 +58,7 @@ export default function Services() {
             </div>
             <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-lift hidden md:block">
               <img
-                src={heroImage}
+                src="/_DSC3877.jpg"
                 alt="Pharmacist preparing blister packaging"
                 className="w-full h-full object-cover"
                 loading="lazy"

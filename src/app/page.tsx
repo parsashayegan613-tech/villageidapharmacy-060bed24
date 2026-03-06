@@ -17,11 +17,6 @@ import {
   MessageSquare, CheckCircle, ChevronRight, ChevronLeft, Calendar, ArrowRight,
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
-import heroImage from "@/assets/_DSC3861.jpg";
-import compoundingImage from "@/assets/_DSC3900.jpg";
-import heidiImage from "@/assets/staff_heidi.png";
-import anooshImage from "@/assets/staff_anoosh.png";
-import techImage from "@/assets/staff_tech.png";
 
 // Services data
 const services = [
@@ -82,7 +77,7 @@ export default function Index() {
       {/* ═══ HERO ═══ */}
       <section id="main-content" className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="" className="w-full h-full object-cover" loading="eager" />
+          <img src="/_DSC3861.jpg" alt="" className="w-full h-full object-cover" loading="eager" />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/30" />
         </div>
 
@@ -225,7 +220,7 @@ export default function Index() {
             <ScrollReveal direction="left">
               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-lift relative group">
                 <img
-                  src={compoundingImage}
+                  src="/_DSC3900.jpg"
                   alt="Pharmacist compounding custom medication"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"

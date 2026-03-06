@@ -11,7 +11,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 import { MapPin, Phone, Printer, Mail, Clock, Copy, Check, RefreshCw, ArrowRightLeft, ExternalLink } from "lucide-react";
-import contactImage from "@/assets/_DSC3857.jpg";
 
 const contactInfo = [
   { icon: MapPin, label: "Address", value: "7004 98 Ave, Edmonton, AB T6A 0A5", copyable: true },
@@ -114,7 +113,7 @@ export default function Contact() {
             <div className="space-y-8">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg border border-border/60 bg-muted">
                 <img
-                  src={contactImage}
+                  src="/_DSC3857.jpg"
                   alt="Pharmacist answering patient questions on the phone"
                   className="w-full h-full object-cover object-center"
                   loading="lazy"
