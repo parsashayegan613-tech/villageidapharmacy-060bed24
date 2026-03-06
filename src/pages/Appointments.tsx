@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { format } from "date-fns";
+import { format, isToday, parse } from "date-fns";
 import { Syringe, ClipboardCheck, HeartPulse, Cigarette, FlaskConical, HelpCircle, CheckCircle, Phone, Home, ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -52,6 +52,24 @@ export default function Appointments() {
     preferredTime: "",
     notes: ""
   });
+
+  const getAvailableTimes = () => {
+    if (!date) return timeSlots;
+    if (isToday(date)) {
+      const now = new Date();
+      return timeSlots.filter((time) => {
+        try {
+          const timeDate = parse(time, "h:mm a", date);
+          return timeDate > now;
+        } catch (e) {
+          return true;
+        }
+      });
+    }
+    return timeSlots;
+  };
+
+  const availableTimeSlots = getAvailableTimes();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -199,19 +217,25 @@ export default function Appointments() {
                       {date && (
                         <div className="p-3 border-t sm:border-t-0 sm:border-l border-border w-full sm:w-48 h-64 sm:h-[310px] overflow-y-auto">
                           <div className="text-sm font-medium mb-3 text-center text-foreground sticky top-0 bg-popover/95 backdrop-blur-sm z-10 py-1">Available Times</div>
-                          <div className="grid grid-cols-2 sm:grid-cols-1 gap-2">
-                            {timeSlots.map((time) => (
-                              <Button
-                                key={time}
-                                type="button"
-                                variant={formData.preferredTime === time ? "default" : "outline"}
-                                className={cn("w-full h-9 text-xs", formData.preferredTime === time && "bg-primary text-primary-foreground")}
-                                onClick={() => setFormData(prev => ({ ...prev, preferredTime: time }))}
-                              >
-                                {time}
-                              </Button>
-                            ))}
-                          </div>
+                          {availableTimeSlots.length > 0 ? (
+                            <div className="grid grid-cols-2 sm:grid-cols-1 gap-2">
+                              {availableTimeSlots.map((time) => (
+                                <Button
+                                  key={time}
+                                  type="button"
+                                  variant={formData.preferredTime === time ? "default" : "outline"}
+                                  className={cn("w-full h-9 text-xs", formData.preferredTime === time && "bg-primary text-primary-foreground")}
+                                  onClick={() => setFormData(prev => ({ ...prev, preferredTime: time }))}
+                                >
+                                  {time}
+                                </Button>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-sm text-muted-foreground text-center py-8">
+                              No more times available today.
+                            </div>
+                          )}
                         </div>
                       )}
                     </PopoverContent>
