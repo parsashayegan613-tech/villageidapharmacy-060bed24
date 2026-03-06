@@ -388,7 +388,7 @@ export default function Index() {
             </div>
             <div className="text-center mt-6">
               <a
-                href="https://www.google.com/maps/place/Village+IDA+Pharmacy/"
+                href="https://www.google.com/maps/search/?api=1&query=Village+IDA+Pharmacy+Edmonton"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"

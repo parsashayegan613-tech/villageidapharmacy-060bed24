@@ -99,8 +99,8 @@ export default {
         serif: ["'DM Serif Display'", "Georgia", "serif"],
       },
       fontSize: {
-        "display": ["4rem", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
-        "display-sm": ["3rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+        "display": ["clamp(2.5rem, 6vw, 4rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
+        "display-sm": ["clamp(2.25rem, 5vw, 3rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
       },
       keyframes: {
         "accordion-down": {
