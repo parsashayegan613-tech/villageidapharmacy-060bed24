@@ -3,7 +3,9 @@ import { SEOHead } from "@/components/SEOHead";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CTABand } from "@/components/CTABand";
 import { Heart, Users, Award, Truck, Clock, ShieldCheck } from "lucide-react";
-import storyImage from "@/assets/_DSC3857.jpg";
+
+// Placeholder while waiting for new image selection
+const storyImage = "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80";
 
 const values = [
     { icon: Heart, title: "Personal Care", description: "We take the time to know each patient by name, understand their health goals, and provide tailored advice." },
@@ -88,7 +90,7 @@ export default function About() {
                                 <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-lift">
                                     <img
                                         src={storyImage}
-                                        alt="Pharmacist answering patient questions on the phone"
+                                        alt="Village IDA Pharmacy Team"
                                         className="w-full h-full object-cover"
                                         loading="lazy"
                                     />
