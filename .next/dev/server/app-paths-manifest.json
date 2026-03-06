@@ -1,6 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/about/page": "app/about/page.js",
+  "/appointments/page": "app/appointments/page.js",
+  "/compounding/page": "app/compounding/page.js",
+  "/contact/page": "app/contact/page.js",
   "/page": "app/page.js",
   "/refill/page": "app/refill/page.js",
+  "/services/page": "app/services/page.js",
   "/transfer/page": "app/transfer/page.js"
 }
