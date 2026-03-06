@@ -17,6 +17,9 @@ import {
 import { useState, useEffect, useCallback } from "react";
 import heroImage from "@/assets/_DSC3861.jpg";
 import compoundingImage from "@/assets/_DSC3900.jpg";
+import heidiImage from "@/assets/staff_heidi.png";
+import anooshImage from "@/assets/staff_anoosh.png";
+import techImage from "@/assets/staff_tech.png";
 
 // Services data
 const services = [
@@ -31,9 +34,9 @@ const services = [
 ];
 
 const staff = [
-  { name: "Heidi", role: "Owner & Lead Pharmacist", statement: "Every patient deserves to feel heard and cared for. That's what drives us every day." },
-  { name: "Anoosh", role: "Pharmacist", statement: "We treat every customer like family — because to us, they are." },
-  { name: "Team Member", role: "Pharmacy Technician", statement: "Helping our patients manage their health is the most rewarding part of what we do." },
+  { name: "Heidi", role: "Owner & Lead Pharmacist", statement: "Every patient deserves to feel heard and cared for. That's what drives us every day.", image: heidiImage },
+  { name: "Anoosh", role: "Pharmacist", statement: "We treat every customer like family — because to us, they are.", image: anooshImage },
+  { name: "Team Member", role: "Pharmacy Technician", statement: "Helping our patients manage their health is the most rewarding part of what we do.", image: techImage },
 ];
 
 const reviews = [
@@ -279,11 +282,15 @@ export default function Index() {
             {staff.map((member, i) => (
               <ScrollReveal key={member.name} delay={i * 0.1}>
                 <div className="bg-card rounded-2xl p-8 shadow-soft hover-lift border border-border/60">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 mb-5 flex items-center justify-center">
-                    <span className="text-xl font-serif text-primary/70">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
+                  {member.image ? (
+                    <img src={member.image} alt={member.name} className="w-20 h-20 rounded-2xl mb-5 object-cover shadow-sm" />
+                  ) : (
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 mb-5 flex items-center justify-center">
+                      <span className="text-xl font-serif text-primary/70">
+                        {member.name.split(' ').map(n => n[0]).join('')}
+                      </span>
+                    </div>
+                  )}
                   <h3 className="font-sans font-semibold text-foreground text-lg">{member.name}</h3>
                   <p className="text-sm text-primary font-medium mb-3">{member.role}</p>
                   <p className="text-sm text-muted-foreground italic leading-relaxed">"{member.statement}"</p>
