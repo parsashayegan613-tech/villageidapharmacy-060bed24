@@ -25,44 +25,32 @@ export default function Terms() {
                                 <li>Request prescription transfers from another pharmacy</li>
                                 <li>Book appointments for health services</li>
                                 <li>Contact our pharmacy team</li>
-                                <li>Create an account to track your requests</li>
                             </ul>
                             <p className="mt-3">These online services are requests only and do not constitute a confirmed prescription fill or appointment. Our pharmacists will confirm all requests by phone or in person.</p>
                         </section>
 
                         <section>
-                            <h2 className="text-xl font-serif font-semibold text-foreground">3. Account Responsibilities</h2>
-                            <p>If you create an account, you are responsible for:</p>
-                            <ul className="list-disc pl-6 space-y-2">
-                                <li>Maintaining the confidentiality of your login credentials</li>
-                                <li>All activity that occurs under your account</li>
-                                <li>Providing accurate and up-to-date information</li>
-                                <li>Notifying us immediately of any unauthorized access</li>
-                            </ul>
-                        </section>
-
-                        <section>
-                            <h2 className="text-xl font-serif font-semibold text-foreground">4. Medical Disclaimer</h2>
+                            <h2 className="text-xl font-serif font-semibold text-foreground">3. Medical Disclaimer</h2>
                             <p>The information on this website is for general informational purposes only and is not a substitute for professional medical or pharmaceutical advice. Always consult with a qualified healthcare provider regarding your health conditions and medications.</p>
                         </section>
 
                         <section>
-                            <h2 className="text-xl font-serif font-semibold text-foreground">5. Accuracy of Information</h2>
+                            <h2 className="text-xl font-serif font-semibold text-foreground">4. Accuracy of Information</h2>
                             <p>We strive to keep all information on our website accurate and up to date. However, we cannot guarantee that all content is error-free. Prices, availability, and service details are subject to change without notice.</p>
                         </section>
 
                         <section>
-                            <h2 className="text-xl font-serif font-semibold text-foreground">6. Limitation of Liability</h2>
+                            <h2 className="text-xl font-serif font-semibold text-foreground">5. Limitation of Liability</h2>
                             <p>Village IDA Pharmacy shall not be liable for any damages arising from the use or inability to use this website, including but not limited to direct, indirect, incidental, or consequential damages.</p>
                         </section>
 
                         <section>
-                            <h2 className="text-xl font-serif font-semibold text-foreground">7. Changes to Terms</h2>
+                            <h2 className="text-xl font-serif font-semibold text-foreground">6. Changes to Terms</h2>
                             <p>We reserve the right to update these Terms of Service at any time. Changes will be posted on this page with an updated revision date. Continued use of the website after changes constitutes acceptance of the new terms.</p>
                         </section>
 
                         <section>
-                            <h2 className="text-xl font-serif font-semibold text-foreground">8. Contact</h2>
+                            <h2 className="text-xl font-serif font-semibold text-foreground">7. Contact</h2>
                             <p>If you have questions about these Terms of Service, please contact us:</p>
                             <div className="bg-card rounded-xl border border-border/60 p-6 mt-4">
                                 <p className="font-semibold">Village IDA Pharmacy</p>

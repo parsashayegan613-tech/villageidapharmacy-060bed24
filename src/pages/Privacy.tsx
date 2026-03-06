@@ -18,7 +18,6 @@ export default function Privacy() {
                             <ul className="list-disc pl-6 space-y-2">
                                 <li><strong>Contact information:</strong> name, email address, phone number, mailing address</li>
                                 <li><strong>Health-related information:</strong> prescription numbers, medication details, health conditions relevant to pharmacy services</li>
-                                <li><strong>Account information:</strong> login credentials (securely stored via Supabase authentication)</li>
                                 <li><strong>Communication records:</strong> messages you send through our contact and appointment forms</li>
                             </ul>
                         </section>
