@@ -1,10 +1,14 @@
+import type { Metadata } from "next";
 import { Layout } from "@/components/layout/Layout";
-import { SEOHead } from "@/components/SEOHead";
+
+export const metadata: Metadata = {
+    title: "Terms of Service | Village IDA Pharmacy",
+    description: "Terms and conditions for using the Village IDA Pharmacy website and services.",
+};
 
 export default function Terms() {
     return (
         <Layout>
-            <SEOHead title="Terms of Service | Village IDA Pharmacy" description="Terms and conditions for using the Village IDA Pharmacy website and services." />
 
             <section className="py-20 md:py-28">
                 <div className="container mx-auto px-4 max-w-3xl">

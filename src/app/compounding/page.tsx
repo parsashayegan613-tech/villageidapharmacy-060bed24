@@ -44,8 +44,6 @@ const faqs = [
 export default function Compounding() {
   return (
     <Layout>
-      <SEOHead title="Compounding Pharmacy | Village IDA Edmonton" description="Custom compounded medications tailored to your needs. Dye-free, flavored, and alternative dosage forms available." />
-
       {/* Hero */}
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
         <div className="container mx-auto px-4 relative z-10">

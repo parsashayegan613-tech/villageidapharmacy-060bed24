@@ -1,13 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
-import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Home, Search, Phone, RefreshCw, ArrowRightLeft, Calendar } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Page Not Found | Village IDA Pharmacy",
+  description: "The page you're looking for doesn't exist. Return to Village IDA Pharmacy.",
+};
 
 export default function NotFound() {
   return (
     <Layout>
-      <SEOHead title="Page Not Found | Village IDA Pharmacy" description="The page you're looking for doesn't exist." />
 
       <section className="py-20 md:py-28 flex items-center justify-center">
         <div className="container mx-auto px-4 max-w-lg text-center">

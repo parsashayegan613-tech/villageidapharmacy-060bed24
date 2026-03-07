@@ -1,10 +1,14 @@
+import type { Metadata } from "next";
 import { Layout } from "@/components/layout/Layout";
-import { SEOHead } from "@/components/SEOHead";
+
+export const metadata: Metadata = {
+    title: "Privacy Policy | Village IDA Pharmacy",
+    description: "How Village IDA Pharmacy collects, uses, and protects your personal information. PIPEDA compliant.",
+};
 
 export default function Privacy() {
     return (
         <Layout>
-            <SEOHead title="Privacy Policy | Village IDA Pharmacy" description="How Village IDA Pharmacy collects, uses, and protects your personal information." />
 
             <section className="py-20 md:py-28">
                 <div className="container mx-auto px-4 max-w-3xl">

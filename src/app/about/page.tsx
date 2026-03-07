@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import { Layout } from "@/components/layout/Layout";
-import { SEOHead } from "@/components/SEOHead";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CTABand } from "@/components/CTABand";
 import { Heart, Users, Award, Truck, Clock, ShieldCheck } from "lucide-react";
+
+export const metadata: Metadata = {
+    title: "About Us | Village IDA Pharmacy Edmonton",
+    description: "Learn about Village IDA Pharmacy — your trusted Edmonton pharmacy for personalized care, prescription services, and community health support.",
+};
+
 
 
 const values = [
@@ -38,10 +44,6 @@ const team = [
 export default function About() {
     return (
         <Layout>
-            <SEOHead
-                title="About Us | Village IDA Pharmacy Edmonton"
-                description="Learn about Village IDA Pharmacy — your trusted Edmonton pharmacy for personalized care, prescription services, and community health support since day one."
-            />
 
             {/* Hero */}
             <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
