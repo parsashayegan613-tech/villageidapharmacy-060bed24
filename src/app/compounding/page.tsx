@@ -41,9 +41,26 @@ const faqs = [
   { question: "Can you compound medications for my pets?", answer: "Yes! Getting pets to take medication is notoriously difficult. We work with local veterinarians to compound pet medications into easy-to-administer forms, such as tuna-flavored liquids for cats, beef-flavored treats for dogs, or transdermal creams that can be rubbed on their ear." },
 ];
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
 export default function Compounding() {
   return (
     <Layout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* Hero */}
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
         <div className="container mx-auto px-4 relative z-10">
