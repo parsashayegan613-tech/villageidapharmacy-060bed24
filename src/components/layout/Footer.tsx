@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { MapPin, Phone, Printer, Mail, Clock, ArrowUpRight } from "lucide-react";
 
