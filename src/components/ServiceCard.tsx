@@ -10,6 +10,7 @@ interface ServiceCardProps {
   description: string;
   whoItsFor?: string;
   howItWorks?: string;
+  href?: string;
   className?: string;
 }
 
@@ -19,9 +20,13 @@ export function ServiceCard({
   description,
   whoItsFor,
   howItWorks,
+  href,
   className,
 }: ServiceCardProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  // If there's an href, handle clicking to navigate (if desired) or just let the "Learn More" button handle it
+  // We'll add a "Learn More" button in the expanded section.
 
   return (
     <div
@@ -69,6 +74,13 @@ export function ServiceCard({
             <div>
               <span className="text-xs font-semibold text-primary/70 uppercase tracking-wider">How it works</span>
               <p className="text-sm text-muted-foreground">{howItWorks}</p>
+            </div>
+          )}
+          {href && (
+            <div className="pt-2">
+              <a href={href} className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+                Learn More <ChevronRight className="h-4 w-4 ml-1" />
+              </a>
             </div>
           )}
         </div>

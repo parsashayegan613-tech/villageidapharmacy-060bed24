@@ -90,8 +90,8 @@ export function TransferForm() {
                             <Button type="button" variant="ghost" size="sm" onClick={addMedication} className="mt-2 text-muted-foreground"><Plus className="h-4 w-4 mr-2" />Add Another</Button>
                         </div>
                         <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will confirm everything by phone.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
-                        <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2" size="lg">
-                            {isSubmitting ? "Submitting..." : "Submit Transfer Request"} <ArrowRight className="h-4 w-4" />
+                        <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2 shadow-lift" size="lg">
+                            {isSubmitting ? "Submitting..." : "We'll Handle Your Transfer"} <ArrowRight className="h-4 w-4" />
                         </Button>
                     </form>
                     <div className="mt-12 p-8 bg-muted rounded-2xl text-center">

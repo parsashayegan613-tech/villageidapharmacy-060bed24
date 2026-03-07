@@ -91,7 +91,8 @@ export function ContactClient() {
                                         <div><Label htmlFor="name">Name</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-1.5" /></div>
                                         <div><Label htmlFor="phone">Phone</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-1.5" /></div>
                                         <div><Label htmlFor="message">Message</Label><Textarea id="message" value={formData.message} onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))} required rows={4} className="mt-1.5" /></div>
-                                        <Button type="submit" disabled={isSubmitting} className="w-full rounded-full">{isSubmitting ? "Sending..." : "Send Message"}</Button>
+                                        <p className="text-xs text-muted-foreground font-medium mb-3 mt-4 text-center">We typically reply within 1-2 hours during business operations.</p>
+                                        <Button type="submit" disabled={isSubmitting} className="w-full rounded-full shadow-lift">{isSubmitting ? "Sending..." : "Send Message"}</Button>
                                     </form>
                                 )}
                             </div>

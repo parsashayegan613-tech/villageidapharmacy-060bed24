@@ -184,8 +184,8 @@ export default function About() {
             {/* CTA */}
             <CTABand
                 headline="Ready to experience the difference?"
-                primaryAction={{ label: "Call Us", href: "tel:780-440-4555", external: true }}
-                secondaryAction={{ label: "Transfer Your Prescriptions", href: "/transfer" }}
+                primaryAction={{ label: "Switch to Village IDA", href: "/transfer" }}
+                secondaryAction={{ label: "Call Us Today", href: "tel:780-440-4555", external: true }}
             />
 
             <div className="h-16 md:hidden" />

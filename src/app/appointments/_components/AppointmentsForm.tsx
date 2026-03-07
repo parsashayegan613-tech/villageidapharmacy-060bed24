@@ -160,7 +160,10 @@ function AppointmentsContent() {
                                 </Popover>
                             </div>
                             <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will discuss in person.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
-                            <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2" size="lg">{isSubmitting ? "Submitting..." : "Submit Request"} <ArrowRight className="h-4 w-4" /></Button>
+                            <div className="pt-2">
+                                <p className="text-xs text-muted-foreground font-medium mb-3 text-center">We will contact you within 1 business day to confirm your exact appointment time.</p>
+                                <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2 shadow-lift" size="lg">{isSubmitting ? "Submitting..." : "Book Appointment"} <ArrowRight className="h-4 w-4" /></Button>
+                            </div>
                         </form>
                     )}
                 </div>
