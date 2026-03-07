@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Layout } from "@/components/layout/Layout";
 import { StepCard } from "@/components/StepCard";
 import { TransferForm } from "./_components/TransferForm";
+import { FAQAccordion } from "@/components/FAQAccordion";
 import { CheckCircle, Phone, MessageSquare, Truck } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -43,6 +44,32 @@ export default function TransferPage() {
       </section>
 
       <TransferForm />
+
+      <section className="py-16 md:py-24 bg-card border-t border-border/50">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <h2 className="text-3xl font-serif text-foreground mb-8 text-center">Frequently Asked Questions</h2>
+          <FAQAccordion
+            items={[
+              {
+                question: "How long does it take to transfer my prescriptions?",
+                answer: "Most prescription transfers are completed on the same business day. Depending on how quickly your current pharmacy responds to our request, we typically have everything moved over within a few hours.",
+              },
+              {
+                question: "Do I have to call my old pharmacy?",
+                answer: "No, you don't have to lift a finger! Once you submit the form above, our pharmacists will contact your old pharmacy directly to transfer all your active prescription files on your behalf.",
+              },
+              {
+                question: "How does transferring prescriptions work in Alberta?",
+                answer: "In Alberta, pharmacies are legally required to transfer active prescriptions when requested by the patient. All your health information and remaining refill counts are securely documented and transferred directly between the two pharmacists.",
+              },
+              {
+                question: "Can I transfer just one prescription, or does it have to be all of them?",
+                answer: "You can transfer as many or as few as you'd like. The form above allows you to either select 'Transfer All' or specify the exact medications you want moved to Village IDA.",
+              },
+            ]}
+          />
+        </div>
+      </section>
     </Layout>
   );
 }

@@ -28,12 +28,30 @@ const staff = [
 ];
 
 const faqs = [
-  { question: "How do I transfer my prescriptions to Village IDA?", answer: "Simply fill out our transfer form online or call us. We handle everything with your old pharmacy — no work required from you." },
-  { question: "Do you offer prescription delivery?", answer: "Yes! We offer free delivery throughout Edmonton. Just request delivery when you place your refill." },
-  { question: "What is blister packaging?", answer: "Blister packaging organizes your medications by day and time in easy-to-use packs. It's especially helpful if you take multiple medications daily." },
-  { question: "Do I need an appointment for a flu shot?", answer: "Walk-ins are welcome during our regular hours, but booking ahead ensures no wait time." },
-  { question: "What compounding services do you offer?", answer: "We create custom medications including dye-free options, alternative dosage forms, flavored medications for children, and topical preparations." },
-  { question: "How long does a refill take?", answer: "Most refills are ready within 15-20 minutes. We'll call or text when your order is ready for pickup or delivery." },
+  {
+    question: "How do I transfer my prescriptions to Village IDA in Edmonton?",
+    answer: "Transferring your prescriptions is simple and legally protected in Alberta. You don't even need to call your old pharmacy. Just fill out our online transfer request form or call us directly. Our pharmacists will contact your previous pharmacy on your behalf to securely transfer all your active medication files and refill counts. The process is usually completed the same business day."
+  },
+  {
+    question: "Do you offer free prescription delivery in Edmonton?",
+    answer: "Yes! We offer fast, free prescription delivery to all patients across Edmonton city limits. Whether you are managing chronic conditions, recovering from surgery, or simply have a busy schedule, our drivers will safely deliver your medications right to your front door at no extra charge. Just select 'Delivery' when requesting a refill."
+  },
+  {
+    question: "What is blister packaging (compliance packaging)?",
+    answer: "Blister packaging (also known as compliance packaging or dosing cards) is a service where we pre-sort your daily medications into secure, easy-to-use bubble packs organized by exact days and times (e.g., Morning, Noon, Evening, Bedtime). This eliminates the confusion of juggling multiple pill bottles, ensuring you or your loved ones never miss a dose."
+  },
+  {
+    question: "What do I need to bring for a walk-in flu shot?",
+    answer: "If you are walking in for a flu shot or other immunization, please bring your valid Alberta Health Care (AHC) card and wear a short-sleeved shirt. While walk-ins are always welcome, you can also book an appointment online to guarantee zero wait time."
+  },
+  {
+    question: "What types of custom compounding do you do?",
+    answer: "Our compounding specialists create customized medications tailored to unique patient needs. This includes converting pills into liquids for children or adults who cannot swallow tablets, creating dye-free or allergen-free formulations, mixing customized topical pain creams, and adding appealing flavors to pediatric medications."
+  },
+  {
+    question: "How do medication reviews work?",
+    answer: "A medication review is a free, one-on-one consultation with our pharmacist. We sit down with you to review all your current prescription medications, over-the-counter drugs, and supplements. We'll identify any potential drug interactions, suggest ways to simplify your routine, and ensure your medications are working effectively for your specific health goals."
+  },
 ];
 
 export default function HomePage() {

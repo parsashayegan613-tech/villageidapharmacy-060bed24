@@ -52,13 +52,13 @@ export default function About() {
                         <div className="max-w-2xl">
                             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">About us</p>
                             <h1 className="text-display-sm md:text-display font-serif text-foreground mb-6">
-                                Your neighbourhood pharmacy.
+                                Tired of feeling like just another number?
                             </h1>
-                            <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                                Village IDA Pharmacy has been serving Edmonton families with personalized pharmaceutical care. We believe in taking the time to truly know our patients — their medications, their concerns, and what matters most to their health.
+                            <p className="text-lg text-muted-foreground leading-relaxed mb-4 font-medium">
+                                At Village IDA Pharmacy, we believe healthcare shouldn't be rushed, transactional, or impersonal. We actually take the time to know you, your medications, and your health goals.
                             </p>
                             <p className="text-lg text-muted-foreground leading-relaxed">
-                                As an independent IDA member pharmacy, we combine the personal touch of a family-run business with the resources and buying power of Canada's largest network of independent pharmacies.
+                                As an independent Edmonton pharmacy, we offer an antidote to the frustrating big-box pharmacy experience. No long lines, no being put on hold forever, and no talking to a different pharmacist every time you visit. Just consistent, caring people who know your name.
                             </p>
                         </div>
                     </ScrollReveal>
@@ -73,17 +73,17 @@ export default function About() {
                             <div>
                                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Our story</p>
                                 <h2 className="text-display-sm font-serif text-foreground mb-6">
-                                    Built on care, <span className="italic">not volume.</span>
+                                    Why patients switch <span className="italic">to us.</span>
                                 </h2>
                                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                                     <p>
-                                        Located in the heart of Edmonton at 7004 98 Ave, Village IDA Pharmacy was founded with a simple belief: pharmacy should be personal. In an era of big-box stores and rushed consultations, we chose a different path.
+                                        We hear it every day: patients come to us because they are exhausted by the big pharmacy chains. They're tired of waiting days for simple refills, battling automated phone systems, and feeling rushed out the door before they can ask a question about their new prescription.
                                     </p>
                                     <p>
-                                        Our pharmacists don't just fill prescriptions — they sit down with you, review your medications, answer your questions, and make sure you understand your treatment. Whether it's custom compounding for a child who can't swallow pills, or delivering blister-packed medications to a senior's doorstep, we go the extra mile.
+                                        When you trust Village IDA Pharmacy with your care, you get direct access to the same dedicated pharmacists every time. We offer free city-wide delivery so you don't even have to leave home, custom compounding for unusual dosages, and compliance blister packaging to make managing multiple daily pills effortless.
                                     </p>
                                     <p>
-                                        We're proud to be part of the IDA Pharmacy Group, Canada's largest banner group of independent pharmacies. This means you get the warmth of a local pharmacy with the competitive pricing and resources of a national network.
+                                        Best of all, <strong className="text-foreground">we handle the entire transfer process for you.</strong> You don't have to call your old pharmacy or lift a finger. Just tell us you want to switch, and we do the rest in minutes.
                                     </p>
                                 </div>
                             </div>

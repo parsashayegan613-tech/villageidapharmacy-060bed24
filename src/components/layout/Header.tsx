@@ -16,18 +16,26 @@ import { cn } from "@/lib/utils";
 
 const navigation = [
   {
+    name: "Prescriptions",
+    href: "/refill",
+    dropdown: [
+      { name: "Refill Request", href: "/refill" },
+      { name: "Transfer to Us", href: "/transfer" },
+      { name: "Free Delivery", href: "/delivery" },
+    ],
+  },
+  {
     name: "Services",
     href: "/services",
     dropdown: [
       { name: "All Services", href: "/services" },
       { name: "Compounding", href: "/compounding" },
+      { name: "Blister Packaging", href: "/blister-packaging" },
+      { name: "Appointments & Injections", href: "/appointments" },
     ],
   },
-  { name: "Refill", href: "/refill" },
-  { name: "Transfer", href: "/transfer" },
-  { name: "Appointments", href: "/appointments" },
-  { name: "Contact", href: "/contact" },
   { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function Header() {
@@ -87,7 +95,7 @@ export function Header() {
                       <button
                         className={cn(
                           "px-4 py-2 text-sm font-medium rounded-lg transition-all flex items-center gap-1 focus-ring",
-                          pathname.startsWith("/services") || pathname === "/compounding"
+                          item.dropdown.some(d => pathname.startsWith(d.href) && d.href !== "/" && d.href !== "/services") || pathname === item.href || (item.name === "Services" && pathname === "/services") || item.dropdown.some(d => pathname === d.href)
                             ? "text-primary"
                             : "text-muted-foreground hover:text-foreground"
                         )}

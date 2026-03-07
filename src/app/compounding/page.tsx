@@ -34,11 +34,11 @@ const goodFitChecklist = [
 ];
 
 const faqs = [
-  { question: "What is compounding?", answer: "Compounding is the art and science of creating personalized medications. We combine, mix, or alter ingredients to create a medication tailored to your specific needs." },
-  { question: "Do I need a prescription for compounded medications?", answer: "Yes, most compounded medications require a prescription from your doctor. We work closely with physicians to ensure your medication meets your needs." },
-  { question: "How long does it take to get a compounded medication?", answer: "Most compounds are ready within 1-3 business days. Complex formulations may take slightly longer. We'll let you know the timeline when you place your order." },
-  { question: "Is compounding covered by insurance?", answer: "Coverage varies by plan. Many insurance plans cover compounded medications. We can help you check your coverage and process claims." },
-  { question: "How do I know if compounding is right for me?", answer: "If standard medications aren't working for you due to allergies, dosage issues, or difficulty swallowing pills, compounding might help. Schedule a consult to discuss your options." },
+  { question: "What is a compounding pharmacy?", answer: "A compounding pharmacy specializes in creating customized medications from scratch. While traditional pharmacies only dispense mass-manufactured drugs, our specially trained compounding pharmacists can alter the form, dosage, or ingredients of a medication to meet your exact medical needs." },
+  { question: "Why would my child need compounded medication?", answer: "Many medications are only manufactured for adults. If your child needs a specific dose, has trouble swallowing pills, or is allergic to common dyes and preservatives, we can compound their prescription into a favorable flavor (like bubblegum or grape) as a liquid suspension, lollipop, or gummy." },
+  { question: "Do I need a prescription for compounded medications?", answer: "Yes. Just like mass-manufactured drugs, compounded medications require a valid prescription from a licensed healthcare provider (such as a doctor, dentist, or veterinarian). We work directly with your prescriber to formulate the exact treatment you need." },
+  { question: "Is compounding covered by Alberta health insurance?", answer: "Coverage depends entirely on your specific insurance provider and plan. Many extended health benefit plans do cover compounded medications, provided the active ingredients are eligible. Our team can help process the claim or provide the necessary documentation for you to submit." },
+  { question: "Can you compound medications for my pets?", answer: "Yes! Getting pets to take medication is notoriously difficult. We work with local veterinarians to compound pet medications into easy-to-administer forms, such as tuna-flavored liquids for cats, beef-flavored treats for dogs, or transdermal creams that can be rubbed on their ear." },
 ];
 
 export default function Compounding() {

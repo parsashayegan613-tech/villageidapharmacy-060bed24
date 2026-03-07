@@ -1,4 +1,4 @@
-import { MapPin, Phone, Clock, ExternalLink } from "lucide-react";
+import { MapPin, Phone, Clock, ExternalLink, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -47,8 +47,23 @@ export function LocationCard({ className }: LocationCardProps) {
           </div>
         </div>
 
+        <div className="flex items-center gap-3 bg-secondary rounded-xl p-3 border border-border mt-4 mb-2">
+          <img src="/staff_anoosh.png" alt="Pharmacist Anoosh" className="w-12 h-12 rounded-full border border-border/50 object-cover" />
+          <div>
+            <div className="flex items-center gap-0.5 text-amber-400 mb-0.5">
+              <Star className="w-3.5 h-3.5 fill-current" />
+              <Star className="w-3.5 h-3.5 fill-current" />
+              <Star className="w-3.5 h-3.5 fill-current" />
+              <Star className="w-3.5 h-3.5 fill-current" />
+              <Star className="w-3.5 h-3.5 fill-current" />
+              <span className="text-xs font-bold text-foreground ml-1">4.9/5</span>
+            </div>
+            <p className="text-xs text-muted-foreground font-medium">Read our Google Reviews</p>
+          </div>
+        </div>
+
         <div className="flex flex-col sm:flex-row gap-3 pt-2">
-          <Button asChild className="flex-1 gap-2">
+          <Button asChild className="flex-1 gap-2 shadow-lift">
             <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
               <ExternalLink className="h-4 w-4" />
               Open in Maps
@@ -57,7 +72,7 @@ export function LocationCard({ className }: LocationCardProps) {
           <Button asChild variant="outline" className="flex-1 gap-2">
             <a href={`tel:${phone}`}>
               <Phone className="h-4 w-4" />
-              Call
+              Call Pharmacy
             </a>
           </Button>
         </div>
