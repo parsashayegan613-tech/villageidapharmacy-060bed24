@@ -23,10 +23,10 @@ export function HomeHero() {
                             Edmonton's Independent Pharmacy
                         </motion.p>
                         <h1 className="text-display-sm md:text-5xl lg:text-6xl text-background leading-[1.05] mb-6 font-serif">
-                            Free delivery, easy transfers, and{" "}<span className="italic">custom compounding.</span>
+                            Switch in minutes, get personal care without the <span className="italic relative">chain pharmacy hassle.</span>
                         </h1>
                         <p className="text-lg md:text-xl text-background/70 mb-10 leading-relaxed max-w-lg">
-                            Switch in minutes, refill online, or book with a pharmacist who actually knows your case.
+                            Local Edmonton pharmacy with free city-wide delivery, fast refills, and pharmacists who actually know your case.
                         </p>
                         <motion.div className="flex flex-col sm:flex-row gap-4" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }}>
                             <Button asChild size="lg" className="rounded-full px-8 gap-2 shadow-lift">

@@ -33,12 +33,6 @@ const team = [
         statement: "We treat every customer like family — because to us, they are.",
         image: "/staff_anoosh.png",
     },
-    {
-        name: "Team Member",
-        role: "Pharmacy Technician",
-        statement: "Helping our patients manage their health is the most rewarding part of what we do.",
-        image: "/staff_tech.png",
-    },
 ];
 
 export default function About() {
@@ -158,7 +152,7 @@ export default function About() {
                             <p className="text-muted-foreground text-lg">Real pharmacists, real relationships.</p>
                         </div>
                     </ScrollReveal>
-                    <div className="grid md:grid-cols-3 gap-6">
+                    <div className="grid md:grid-cols-2 max-w-4xl gap-8">
                         {team.map((member, i) => (
                             <ScrollReveal key={member.name} delay={i * 0.1}>
                                 <div className="bg-card rounded-2xl p-8 shadow-soft hover-lift border border-border/60">

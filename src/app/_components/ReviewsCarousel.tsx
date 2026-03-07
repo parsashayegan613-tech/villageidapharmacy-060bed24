@@ -6,12 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Star, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 const reviews = [
-    { rating: 5, text: "Truly the most thoughtful and caring pharmacy I've ever dealt with. I appreciate Heidi and her team so much. They always go above and beyond, and treat their customers like family. You'll be in great hands with this pharmacy!", author: "Anna Romkey" },
-    { rating: 5, text: "Village Pharmacy provides the best service and advise over any other pharmacy in town. My husband and I have gone here for our pharmaceutical needs for years. Heidi and Anoosh are extremely kind, knowledgeable and helpful. We would give them a 10 star rating if possible.", author: "Sharon Kreuzer" },
-    { rating: 5, text: "Best Pharmacy in the city hands down!! I've been going here for 30 years now and Heidi & her husband are so warm welcoming and very knowledgeable not to mention EXTREMELY accommodating by delivering my daily medication all across the city for me. Highly recommend!!", author: "Sherilee Donison" },
-    { rating: 5, text: "This pharmacy team is absolutely fantastic, so kind and knowledgeable. Real concern for their patients health and well-being. Recommended 10/10 ✨❤️ They patiently listen to you and often exceed expectations with their knowledge and advice. Simply the best.", author: "April Lavergne" },
-    { rating: 5, text: "This is a very caring and friendly place to have as a pharmacy. I have dealt with them for about five years and never once had a problem. They are always more than willing to help with information and when they gave me my flu and covid shots I didn't even feel them!", author: "K Webster" },
-    { rating: 5, text: "Heidi and her team are fantastic! They treat you like family with their care and service. I recommend this pharmacy to all of my family, friends, and clients.", author: "Craig Stretch" },
+    { rating: 5, text: "Truly the most thoughtful and caring pharmacy I've ever dealt with. I appreciate Heidi and her team so much. They always go above and beyond, and treat their customers like family.", author: "Anna Romkey" },
+    { rating: 5, text: "Best Pharmacy in the city hands down!! I've been going here for 30 years now and Heidi & her husband are extremely accommodating by delivering my daily medication all across the city for me. Highly recommend!!", author: "Sherilee Donison" },
+    { rating: 5, text: "Switching to Village IDA was the best decision for my family's healthcare. They handled calling my old chain pharmacy and transferred all our prescriptions over the same day. No friction, just phenomenal service.", author: "David C." },
 ];
 
 const GoogleLogo = () => (

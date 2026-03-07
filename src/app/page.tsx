@@ -21,11 +21,6 @@ export const metadata: Metadata = {
 };
 
 
-const staff = [
-  { name: "Heidi", role: "Owner & Lead Pharmacist", statement: "Every patient deserves to feel heard and cared for. That's what drives us every day.", image: "/staff_heidi.png" },
-  { name: "Anoosh", role: "Pharmacist", statement: "We treat every customer like family — because to us, they are.", image: "/staff_anoosh.png" },
-  { name: "Team Member", role: "Pharmacy Technician", statement: "Helping our patients manage their health is the most rewarding part of what we do.", image: "/staff_tech.png" },
-];
 
 const faqs = [
   {
@@ -146,36 +141,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Staff */}
-      <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
-        <div className="container mx-auto px-4 relative z-10">
-          <ScrollReveal>
-            <div className="max-w-xl mb-14">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Our team</p>
-              <h2 className="text-display-sm font-serif text-foreground mb-4">Meet the people who care.</h2>
-              <p className="text-muted-foreground text-lg">Real pharmacists, real relationships.</p>
-            </div>
-          </ScrollReveal>
-          <div className="grid md:grid-cols-3 gap-6">
-            {staff.map((member, i) => (
-              <ScrollReveal key={member.name} delay={i * 0.1}>
-                <div className="bg-card rounded-2xl p-8 shadow-soft hover-lift border border-border/60">
-                  {member.image ? (
-                    <img src={member.image} alt={member.name} className="w-20 h-20 rounded-2xl mb-5 object-cover shadow-sm" />
-                  ) : (
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 mb-5 flex items-center justify-center">
-                      <span className="text-xl font-serif text-primary/70">{member.name.split(" ").map(n => n[0]).join("")}</span>
-                    </div>
-                  )}
-                  <h3 className="font-sans font-semibold text-foreground text-lg">{member.name}</h3>
-                  <p className="text-sm text-primary font-medium mb-3">{member.role}</p>
-                  <p className="text-sm text-muted-foreground italic leading-relaxed">"{member.statement}"</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Reviews — client component (useState/useEffect/framer-motion) */}
       <ReviewsCarousel />
