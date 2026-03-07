@@ -1,8 +1,6 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
-import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { CTABand } from "@/components/CTABand";
@@ -11,6 +9,11 @@ import {
   FlaskConical, Droplets, Palette, Pill, TestTube, Sparkles,
   CheckCircle, Phone, FileText, MessageSquare, Package, Calendar,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Compounding Pharmacy Edmonton | Village IDA Pharmacy",
+  description: "Custom compounded medications in Edmonton. Dye-free, preservative-free, and alternative dosage forms made specifically for you. Call 780-440-4555.",
+};
 
 const compoundingExamples = [
   { icon: Droplets, title: "Dye-Free Options", description: "Medications without artificial colors for sensitive patients." },
