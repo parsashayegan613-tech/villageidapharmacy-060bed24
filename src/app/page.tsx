@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
-import { ServiceCard } from "@/components/ServiceCard";
 import { StepCard } from "@/components/StepCard";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { LocationCard } from "@/components/LocationCard";
@@ -9,10 +8,10 @@ import { CTABand } from "@/components/CTABand";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { HomeHero } from "./_components/HomeHero";
 import { ReviewsCarousel } from "./_components/ReviewsCarousel";
+import { HomeServicesGrid } from "./_components/HomeServicesGrid";
 import { Button } from "@/components/ui/button";
 import {
-  Truck, Package, ClipboardCheck, HeartPulse, Cigarette, Syringe,
-  FlaskConical, Home as HomeIcon, Phone, FileText, MessageSquare,
+  Truck, ClipboardCheck, Phone, FileText, MessageSquare,
   CheckCircle, ArrowRight, Calendar,
 } from "lucide-react";
 
@@ -21,16 +20,6 @@ export const metadata: Metadata = {
   description: "Your local Edmonton pharmacy for refills, transfers, compounding, and personalized care. Free delivery available. Call 780-440-4555.",
 };
 
-const services = [
-  { icon: Truck, title: "Delivery", description: "Free prescription delivery to your door.", whoItsFor: "Anyone in Edmonton who prefers home delivery.", howItWorks: "Request delivery when you refill — we'll call to confirm." },
-  { icon: Package, title: "Blister Packaging", description: "Medications organized by day and time.", whoItsFor: "Patients managing multiple medications daily.", howItWorks: "We pre-sort your medications into easy weekly packs." },
-  { icon: ClipboardCheck, title: "Medication Reviews", description: "One-on-one review of your medications.", whoItsFor: "Anyone wanting to understand their medications better.", howItWorks: "Book a private session with our pharmacist." },
-  { icon: HeartPulse, title: "Diabetes Support", description: "Personalized diabetes management help.", whoItsFor: "Patients managing Type 1 or Type 2 diabetes.", howItWorks: "We review your medications, devices, and lifestyle." },
-  { icon: Cigarette, title: "Smoking Cessation", description: "Support to help you quit smoking.", whoItsFor: "Anyone ready to quit or thinking about it.", howItWorks: "Meet with our pharmacist to build a quit plan." },
-  { icon: Syringe, title: "Injection Services", description: "Flu shots, vaccines, and more.", whoItsFor: "Adults seeking immunizations or injections.", howItWorks: "Walk in or book an appointment." },
-  { icon: FlaskConical, title: "Compounding", description: "Custom medications made for you.", whoItsFor: "Patients who need specialized formulations.", howItWorks: "We create medications tailored to your needs." },
-  { icon: HomeIcon, title: "Home Health Care", description: "Medical supplies and equipment.", whoItsFor: "Patients needing home care products.", howItWorks: "Browse our selection or ask our team." },
-];
 
 const staff = [
   { name: "Heidi", role: "Owner & Lead Pharmacist", statement: "Every patient deserves to feel heard and cared for. That's what drives us every day.", image: "/staff_heidi.png" },
@@ -63,13 +52,7 @@ export default function HomePage() {
               <p className="text-muted-foreground text-lg leading-relaxed">A full range of pharmacy services to support your health — from delivery to custom compounding.</p>
             </div>
           </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {services.map((service, i) => (
-              <ScrollReveal key={service.title} delay={i * 0.06}>
-                <ServiceCard {...service} />
-              </ScrollReveal>
-            ))}
-          </div>
+          <HomeServicesGrid />
         </div>
       </section>
 
