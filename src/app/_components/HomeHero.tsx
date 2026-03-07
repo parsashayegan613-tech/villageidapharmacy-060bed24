@@ -49,22 +49,6 @@ export function HomeHero() {
                     </motion.div>
                 </div>
             </section>
-
-            <div className="hidden md:block border-b border-border bg-card">
-                <div className="container mx-auto px-4">
-                    <div className="flex justify-end gap-1 py-2.5">
-                        <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full text-muted-foreground hover:text-foreground">
-                            <a href="tel:780-440-4555"><Phone className="h-4 w-4" />Call</a>
-                        </Button>
-                        <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full text-muted-foreground hover:text-foreground">
-                            <Link href="/refill"><FileText className="h-4 w-4" />Refill</Link>
-                        </Button>
-                        <Button asChild variant="ghost" size="sm" className="gap-2 rounded-full text-muted-foreground hover:text-foreground">
-                            <Link href="/transfer"><ArrowRightLeft className="h-4 w-4" />Transfer</Link>
-                        </Button>
-                    </div>
-                </div>
-            </div>
         </>
     );
 }

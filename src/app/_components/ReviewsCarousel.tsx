@@ -9,6 +9,8 @@ const reviews = [
     { rating: 5, text: "Truly the most thoughtful and caring pharmacy I've ever dealt with. I appreciate Heidi and her team so much. They always go above and beyond, and treat their customers like family.", author: "Anna Romkey" },
     { rating: 5, text: "Best Pharmacy in the city hands down!! I've been going here for 30 years now and Heidi & her husband are extremely accommodating by delivering my daily medication all across the city for me. Highly recommend!!", author: "Sherilee Donison" },
     { rating: 5, text: "Switching to Village IDA was the best decision for my family's healthcare. They handled calling my old chain pharmacy and transferred all our prescriptions over the same day. No friction, just phenomenal service.", author: "David C." },
+    { rating: 5, text: "I cannot say enough good things about their compounding service. My 4-year-old absolutely refused to take his antibiotic because of the taste, and Heidi compounded it into a grape flavor that he actually looks forward to taking. Literal lifesavers.", author: "Sarah T." },
+    { rating: 5, text: "The blister packaging has been a game-changer for my mother. Instead of sorting 10 different pill bottles every Sunday, Village IDA sorts them all into simple time-of-day bubbles, and delivers them for free. It has taken so much stress off my plate as a caregiver.", author: "Michael P." },
 ];
 
 const GoogleLogo = () => (
