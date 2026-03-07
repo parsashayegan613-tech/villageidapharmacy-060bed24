@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
-import { Phone, Search, X, MessageSquare } from "lucide-react";
+import { Phone, Search, X, MessageSquare, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -18,9 +18,15 @@ type Message = {
 };
 
 const STATUS_STYLES: Record<string, string> = {
-    unread: "bg-blue-500/15 text-blue-400 border-blue-500/20",
-    read: "bg-zinc-500/15 text-zinc-400 border-zinc-500/20",
-    replied: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
+    unread: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+    read: "bg-zinc-500/15 text-zinc-400 border-zinc-500/30",
+    replied: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+};
+
+const STATUS_ACTIVE: Record<string, string> = {
+    unread: "bg-blue-500 text-white border-blue-500",
+    read: "bg-zinc-500 text-white border-zinc-500",
+    replied: "bg-emerald-500 text-white border-emerald-500",
 };
 
 const STATUS_OPTIONS = ["unread", "read", "replied"];
@@ -31,28 +37,46 @@ export default function AdminMessages() {
     const [search, setSearch] = useState("");
     const [selected, setSelected] = useState<Message | null>(null);
     const [updatingId, setUpdatingId] = useState<string | null>(null);
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
     useEffect(() => {
         supabase.from("contact_messages").select("*").order("created_at", { ascending: false })
-            .then(({ data }) => { setMessages(data || []); setLoading(false); });
+            .then(({ data, error }) => {
+                if (error) toast.error("Failed to load: " + error.message);
+                setMessages(data || []);
+                setLoading(false);
+            });
     }, []);
 
-    async function markStatus(id: string, status: string) {
+    async function updateStatus(id: string, status: string) {
         setUpdatingId(id);
         const { error } = await supabase.from("contact_messages").update({ status }).eq("id", id);
         if (!error) {
             setMessages(prev => prev.map(m => m.id === id ? { ...m, status } : m));
             if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : null);
-            toast.success("Status updated");
+            toast.success("Marked as " + status);
         } else {
             toast.error("Failed to update");
         }
         setUpdatingId(null);
     }
 
+    async function deleteMessage(id: string) {
+        const { error } = await supabase.from("contact_messages").delete().eq("id", id);
+        if (!error) {
+            setMessages(prev => prev.filter(m => m.id !== id));
+            setSelected(null);
+            setConfirmDelete(false);
+            toast.success("Message deleted");
+        } else {
+            toast.error("Failed to delete");
+        }
+    }
+
     const openMessage = (msg: Message) => {
         setSelected(msg);
-        if (msg.status === "unread") markStatus(msg.id, "read");
+        setConfirmDelete(false);
+        if (msg.status === "unread") updateStatus(msg.id, "read");
     };
 
     const filtered = messages.filter(m => {
@@ -103,9 +127,7 @@ export default function AdminMessages() {
                                     </div>
                                 </div>
                                 <div className="flex-shrink-0 text-right">
-                                    <span className={cn("text-xs font-medium border px-2 py-0.5 rounded-full", STATUS_STYLES[msg.status] || STATUS_STYLES.read)}>
-                                        {msg.status}
-                                    </span>
+                                    <span className={cn("text-xs font-medium border px-2 py-0.5 rounded-full", STATUS_STYLES[msg.status] || STATUS_STYLES.read)}>{msg.status}</span>
                                     <p className="text-zinc-600 text-xs mt-1.5">{format(new Date(msg.created_at), "MMM d")}</p>
                                 </div>
                             </div>
@@ -122,12 +144,13 @@ export default function AdminMessages() {
                             <h2 className="text-white font-semibold">Message</h2>
                             <button onClick={() => setSelected(null)} className="text-zinc-400 hover:text-white p-1"><X className="h-5 w-5" /></button>
                         </div>
+
                         <div className="p-5 space-y-6">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1.5">From</p>
                                     <p className="text-white font-medium">{selected.full_name}</p>
-                                    <a href={`tel:${selected.phone}`} onClick={e => e.stopPropagation()} className="text-blue-400 text-sm hover:underline flex items-center gap-1">
+                                    <a href={`tel:${selected.phone}`} className="text-blue-400 text-sm hover:underline flex items-center gap-1">
                                         <Phone className="h-3 w-3" />{selected.phone}
                                     </a>
                                 </div>
@@ -146,7 +169,7 @@ export default function AdminMessages() {
                             </div>
 
                             <div>
-                                <p className="text-zinc-500 text-xs uppercase tracking-wider mb-3">Reply via Phone</p>
+                                <p className="text-zinc-500 text-xs uppercase tracking-wider mb-3">Call Back</p>
                                 <a
                                     href={`tel:${selected.phone}`}
                                     className="flex items-center justify-center gap-2 w-full py-3 bg-blue-600/15 border border-blue-500/30 rounded-xl text-blue-400 text-sm font-medium hover:bg-blue-600/25 transition-colors"
@@ -156,23 +179,41 @@ export default function AdminMessages() {
                                 </a>
                             </div>
 
+                            {/* Status buttons */}
                             <div>
-                                <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1.5">Update Status</p>
+                                <p className="text-zinc-500 text-xs uppercase tracking-wider mb-2.5">Mark As</p>
                                 <div className="flex gap-2">
                                     {STATUS_OPTIONS.map(s => (
                                         <button
                                             key={s}
-                                            onClick={() => markStatus(selected.id, s)}
+                                            onClick={() => updateStatus(selected.id, s)}
                                             disabled={selected.status === s || updatingId === selected.id}
                                             className={cn(
-                                                "flex-1 py-2 px-3 rounded-lg text-xs font-medium border transition-all capitalize",
-                                                selected.status === s ? STATUS_STYLES[s] : "border-zinc-700 text-zinc-400 hover:border-zinc-500"
+                                                "flex-1 py-2 px-3 rounded-full text-xs font-medium border transition-all capitalize",
+                                                selected.status === s ? STATUS_ACTIVE[s] : "border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-white disabled:opacity-40"
                                             )}
                                         >
                                             {s}
                                         </button>
                                     ))}
                                 </div>
+                            </div>
+
+                            {/* Delete */}
+                            <div className="pt-2 border-t border-zinc-800">
+                                {!confirmDelete ? (
+                                    <button onClick={() => setConfirmDelete(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-red-500/20 text-red-400 hover:bg-red-500/10 hover:border-red-500/40 text-sm font-medium transition-all w-full justify-center">
+                                        <Trash2 className="h-4 w-4" /> Delete Message
+                                    </button>
+                                ) : (
+                                    <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+                                        <p className="text-red-300 text-sm font-medium mb-3">Delete this message? This cannot be undone.</p>
+                                        <div className="flex gap-2">
+                                            <button onClick={() => deleteMessage(selected.id)} className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors">Yes, Delete</button>
+                                            <button onClick={() => setConfirmDelete(false)} className="flex-1 py-2 border border-zinc-700 text-zinc-300 hover:text-white text-sm font-medium rounded-lg transition-colors">Cancel</button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
-import { Phone, Search, X } from "lucide-react";
+import { Phone, Search, X, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -20,10 +20,17 @@ type Transfer = {
 };
 
 const STATUS_STYLES: Record<string, string> = {
-    pending: "bg-amber-500/15 text-amber-400 border-amber-500/20",
-    in_progress: "bg-blue-500/15 text-blue-400 border-blue-500/20",
-    completed: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
-    cancelled: "bg-zinc-500/15 text-zinc-400 border-zinc-500/20",
+    pending: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+    in_progress: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+    completed: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+    cancelled: "bg-zinc-500/15 text-zinc-400 border-zinc-500/30",
+};
+
+const STATUS_ACTIVE: Record<string, string> = {
+    pending: "bg-amber-500 text-white border-amber-500",
+    in_progress: "bg-blue-500 text-white border-blue-500",
+    completed: "bg-emerald-500 text-white border-emerald-500",
+    cancelled: "bg-zinc-500 text-white border-zinc-500",
 };
 
 const STATUS_OPTIONS = ["pending", "in_progress", "completed", "cancelled"];
@@ -34,10 +41,15 @@ export default function AdminTransfers() {
     const [search, setSearch] = useState("");
     const [selected, setSelected] = useState<Transfer | null>(null);
     const [updatingId, setUpdatingId] = useState<string | null>(null);
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
     useEffect(() => {
         supabase.from("transfers").select("*").order("created_at", { ascending: false })
-            .then(({ data }) => { setTransfers(data || []); setLoading(false); });
+            .then(({ data, error }) => {
+                if (error) toast.error("Failed to load: " + error.message);
+                setTransfers(data || []);
+                setLoading(false);
+            });
     }, []);
 
     async function updateStatus(id: string, status: string) {
@@ -46,11 +58,23 @@ export default function AdminTransfers() {
         if (!error) {
             setTransfers(prev => prev.map(t => t.id === id ? { ...t, status } : t));
             if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : null);
-            toast.success("Status updated");
+            toast.success("Status updated to " + status.replace(/_/g, " "));
         } else {
             toast.error("Failed to update status");
         }
         setUpdatingId(null);
+    }
+
+    async function deleteTransfer(id: string) {
+        const { error } = await supabase.from("transfers").delete().eq("id", id);
+        if (!error) {
+            setTransfers(prev => prev.filter(t => t.id !== id));
+            setSelected(null);
+            setConfirmDelete(false);
+            toast.success("Request deleted");
+        } else {
+            toast.error("Failed to delete");
+        }
     }
 
     const filtered = transfers.filter(t => {
@@ -86,12 +110,12 @@ export default function AdminTransfers() {
                                     <th className="text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider hidden md:table-cell">From Pharmacy</th>
                                     <th className="text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider hidden lg:table-cell">Date</th>
                                     <th className="text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Status</th>
-                                    <th className="w-16"></th>
+                                    <th className="w-20"></th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-zinc-800">
                                 {filtered.map(t => (
-                                    <tr key={t.id} className="hover:bg-zinc-800/40 transition-colors cursor-pointer" onClick={() => setSelected(t)}>
+                                    <tr key={t.id} className="hover:bg-zinc-800/40 transition-colors cursor-pointer" onClick={() => { setSelected(t); setConfirmDelete(false); }}>
                                         <td className="px-4 py-3.5">
                                             <p className="text-white font-medium text-sm">{t.full_name}</p>
                                             <a href={`tel:${t.phone}`} onClick={e => e.stopPropagation()} className="text-zinc-400 text-xs hover:text-blue-400 flex items-center gap-1 w-fit">
@@ -100,18 +124,13 @@ export default function AdminTransfers() {
                                         </td>
                                         <td className="px-4 py-3.5 text-zinc-300 text-sm hidden md:table-cell">{t.current_pharmacy}</td>
                                         <td className="px-4 py-3.5 text-zinc-500 text-sm hidden lg:table-cell">{format(new Date(t.created_at), "MMM d, h:mm a")}</td>
-                                        <td className="px-4 py-3.5" onClick={e => e.stopPropagation()}>
-                                            <select
-                                                value={t.status}
-                                                onChange={e => updateStatus(t.id, e.target.value)}
-                                                disabled={updatingId === t.id}
-                                                className={cn("text-xs font-medium border px-2 py-1.5 rounded-full bg-transparent focus:outline-none cursor-pointer", STATUS_STYLES[t.status] || STATUS_STYLES.pending)}
-                                            >
-                                                {STATUS_OPTIONS.map(s => <option key={s} value={s} className="bg-zinc-800 text-white">{s.replace(/_/g, " ")}</option>)}
-                                            </select>
+                                        <td className="px-4 py-3.5">
+                                            <span className={cn("text-xs font-medium border px-2.5 py-1 rounded-full capitalize", STATUS_STYLES[t.status] || STATUS_STYLES.pending)}>
+                                                {t.status.replace(/_/g, " ")}
+                                            </span>
                                         </td>
                                         <td className="px-4 py-3.5">
-                                            <button onClick={e => { e.stopPropagation(); setSelected(t); }} className="text-xs text-zinc-400 hover:text-white px-2 py-1 rounded-md border border-zinc-700 hover:border-zinc-500 transition-colors">View</button>
+                                            <button onClick={e => { e.stopPropagation(); setSelected(t); setConfirmDelete(false); }} className="text-xs text-zinc-400 hover:text-white px-2.5 py-1.5 rounded-lg border border-zinc-700 hover:border-zinc-500 transition-colors">Open</button>
                                         </td>
                                     </tr>
                                 ))}
@@ -129,6 +148,7 @@ export default function AdminTransfers() {
                             <h2 className="text-white font-semibold">Transfer Details</h2>
                             <button onClick={() => setSelected(null)} className="text-zinc-400 hover:text-white p-1"><X className="h-5 w-5" /></button>
                         </div>
+
                         <div className="p-5 space-y-6">
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
@@ -160,15 +180,41 @@ export default function AdminTransfers() {
                                 </div>
                             )}
 
+                            {/* Status buttons */}
                             <div>
-                                <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1.5">Update Status</p>
-                                <select
-                                    value={selected.status}
-                                    onChange={e => updateStatus(selected.id, e.target.value)}
-                                    className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
-                                >
-                                    {STATUS_OPTIONS.map(s => <option key={s} value={s}>{s.replace(/_/g, " ")}</option>)}
-                                </select>
+                                <p className="text-zinc-500 text-xs uppercase tracking-wider mb-2.5">Update Status</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {STATUS_OPTIONS.map(s => (
+                                        <button
+                                            key={s}
+                                            onClick={() => updateStatus(selected.id, s)}
+                                            disabled={updatingId === selected.id}
+                                            className={cn(
+                                                "px-3 py-1.5 rounded-full text-xs font-medium border transition-all capitalize",
+                                                selected.status === s ? STATUS_ACTIVE[s] : "border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-white"
+                                            )}
+                                        >
+                                            {s.replace(/_/g, " ")}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Delete */}
+                            <div className="pt-2 border-t border-zinc-800">
+                                {!confirmDelete ? (
+                                    <button onClick={() => setConfirmDelete(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-red-500/20 text-red-400 hover:bg-red-500/10 hover:border-red-500/40 text-sm font-medium transition-all w-full justify-center">
+                                        <Trash2 className="h-4 w-4" /> Delete Request
+                                    </button>
+                                ) : (
+                                    <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+                                        <p className="text-red-300 text-sm font-medium mb-3">Delete this transfer request? This cannot be undone.</p>
+                                        <div className="flex gap-2">
+                                            <button onClick={() => deleteTransfer(selected.id)} className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors">Yes, Delete</button>
+                                            <button onClick={() => setConfirmDelete(false)} className="flex-1 py-2 border border-zinc-700 text-zinc-300 hover:text-white text-sm font-medium rounded-lg transition-colors">Cancel</button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

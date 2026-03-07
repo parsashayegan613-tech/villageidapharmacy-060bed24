@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
-import { Phone, Truck, Package, Search, X, Send } from "lucide-react";
+import { Phone, Truck, Package, Search, X, Send, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -25,12 +25,21 @@ type Refill = {
 };
 
 const STATUS_STYLES: Record<string, string> = {
-    pending: "bg-amber-500/15 text-amber-400 border-amber-500/20",
-    processing: "bg-blue-500/15 text-blue-400 border-blue-500/20",
-    ready: "bg-emerald-500/15 text-emerald-400 border-emerald-500/20",
-    out_for_delivery: "bg-purple-500/15 text-purple-400 border-purple-500/20",
-    delivered: "bg-zinc-500/15 text-zinc-400 border-zinc-500/20",
-    completed: "bg-zinc-500/15 text-zinc-400 border-zinc-500/20",
+    pending: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+    processing: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+    ready: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30",
+    out_for_delivery: "bg-purple-500/15 text-purple-400 border-purple-500/30",
+    delivered: "bg-zinc-500/15 text-zinc-400 border-zinc-500/30",
+    completed: "bg-zinc-500/15 text-zinc-400 border-zinc-500/30",
+};
+
+const STATUS_ACTIVE: Record<string, string> = {
+    pending: "bg-amber-500 text-white border-amber-500",
+    processing: "bg-blue-500 text-white border-blue-500",
+    ready: "bg-emerald-500 text-white border-emerald-500",
+    out_for_delivery: "bg-purple-500 text-white border-purple-500",
+    delivered: "bg-zinc-500 text-white border-zinc-500",
+    completed: "bg-zinc-500 text-white border-zinc-500",
 };
 
 const STATUS_OPTIONS = ["pending", "processing", "ready", "out_for_delivery", "delivered", "completed"];
@@ -44,21 +53,18 @@ const SMS_TEMPLATES: Record<string, string> = {
 export default function AdminRefills() {
     const [refills, setRefills] = useState<Refill[]>([]);
     const [loading, setLoading] = useState(true);
-    const [queryError, setQueryError] = useState<string | null>(null);
     const [search, setSearch] = useState("");
     const [filterStatus, setFilterStatus] = useState("all");
     const [selected, setSelected] = useState<Refill | null>(null);
     const [updatingId, setUpdatingId] = useState<string | null>(null);
     const [sendingSms, setSendingSms] = useState(false);
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
     useEffect(() => { fetchRefills(); }, []);
 
     async function fetchRefills() {
         const { data, error } = await supabase.from("refills").select("*").order("created_at", { ascending: false });
-        if (error) {
-            console.error("Refills query error:", error);
-            setQueryError(`${error.code}: ${error.message}`);
-        }
+        if (error) toast.error("Failed to load refills: " + error.message);
         setRefills(data || []);
         setLoading(false);
     }
@@ -69,11 +75,23 @@ export default function AdminRefills() {
         if (!error) {
             setRefills(prev => prev.map(r => r.id === id ? { ...r, status } : r));
             if (selected?.id === id) setSelected(prev => prev ? { ...prev, status } : null);
-            toast.success("Status updated");
+            toast.success("Status updated to " + status.replace(/_/g, " "));
         } else {
             toast.error("Failed to update status");
         }
         setUpdatingId(null);
+    }
+
+    async function deleteRefill(id: string) {
+        const { error } = await supabase.from("refills").delete().eq("id", id);
+        if (!error) {
+            setRefills(prev => prev.filter(r => r.id !== id));
+            setSelected(null);
+            setConfirmDelete(false);
+            toast.success("Request deleted");
+        } else {
+            toast.error("Failed to delete");
+        }
     }
 
     async function sendSms(refill: Refill, key: string) {
@@ -109,19 +127,12 @@ export default function AdminRefills() {
                 </div>
             </div>
 
-            {queryError && (
-                <div className="mb-5 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
-                    <p className="text-red-400 text-sm font-semibold mb-1">Query Error (share this with your developer):</p>
-                    <code className="text-red-300 text-xs break-all">{queryError}</code>
-                </div>
-            )}
-
             <div className="flex flex-col sm:flex-row gap-3 mb-5">
                 <div className="relative flex-1">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
                     <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search by name or phone..." className="w-full pl-9 pr-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-blue-500 transition-colors" />
                 </div>
-                <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500 transition-colors">
+                <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="px-4 py-2.5 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500">
                     <option value="all">All Statuses</option>
                     {STATUS_OPTIONS.map(s => <option key={s} value={s} className="bg-zinc-800">{s.replace(/_/g, " ")}</option>)}
                 </select>
@@ -137,45 +148,39 @@ export default function AdminRefills() {
                         <table className="w-full">
                             <thead>
                                 <tr className="border-b border-zinc-800">
-                                    {["Patient", "Rx Count", "Delivery", "Date", "Status", ""].map(h => (
-                                        <th key={h} className={cn("text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider", !h && "w-16", h === "Rx Count" && "hidden sm:table-cell", h === "Date" && "hidden lg:table-cell", h === "Delivery" && "hidden md:table-cell")}>{h}</th>
-                                    ))}
+                                    <th className="text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Patient</th>
+                                    <th className="text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider hidden sm:table-cell">Rx</th>
+                                    <th className="text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider hidden md:table-cell">Delivery</th>
+                                    <th className="text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider hidden lg:table-cell">Date</th>
+                                    <th className="text-left px-4 py-3 text-xs font-medium text-zinc-500 uppercase tracking-wider">Status</th>
+                                    <th className="w-20"></th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-zinc-800">
                                 {filtered.map((refill) => (
-                                    <tr key={refill.id} className="hover:bg-zinc-800/40 transition-colors cursor-pointer" onClick={() => setSelected(refill)}>
+                                    <tr key={refill.id} className="hover:bg-zinc-800/40 transition-colors cursor-pointer" onClick={() => { setSelected(refill); setConfirmDelete(false); }}>
                                         <td className="px-4 py-3.5">
                                             <p className="text-white font-medium text-sm">{refill.full_name}</p>
                                             <a href={`tel:${refill.phone}`} onClick={e => e.stopPropagation()} className="text-zinc-400 text-xs hover:text-blue-400 flex items-center gap-1 w-fit">
                                                 <Phone className="h-3 w-3" />{refill.phone}
                                             </a>
                                         </td>
-                                        <td className="px-4 py-3.5 text-zinc-300 text-sm hidden sm:table-cell">
-                                            {refill.prescriptions?.length ?? 0} Rx
-                                        </td>
+                                        <td className="px-4 py-3.5 text-zinc-300 text-sm hidden sm:table-cell">{refill.prescriptions?.length ?? 0} Rx</td>
                                         <td className="px-4 py-3.5 hidden md:table-cell">
                                             <span className="flex items-center gap-1.5 text-zinc-300 text-sm capitalize">
                                                 {refill.delivery_type === "delivery" ? <Truck className="h-4 w-4 text-zinc-500" /> : <Package className="h-4 w-4 text-zinc-500" />}
                                                 {refill.delivery_type}
                                             </span>
                                         </td>
-                                        <td className="px-4 py-3.5 text-zinc-500 text-sm hidden lg:table-cell">
-                                            {format(new Date(refill.created_at), "MMM d, h:mm a")}
-                                        </td>
-                                        <td className="px-4 py-3.5" onClick={e => e.stopPropagation()}>
-                                            <select
-                                                value={refill.status}
-                                                onChange={e => updateStatus(refill.id, e.target.value)}
-                                                disabled={updatingId === refill.id}
-                                                className={cn("text-xs font-medium border px-2 py-1.5 rounded-full bg-transparent focus:outline-none cursor-pointer transition-opacity", STATUS_STYLES[refill.status] || STATUS_STYLES.pending, updatingId === refill.id && "opacity-50")}
-                                            >
-                                                {STATUS_OPTIONS.map(s => <option key={s} value={s} className="bg-zinc-800 text-white">{s.replace(/_/g, " ")}</option>)}
-                                            </select>
+                                        <td className="px-4 py-3.5 text-zinc-500 text-sm hidden lg:table-cell">{format(new Date(refill.created_at), "MMM d, h:mm a")}</td>
+                                        <td className="px-4 py-3.5">
+                                            <span className={cn("text-xs font-medium border px-2.5 py-1 rounded-full capitalize", STATUS_STYLES[refill.status] || STATUS_STYLES.pending)}>
+                                                {refill.status.replace(/_/g, " ")}
+                                            </span>
                                         </td>
                                         <td className="px-4 py-3.5">
-                                            <button onClick={e => { e.stopPropagation(); setSelected(refill); }} className="text-xs text-zinc-400 hover:text-white px-2 py-1 rounded-md border border-zinc-700 hover:border-zinc-500 transition-colors">
-                                                View
+                                            <button onClick={e => { e.stopPropagation(); setSelected(refill); setConfirmDelete(false); }} className="text-xs text-zinc-400 hover:text-white px-2.5 py-1.5 rounded-lg border border-zinc-700 hover:border-zinc-500 transition-colors">
+                                                Open
                                             </button>
                                         </td>
                                     </tr>
@@ -193,12 +198,11 @@ export default function AdminRefills() {
                     <div className="relative w-full max-w-md bg-zinc-900 border-l border-zinc-800 h-full overflow-y-auto flex flex-col">
                         <div className="p-5 border-b border-zinc-800 flex items-center justify-between sticky top-0 bg-zinc-900 z-10">
                             <h2 className="text-white font-semibold">Refill Details</h2>
-                            <button onClick={() => setSelected(null)} className="text-zinc-400 hover:text-white transition-colors p-1">
-                                <X className="h-5 w-5" />
-                            </button>
+                            <button onClick={() => setSelected(null)} className="text-zinc-400 hover:text-white p-1"><X className="h-5 w-5" /></button>
                         </div>
 
                         <div className="p-5 space-y-6 flex-1">
+                            {/* Patient info */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1.5">Patient</p>
@@ -213,6 +217,7 @@ export default function AdminRefills() {
                                 </div>
                             </div>
 
+                            {/* Prescriptions */}
                             <div>
                                 <p className="text-zinc-500 text-xs uppercase tracking-wider mb-2">Prescriptions ({selected.prescriptions?.length ?? 0})</p>
                                 <div className="space-y-1.5">
@@ -222,15 +227,14 @@ export default function AdminRefills() {
                                 </div>
                             </div>
 
+                            {/* Delivery */}
                             <div>
                                 <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1.5">Delivery Method</p>
                                 <p className="text-white text-sm capitalize flex items-center gap-2">
                                     {selected.delivery_type === "delivery" ? <Truck className="h-4 w-4 text-zinc-400" /> : <Package className="h-4 w-4 text-zinc-400" />}
                                     {selected.delivery_type}
                                 </p>
-                                {selected.address && (
-                                    <p className="text-zinc-400 text-sm mt-1">{selected.address}{selected.city ? `, ${selected.city}` : ""}{selected.postal_code ? ` ${selected.postal_code}` : ""}</p>
-                                )}
+                                {selected.address && <p className="text-zinc-400 text-sm mt-1">{selected.address}{selected.city ? `, ${selected.city}` : ""}{selected.postal_code ? ` ${selected.postal_code}` : ""}</p>}
                             </div>
 
                             {selected.notes && (
@@ -240,17 +244,27 @@ export default function AdminRefills() {
                                 </div>
                             )}
 
+                            {/* Status buttons */}
                             <div>
-                                <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1.5">Update Status</p>
-                                <select
-                                    value={selected.status}
-                                    onChange={e => updateStatus(selected.id, e.target.value)}
-                                    className="w-full px-3 py-2.5 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm focus:outline-none focus:border-blue-500"
-                                >
-                                    {STATUS_OPTIONS.map(s => <option key={s} value={s}>{s.replace(/_/g, " ")}</option>)}
-                                </select>
+                                <p className="text-zinc-500 text-xs uppercase tracking-wider mb-2.5">Update Status</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {STATUS_OPTIONS.map(s => (
+                                        <button
+                                            key={s}
+                                            onClick={() => updateStatus(selected.id, s)}
+                                            disabled={updatingId === selected.id}
+                                            className={cn(
+                                                "px-3 py-1.5 rounded-full text-xs font-medium border transition-all capitalize",
+                                                selected.status === s ? STATUS_ACTIVE[s] : "border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-white"
+                                            )}
+                                        >
+                                            {s.replace(/_/g, " ")}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
 
+                            {/* SMS */}
                             <div>
                                 <p className="text-zinc-500 text-xs uppercase tracking-wider mb-2.5">Send SMS Update</p>
                                 <div className="space-y-2">
@@ -259,7 +273,7 @@ export default function AdminRefills() {
                                             key={key}
                                             onClick={() => sendSms(selected, key)}
                                             disabled={sendingSms}
-                                            className="w-full flex items-start gap-3 p-3 rounded-lg border border-zinc-800 hover:border-blue-500/40 hover:bg-blue-500/5 text-left transition-all disabled:opacity-50 group"
+                                            className="w-full flex items-start gap-3 p-3 rounded-lg border border-zinc-800 hover:border-blue-500/40 hover:bg-blue-500/5 text-left transition-all disabled:opacity-50"
                                         >
                                             <Send className="h-4 w-4 text-blue-400 flex-shrink-0 mt-0.5" />
                                             <div>
@@ -269,6 +283,30 @@ export default function AdminRefills() {
                                         </button>
                                     ))}
                                 </div>
+                            </div>
+
+                            {/* Delete */}
+                            <div className="pt-2 border-t border-zinc-800">
+                                {!confirmDelete ? (
+                                    <button
+                                        onClick={() => setConfirmDelete(true)}
+                                        className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-red-500/20 text-red-400 hover:bg-red-500/10 hover:border-red-500/40 text-sm font-medium transition-all w-full justify-center"
+                                    >
+                                        <Trash2 className="h-4 w-4" /> Delete Request
+                                    </button>
+                                ) : (
+                                    <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+                                        <p className="text-red-300 text-sm font-medium mb-3">Delete this refill request? This cannot be undone.</p>
+                                        <div className="flex gap-2">
+                                            <button onClick={() => deleteRefill(selected.id)} className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors">
+                                                Yes, Delete
+                                            </button>
+                                            <button onClick={() => setConfirmDelete(false)} className="flex-1 py-2 border border-zinc-700 text-zinc-300 hover:text-white text-sm font-medium rounded-lg transition-colors">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
