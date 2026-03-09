@@ -34,6 +34,16 @@ const navigation = [
       { name: "Appointments & Injections", href: "/appointments" },
     ],
   },
+  {
+    name: "Resources",
+    href: "/guides",
+    dropdown: [
+      { name: "Patient Guides", href: "/guides" },
+      { name: "Alberta Transfer Laws", href: "/guides/transferring-prescriptions-alberta" },
+      { name: "Pediatric Compounding", href: "/guides/pediatric-compounding-guide" },
+      { name: "Blister Packaging Guide", href: "/guides/blister-packaging-edmonton" },
+    ],
+  },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
