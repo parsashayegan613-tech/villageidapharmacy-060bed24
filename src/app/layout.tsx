@@ -64,7 +64,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
                 />
             </head>
-            <body className="antialiased">
+            <body className="antialiased bg-pattern">
                 <Providers>
                     {children}
                 </Providers>

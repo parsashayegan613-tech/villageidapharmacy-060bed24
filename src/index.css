@@ -222,8 +222,14 @@
     text-wrap: balance;
   }
 
-  /* Focus states */
+  /* Premium Subtle Background Pattern */
+  .bg-pattern {
+    background-image: radial-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Focus states - High Contrast for Accessibility (Seniors) */
   .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+    @apply focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background transition-shadow;
   }
 }
