@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { supabase } from "@/integrations/supabase/client";
-import { LayoutDashboard, FileText, ArrowRightLeft, Calendar, MessageSquare, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, FileText, ArrowRightLeft, Calendar, MessageSquare, LogOut, Menu, X, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
     { href: "/admin", label: "Overview", icon: LayoutDashboard, exact: true },
+    { href: "/admin/patients", label: "Patients", icon: Users },
     { href: "/admin/refills", label: "Refills", icon: FileText },
     { href: "/admin/transfers", label: "Transfers", icon: ArrowRightLeft },
     { href: "/admin/appointments", label: "Appointments", icon: Calendar },
