@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     metadataBase: new URL("https://villageidapharmacy.com"),
     icons: {
         icon: [
-            { url: "/village-ida-logo.jpg", type: "image/jpeg" },
+            { url: "/village-ida-favicon.svg", type: "image/svg+xml" },
         ],
-        shortcut: "/village-ida-logo.jpg",
-        apple: "/village-ida-logo.jpg",
+        shortcut: "/village-ida-favicon.svg",
+        apple: "/village-ida-favicon.svg",
     },
     openGraph: {
         title: "Village IDA Pharmacy | Edmonton",
