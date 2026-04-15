@@ -9,12 +9,20 @@ export const metadata: Metadata = {
         template: "%s | Village IDA Pharmacy",
     },
     description: "Your local Edmonton pharmacy for refills, transfers, compounding, and personalized care. Free delivery available. Call 780-440-4555.",
-    metadataBase: new URL("https://villageidapharmacy.ca"),
+    metadataBase: new URL("https://villageidapharmacy.com"),
+    icons: {
+        icon: [
+            { url: "/village-ida-logo.jpg", type: "image/jpeg" },
+        ],
+        shortcut: "/village-ida-logo.jpg",
+        apple: "/village-ida-logo.jpg",
+    },
     openGraph: {
         title: "Village IDA Pharmacy | Edmonton",
         description: "Local Edmonton pharmacy with free delivery, easy transfers, and custom compounding.",
-        url: "https://villageidapharmacy.ca",
+        url: "https://villageidapharmacy.com",
         siteName: "Village IDA Pharmacy",
+        images: [{ url: "/village-ida-logo.jpg", width: 400, height: 400, alt: "Village IDA Pharmacy Logo" }],
         locale: "en_CA",
         type: "website",
     },
@@ -24,7 +32,7 @@ const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": ["Pharmacy", "MedicalBusiness"],
     name: "Village IDA Pharmacy",
-    url: "https://villageidapharmacy.ca",
+    url: "https://villageidapharmacy.com",
     telephone: "+17804404555",
     address: {
         "@type": "PostalAddress",
