@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Metadata } from "next";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import Providers from "./providers";
 import "@/index.css";
 
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <Providers>
                     {children}
                 </Providers>
+                <GoogleAnalytics />
             </body>
         </html>
     );

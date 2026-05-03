@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { TurnstileField } from "@/components/TurnstileField";
+import { trackLead } from "@/lib/analytics";
 import { CheckCircle, Phone, Home, ArrowRight, Plus, Trash2 } from "lucide-react";
 
 export function TransferForm() {
@@ -30,6 +31,7 @@ export function TransferForm() {
                 body: JSON.stringify({ ...formData, turnstileToken }),
             });
             if (!response.ok) throw new Error("Request failed");
+            trackLead("transfer");
             setSubmitted(true);
             toast.success("Transfer request sent!");
         } catch {

@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { TurnstileField } from "@/components/TurnstileField";
+import { trackLead } from "@/lib/analytics";
 import { CheckCircle, Plus, Trash2, Phone, Home, ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,6 +39,7 @@ export function RefillForm() {
                 body: JSON.stringify({ ...formData, turnstileToken }),
             });
             if (!response.ok) throw new Error("Request failed");
+            trackLead("refill");
             setStep("confirmation");
             toast.success("Refill request sent successfully!");
         } catch {

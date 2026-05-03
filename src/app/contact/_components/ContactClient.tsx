@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { TurnstileField } from "@/components/TurnstileField";
+import { trackLead } from "@/lib/analytics";
 import { MapPin, Phone, Printer, Mail, Clock, Copy, Check } from "lucide-react";
 
 const contactInfo = [
@@ -40,6 +41,7 @@ export function ContactClient() {
                 body: JSON.stringify({ ...formData, turnstileToken }),
             });
             if (!response.ok) throw new Error("Request failed");
+            trackLead("contact");
             setSubmitted(true);
             toast.success("Message sent successfully!");
         } catch {

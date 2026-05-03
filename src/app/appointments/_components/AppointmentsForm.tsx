@@ -12,6 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { TurnstileField } from "@/components/TurnstileField";
+import { trackLead } from "@/lib/analytics";
 import { format, isToday, parse } from "date-fns";
 import { Syringe, ClipboardCheck, HeartPulse, Cigarette, FlaskConical, HelpCircle, CheckCircle, Phone, Home, ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -67,6 +68,7 @@ function AppointmentsContent() {
                 }),
             });
             if (!response.ok) throw new Error("Request failed");
+            trackLead("appointment");
             setSubmitted(true);
             toast.success("Appointment request sent successfully!");
         } catch {
