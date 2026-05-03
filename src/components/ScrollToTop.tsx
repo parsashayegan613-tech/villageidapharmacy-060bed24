@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
 export function ScrollToTop() {
-  const { pathname } = useLocation();
+  const pathname = usePathname();
   useEffect(() => {
     // Temporarily remove smooth scroll on navigation to snap to top instantly
     document.documentElement.style.scrollBehavior = "auto";
