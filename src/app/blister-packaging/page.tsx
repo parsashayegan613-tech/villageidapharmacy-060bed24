@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "Blister Packaging Pharmacy in Edmonton | Village IDA",
     description: "Simplify your medication routine with custom blister packaging in Edmonton. We organize your pills by day and time to ensure you never miss a dose.",
     alternates: {
-        canonical: "https://villageidapharmacy.ca/blister-packaging"
+        canonical: "https://www.villageidapharmacy.com/blister-packaging"
     }
 };
 

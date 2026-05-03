@@ -2,18 +2,19 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { TurnstileField } from "@/components/TurnstileField";
 import { CheckCircle, Phone, Home, ArrowRight, Plus, Trash2 } from "lucide-react";
 
 export function TransferForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const [formData, setFormData] = useState({ name: "", phone: "", currentPharmacy: "", currentPharmacyPhone: "", notes: "", medications: [""] });
+    const [turnstileToken, setTurnstileToken] = useState("");
+    const [formData, setFormData] = useState({ name: "", phone: "", currentPharmacy: "", currentPharmacyPhone: "", notes: "", medications: [""], website: "" });
 
     const addMedication = () => setFormData(prev => ({ ...prev, medications: [...prev.medications, ""] }));
     const removeMedication = (index: number) => setFormData(prev => ({ ...prev, medications: prev.medications.filter((_, i) => i !== index) }));
@@ -23,20 +24,15 @@ export function TransferForm() {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const medicationsText = formData.medications.filter(m => m.trim() !== "").length > 0
-                ? `Medications to Transfer:\n${formData.medications.filter(m => m.trim() !== "").map(m => `- ${m}`).join("\n")}\n\n` : "";
-            const fullNotes = `${medicationsText}Notes:\n${formData.notes}`;
-            const { error } = await supabase.from("transfers").insert([{
-                full_name: formData.name, phone: formData.phone, current_pharmacy: formData.currentPharmacy,
-                current_pharmacy_phone: formData.currentPharmacyPhone, notes: fullNotes, status: "pending", user_id: null,
-            }]);
-            if (error) throw error;
-            await supabase.functions.invoke("send-transfer-alert", {
-                body: { name: formData.name, phone: formData.phone, currentPharmacy: formData.currentPharmacy, medications: formData.medications.filter(rx => rx.trim() !== "") },
+            const response = await fetch("/api/transfers", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...formData, turnstileToken }),
             });
+            if (!response.ok) throw new Error("Request failed");
             setSubmitted(true);
             toast.success("Transfer request sent!");
-        } catch (error: any) {
+        } catch {
             toast.error("Failed to send request. Please try again or call us.");
         } finally {
             setIsSubmitting(false);
@@ -73,6 +69,10 @@ export function TransferForm() {
             <div className="container mx-auto px-4">
                 <div className="max-w-xl mx-auto">
                     <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="hidden" aria-hidden="true">
+                            <Label htmlFor="website">Website</Label>
+                            <Input id="website" tabIndex={-1} autoComplete="off" value={formData.website} onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))} />
+                        </div>
                         <div><Label htmlFor="name">Your Full Name *</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-2" /></div>
                         <div><Label htmlFor="phone">Your Phone Number *</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-2" /></div>
                         <div><Label htmlFor="currentPharmacy">Current Pharmacy Name *</Label><Input id="currentPharmacy" value={formData.currentPharmacy} onChange={(e) => setFormData(prev => ({ ...prev, currentPharmacy: e.target.value }))} required className="mt-2" placeholder="e.g., Shoppers Drug Mart on Whyte Ave" /></div>
@@ -90,6 +90,10 @@ export function TransferForm() {
                             <Button type="button" variant="ghost" size="sm" onClick={addMedication} className="mt-2 text-muted-foreground"><Plus className="h-4 w-4 mr-2" />Add Another</Button>
                         </div>
                         <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will confirm everything by phone.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
+                        <TurnstileField action="transfer" onVerify={setTurnstileToken} onReset={() => setTurnstileToken("")} />
+                        <p className="text-xs text-muted-foreground text-center">
+                            Your request is sent securely to our pharmacy team and used only to coordinate your transfer.
+                        </p>
                         <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2 shadow-lift" size="lg">
                             {isSubmitting ? "Submitting..." : "We'll Handle Your Transfer"} <ArrowRight className="h-4 w-4" />
                         </Button>

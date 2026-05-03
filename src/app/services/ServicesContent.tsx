@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { CTABand } from "@/components/CTABand";
@@ -24,10 +25,10 @@ const categories = [
 const services = [
   { id: "delivery", icon: Truck, title: "Delivery", description: "Free prescription delivery to your door.", category: "delivery", whoItsFor: "Anyone in Edmonton who prefers home delivery.", howItWorks: "Request delivery when you refill — we'll call to confirm.", whatToBring: "Nothing required for delivery.", timing: "Same-day delivery available for most orders.", ctaLabel: "Request Refill with Delivery", ctaHref: "/refill" },
   { id: "blister", icon: Package, title: "Blister Packaging", description: "Medications organized by day and time.", category: "medication", whoItsFor: "Patients managing multiple medications daily.", howItWorks: "We pre-sort your medications into easy weekly packs.", whatToBring: "List of current medications.", timing: "Setup takes 1-2 days, then weekly refills.", ctaLabel: "Contact Us", ctaHref: "/contact" },
-  { id: "medication-reviews", icon: ClipboardCheck, title: "Medication Reviews", description: "One-on-one review of your medications.", category: "medication", whoItsFor: "Anyone wanting to understand their medications better.", howItWorks: "Book a private session with our pharmacist.", whatToBring: "All current medications or a list.", timing: "Sessions typically last 15-30 minutes.", ctaLabel: "Request Appointment", ctaHref: "/appointments" },
+  { id: "medication-reviews", icon: ClipboardCheck, title: "Medication Reviews", description: "One-on-one review of your medications.", category: "medication", whoItsFor: "Anyone wanting to understand their medications better.", howItWorks: "Request a private session with our pharmacist.", whatToBring: "All current medications or a list.", timing: "Sessions typically last 15-30 minutes.", ctaLabel: "Request Appointment", ctaHref: "/appointments" },
   { id: "diabetes", icon: HeartPulse, title: "Diabetes Support", description: "Personalized diabetes management help.", category: "wellness", whoItsFor: "Patients managing Type 1 or Type 2 diabetes.", howItWorks: "We review your medications, devices, and lifestyle.", whatToBring: "Blood glucose records if available.", timing: "Initial consultation: 30 minutes.", ctaLabel: "Request Appointment", ctaHref: "/appointments?type=diabetes" },
   { id: "smoking", icon: Cigarette, title: "Smoking Cessation", description: "Support to help you quit smoking.", category: "wellness", whoItsFor: "Anyone ready to quit or thinking about it.", howItWorks: "Meet with our pharmacist to build a quit plan.", whatToBring: "Nothing required.", timing: "First session: 20-30 minutes.", ctaLabel: "Request Appointment", ctaHref: "/appointments?type=smoking" },
-  { id: "injections", icon: Syringe, title: "Injection Services", description: "Flu shots, vaccines, and more.", category: "injections", whoItsFor: "Adults seeking immunizations or injections.", howItWorks: "Walk in or book an appointment.", whatToBring: "Alberta Health Care card.", timing: "Walk-ins welcome, appointments preferred.", ctaLabel: "Request Appointment", ctaHref: "/appointments?type=injection" },
+  { id: "injections", icon: Syringe, title: "Injection Services", description: "Flu shots, vaccines, and more.", category: "injections", whoItsFor: "Adults seeking immunizations or injections.", howItWorks: "Walk in or request an appointment.", whatToBring: "Alberta Health Care card.", timing: "Walk-ins welcome, appointments preferred.", ctaLabel: "Request Appointment", ctaHref: "/appointments?type=injection" },
   { id: "compounding", icon: FlaskConical, title: "Compounding", description: "Custom medications made for you.", category: "compounding", whoItsFor: "Patients who need specialized formulations.", howItWorks: "We create medications tailored to your needs.", whatToBring: "Prescription from your doctor.", timing: "Most compounds ready in 1-3 days.", ctaLabel: "Learn More", ctaHref: "/compounding" },
   { id: "home-health", icon: HomeIcon, title: "Home Health Care", description: "Medical supplies and equipment.", category: "wellness", whoItsFor: "Patients needing home care products.", howItWorks: "Browse our selection or ask our team.", whatToBring: "Nothing required.", timing: "Most items available same-day.", ctaLabel: "Contact Us", ctaHref: "/contact" },
 ];
@@ -55,12 +56,14 @@ export function ServicesContent() {
                 More than just prescriptions — we offer a full range of services to support your health.
               </p>
             </div>
-            <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-lift hidden md:block">
-              <img
+            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lift hidden md:block">
+              <Image
                 src="/_DSC3877.jpg"
                 alt="Pharmacist preparing blister packaging"
-                className="w-full h-full object-cover"
-                loading="lazy"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                quality={76}
+                className="object-cover"
               />
             </div>
           </div>

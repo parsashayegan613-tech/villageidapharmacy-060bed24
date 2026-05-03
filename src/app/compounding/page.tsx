@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -82,12 +83,14 @@ export default function Compounding() {
                 </Button>
               </div>
             </div>
-            <div className="aspect-square rounded-3xl overflow-hidden shadow-lift border border-border/60">
-              <img
+            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lift border border-border/60">
+              <Image
                 src="/_DSC3900.jpg"
                 alt="Pharmacist compounding medications"
-                className="w-full h-full object-cover"
-                loading="lazy"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                quality={76}
+                className="object-cover"
               />
             </div>
           </div>

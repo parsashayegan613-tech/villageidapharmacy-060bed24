@@ -4,7 +4,7 @@ import { MapPin, Phone, Printer, Mail, Clock, ArrowUpRight } from "lucide-react"
 const quickLinks = [
   { name: "Refill Request", href: "/refill" },
   { name: "Transfer to Us", href: "/transfer" },
-  { name: "Book Appointment", href: "/appointments" },
+  { name: "Request Appointment", href: "/appointments" },
   { name: "Services", href: "/services" },
   { name: "Patient Guides", href: "/guides" },
   { name: "Contact", href: "/contact" },

@@ -4,7 +4,7 @@ import { AppointmentsForm } from "./_components/AppointmentsForm";
 
 export const metadata: Metadata = {
   title: "Request Appointment | Village IDA Pharmacy Edmonton",
-  description: "Book a pharmacy appointment for injections, medication reviews, diabetes support, smoking cessation, or compounding consultations.",
+  description: "Request a pharmacy appointment for injections, medication reviews, diabetes support, smoking cessation, or compounding consultations.",
 };
 
 export default function AppointmentsPage() {

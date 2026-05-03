@@ -1,12 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { TurnstileField } from "@/components/TurnstileField";
 import { MapPin, Phone, Printer, Mail, Clock, Copy, Check } from "lucide-react";
 
 const contactInfo = [
@@ -20,7 +21,8 @@ export function ContactClient() {
     const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
+    const [turnstileToken, setTurnstileToken] = useState("");
+    const [formData, setFormData] = useState({ name: "", phone: "", message: "", website: "" });
 
     const copyToClipboard = async (text: string, index: number) => {
         await navigator.clipboard.writeText(text);
@@ -32,12 +34,15 @@ export function ContactClient() {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const { error } = await supabase.from("contact_messages").insert([{ full_name: formData.name, phone: formData.phone, message: formData.message, status: "unread", user_id: null }]);
-            if (error) throw error;
-            await supabase.functions.invoke("send-contact-alert", { body: { name: formData.name, phone: formData.phone, message: formData.message } });
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...formData, turnstileToken }),
+            });
+            if (!response.ok) throw new Error("Request failed");
             setSubmitted(true);
             toast.success("Message sent successfully!");
-        } catch (error: any) {
+        } catch {
             toast.error("Failed to send message. Please try again or call us.");
         } finally {
             setIsSubmitting(false);
@@ -71,8 +76,15 @@ export function ContactClient() {
                         </div>
 
                         <div className="space-y-8">
-                            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg border border-border/60 bg-muted">
-                                <img src="/_DSC3857.jpg" alt="Pharmacist answering patient questions" className="w-full h-full object-cover object-center" loading="lazy" />
+                            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg border border-border/60 bg-muted">
+                                <Image
+                                    src="/_DSC3857.jpg"
+                                    alt="Pharmacist answering patient questions"
+                                    fill
+                                    sizes="(min-width: 1024px) 50vw, 100vw"
+                                    quality={76}
+                                    className="object-cover object-center"
+                                />
                             </div>
                             <div className="bg-card rounded-2xl p-8 shadow-soft border border-border/60">
                                 <h3 className="text-lg font-serif text-foreground mb-5">Send us a message</h3>
@@ -88,10 +100,15 @@ export function ContactClient() {
                                     </div>
                                 ) : (
                                     <form onSubmit={handleSubmit} className="space-y-4">
+                                        <div className="hidden" aria-hidden="true">
+                                            <Label htmlFor="website">Website</Label>
+                                            <Input id="website" tabIndex={-1} autoComplete="off" value={formData.website} onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))} />
+                                        </div>
                                         <div><Label htmlFor="name">Name</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-1.5" /></div>
                                         <div><Label htmlFor="phone">Phone</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-1.5" /></div>
                                         <div><Label htmlFor="message">Message</Label><Textarea id="message" value={formData.message} onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))} required rows={4} className="mt-1.5" /></div>
-                                        <p className="text-xs text-muted-foreground font-medium mb-3 mt-4 text-center">We typically reply within 1-2 hours during business operations.</p>
+                                        <TurnstileField action="contact" onVerify={setTurnstileToken} onReset={() => setTurnstileToken("")} />
+                                        <p className="text-xs text-muted-foreground font-medium mb-3 mt-4 text-center">We typically reply within 1-2 hours during business operations. Your message is sent securely and used only for follow-up.</p>
                                         <Button type="submit" disabled={isSubmitting} className="w-full rounded-full shadow-lift">{isSubmitting ? "Sending..." : "Send Message"}</Button>
                                     </form>
                                 )}

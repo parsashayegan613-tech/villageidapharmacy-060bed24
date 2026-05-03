@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "Free Prescription Delivery in Edmonton | Village IDA Pharmacy",
     description: "Get your medications delivered directly to your door anywhere in Edmonton. Fast, free, and reliable prescription delivery from your local independent pharmacy.",
     alternates: {
-        canonical: "https://villageidapharmacy.ca/delivery"
+        canonical: "https://www.villageidapharmacy.com/delivery"
     }
 };
 

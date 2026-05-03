@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
@@ -10,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { TurnstileField } from "@/components/TurnstileField";
 import { CheckCircle, Plus, Trash2, Phone, Home, ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -19,9 +19,10 @@ export function RefillForm() {
     const [step, setStep] = useState<Step>(1);
     const [formData, setFormData] = useState({
         name: "", phone: "", email: "",
-        prescriptions: [""], deliveryType: "pickup", address: "", city: "", postalCode: "", notes: "",
+        prescriptions: [""], deliveryType: "pickup", address: "", city: "", postalCode: "", notes: "", website: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [turnstileToken, setTurnstileToken] = useState("");
 
     const addPrescription = () => setFormData(prev => ({ ...prev, prescriptions: [...prev.prescriptions, ""] }));
     const removePrescription = (index: number) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.filter((_, i) => i !== index) }));
@@ -31,22 +32,15 @@ export function RefillForm() {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const { error } = await supabase.from("refills").insert([{
-                full_name: formData.name, phone: formData.phone, email: formData.email,
-                contact_method: "text", prescriptions: formData.prescriptions.filter(rx => rx.trim() !== ""),
-                delivery_type: formData.deliveryType,
-                address: formData.deliveryType === "delivery" ? formData.address : null,
-                city: formData.deliveryType === "delivery" ? formData.city : null,
-                postal_code: formData.deliveryType === "delivery" ? formData.postalCode : null,
-                notes: formData.notes, status: "pending", user_id: null,
-            }]);
-            if (error) throw error;
-            await supabase.functions.invoke("send-refill-alert", {
-                body: { name: formData.name, phone: formData.phone, prescriptions: formData.prescriptions.filter(rx => rx.trim() !== ""), deliveryType: formData.deliveryType },
+            const response = await fetch("/api/refills", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...formData, turnstileToken }),
             });
+            if (!response.ok) throw new Error("Request failed");
             setStep("confirmation");
             toast.success("Refill request sent successfully!");
-        } catch (error: any) {
+        } catch {
             toast.error("Failed to send request. Please try again or call us.");
         } finally {
             setIsSubmitting(false);
@@ -105,6 +99,10 @@ export function RefillForm() {
                 <div className="container mx-auto px-4">
                     <div className="max-w-xl mx-auto">
                         <form onSubmit={handleSubmit}>
+                            <div className="hidden" aria-hidden="true">
+                                <Label htmlFor="website">Website</Label>
+                                <Input id="website" tabIndex={-1} autoComplete="off" value={formData.website} onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))} />
+                            </div>
                             {step === 1 && (
                                 <div className="space-y-6">
                                     <div><Label htmlFor="name">Full Name *</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-2" /></div>
@@ -144,10 +142,14 @@ export function RefillForm() {
                                         </div>
                                     )}
                                     <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will confirm everything by phone.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
+                                    <TurnstileField action="refill" onVerify={setTurnstileToken} onReset={() => setTurnstileToken("")} />
                                     <div className="flex gap-4">
                                         <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 rounded-full" size="lg"><ArrowLeft className="h-4 w-4 mr-2" />Back</Button>
                                         <Button type="submit" disabled={isSubmitting} className="flex-1 rounded-full" size="lg">{isSubmitting ? "Submitting..." : "Submit Request"}</Button>
                                     </div>
+                                    <p className="text-xs text-muted-foreground text-center">
+                                        Your request is sent securely to our pharmacy team and used only to prepare and confirm your refill.
+                                    </p>
                                 </div>
                             )}
                         </form>

@@ -13,7 +13,6 @@ type Interaction = {
     date: string;
     status: string;
     detail: string;
-    raw: any;
 };
 
 type PatientProfile = {
@@ -78,7 +77,6 @@ export default function AdminPatients() {
                         date: r.created_at,
                         status: r.status,
                         detail: `${r.prescriptions?.length || 0} prescriptions`,
-                        raw: r
                     });
                     if (new Date(r.created_at) > new Date(profile.last_interaction)) {
                         profile.last_interaction = r.created_at;
@@ -94,7 +92,6 @@ export default function AdminPatients() {
                         date: t.created_at,
                         status: t.status,
                         detail: `From ${t.current_pharmacy}`,
-                        raw: t
                     });
                     if (new Date(t.created_at) > new Date(profile.last_interaction)) {
                         profile.last_interaction = t.created_at;
@@ -110,7 +107,6 @@ export default function AdminPatients() {
                         date: a.created_at,
                         status: a.status,
                         detail: a.service_type,
-                        raw: a
                     });
                     if (new Date(a.created_at) > new Date(profile.last_interaction)) {
                         profile.last_interaction = a.created_at;
@@ -127,8 +123,9 @@ export default function AdminPatients() {
                 sortedProfiles.sort((a, b) => new Date(b.last_interaction).getTime() - new Date(a.last_interaction).getTime());
 
                 setPatients(sortedProfiles);
-            } catch (err: any) {
-                toast.error("Failed to compile patient directory: " + err.message);
+            } catch (err) {
+                const message = err instanceof Error ? err.message : "Unknown error";
+                toast.error("Failed to compile patient directory: " + message);
             } finally {
                 setLoading(false);
             }

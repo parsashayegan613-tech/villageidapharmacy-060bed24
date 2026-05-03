@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
 import { StepCard } from "@/components/StepCard";
@@ -37,7 +38,7 @@ const faqs = [
   },
   {
     question: "What do I need to bring for a walk-in flu shot?",
-    answer: "If you are walking in for a flu shot or other immunization, please bring your valid Alberta Health Care (AHC) card and wear a short-sleeved shirt. While walk-ins are always welcome, you can also book an appointment online to guarantee zero wait time."
+    answer: "If you are walking in for a flu shot or other immunization, please bring your valid Alberta Health Care (AHC) card and wear a short-sleeved shirt. Walk-ins are welcome, and you can also request an appointment online so we can confirm the best time."
   },
   {
     question: "What types of custom compounding do you do?",
@@ -128,7 +129,14 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
             <ScrollReveal direction="left">
               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-lift relative group">
-                <img src="/_DSC3900.jpg" alt="Pharmacist compounding custom medication" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
+                <Image
+                  src="/_DSC3900.jpg"
+                  alt="Pharmacist compounding custom medication"
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  quality={76}
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
               </div>
             </ScrollReveal>

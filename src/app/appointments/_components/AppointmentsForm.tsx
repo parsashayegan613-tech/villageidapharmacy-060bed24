@@ -3,7 +3,6 @@
 import { useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { TurnstileField } from "@/components/TurnstileField";
 import { format, isToday, parse } from "date-fns";
 import { Syringe, ClipboardCheck, HeartPulse, Cigarette, FlaskConical, HelpCircle, CheckCircle, Phone, Home, ArrowRight, Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -39,7 +39,8 @@ function AppointmentsContent() {
     const [date, setDate] = useState<Date>();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const [formData, setFormData] = useState({ name: "", email: "", phone: "", contactMethod: "call", preferredTime: "", notes: "" });
+    const [turnstileToken, setTurnstileToken] = useState("");
+    const [formData, setFormData] = useState({ name: "", email: "", phone: "", contactMethod: "call", preferredTime: "", notes: "", website: "" });
 
     const getAvailableTimes = () => {
         if (!date) return timeSlots;
@@ -54,19 +55,21 @@ function AppointmentsContent() {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const { error } = await supabase.from("appointments").insert([{
-                client_name: formData.name, client_email: formData.email, client_phone: formData.phone,
-                appointment_date: date ? format(date, "PPP") : "Any day",
-                appointment_time: formData.preferredTime || "Any time",
-                service_type: selectedType, notes: formData.notes, status: "pending", user_id: null,
-            }]);
-            if (error) throw error;
-            await supabase.functions.invoke("send-appointment-alert", {
-                body: { name: formData.name, email: formData.email, phone: formData.phone, contactMethod: formData.contactMethod, date: date ? format(date, "PPP") : "Any day", time: formData.preferredTime || "Any time", serviceType: selectedType, notes: formData.notes },
+            const response = await fetch("/api/appointments", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    ...formData,
+                    date: date ? format(date, "PPP") : "Any day",
+                    time: formData.preferredTime || "Any time",
+                    serviceType: selectedType,
+                    turnstileToken,
+                }),
             });
+            if (!response.ok) throw new Error("Request failed");
             setSubmitted(true);
             toast.success("Appointment request sent successfully!");
-        } catch (error: any) {
+        } catch {
             toast.error("Failed to send request. Please try again or call us.");
         } finally {
             setIsSubmitting(false);
@@ -117,6 +120,10 @@ function AppointmentsContent() {
 
                     {selectedType && (
                         <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="hidden" aria-hidden="true">
+                                <Label htmlFor="website">Website</Label>
+                                <Input id="website" tabIndex={-1} autoComplete="off" value={formData.website} onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))} />
+                            </div>
                             <div><Label htmlFor="name">Your Full Name *</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-2" /></div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div><Label htmlFor="email">Email Address *</Label><Input id="email" type="email" value={formData.email} onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))} required className="mt-2" /></div>
@@ -160,9 +167,10 @@ function AppointmentsContent() {
                                 </Popover>
                             </div>
                             <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will discuss in person.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
+                            <TurnstileField action="appointment" onVerify={setTurnstileToken} onReset={() => setTurnstileToken("")} />
                             <div className="pt-2">
-                                <p className="text-xs text-muted-foreground font-medium mb-3 text-center">We will contact you within 1 business day to confirm your exact appointment time.</p>
-                                <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2 shadow-lift" size="lg">{isSubmitting ? "Submitting..." : "Book Appointment"} <ArrowRight className="h-4 w-4" /></Button>
+                                <p className="text-xs text-muted-foreground font-medium mb-3 text-center">We will contact you within 1 business day to confirm your exact appointment time. Your request is used only to schedule pharmacy care.</p>
+                                <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2 shadow-lift" size="lg">{isSubmitting ? "Submitting..." : "Request Appointment"} <ArrowRight className="h-4 w-4" /></Button>
                             </div>
                         </form>
                     )}

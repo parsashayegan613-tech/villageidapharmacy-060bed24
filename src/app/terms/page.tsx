@@ -27,7 +27,7 @@ export default function Terms() {
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>Submit prescription refill requests</li>
                                 <li>Request prescription transfers from another pharmacy</li>
-                                <li>Book appointments for health services</li>
+                                <li>Request appointments for health services</li>
                                 <li>Contact our pharmacy team</li>
                             </ul>
                             <p className="mt-3">These online services are requests only and do not constitute a confirmed prescription fill or appointment. Our pharmacists will confirm all requests by phone or in person.</p>

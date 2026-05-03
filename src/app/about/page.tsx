@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Layout } from "@/components/layout/Layout";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CTABand } from "@/components/CTABand";
@@ -84,12 +85,14 @@ export default function About() {
                         </ScrollReveal>
                         <ScrollReveal direction="right">
                             <div className="space-y-6">
-                                <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-lift">
-                                    <img
+                                <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lift">
+                                    <Image
                                         src="/team_group.png"
                                         alt="Village IDA Pharmacy Team"
-                                        className="w-full h-full object-cover"
-                                        loading="lazy"
+                                        fill
+                                        sizes="(min-width: 768px) 50vw, 100vw"
+                                        quality={76}
+                                        className="object-cover"
                                     />
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
@@ -157,7 +160,15 @@ export default function About() {
                             <ScrollReveal key={member.name} delay={i * 0.1}>
                                 <div className="bg-card rounded-2xl p-8 shadow-soft hover-lift border border-border/60">
                                     {member.image ? (
-                                        <img src={member.image} alt={member.name} className="w-20 h-20 rounded-2xl mb-5 object-cover shadow-sm" />
+                                        <Image
+                                            src={member.image}
+                                            alt={member.name}
+                                            width={80}
+                                            height={80}
+                                            sizes="80px"
+                                            quality={74}
+                                            className="w-20 h-20 rounded-2xl mb-5 object-cover shadow-sm"
+                                        />
                                     ) : (
                                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 mb-5 flex items-center justify-center">
                                             <span className="text-xl font-serif text-primary/70">
