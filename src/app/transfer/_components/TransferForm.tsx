@@ -48,7 +48,7 @@ export function TransferForm() {
                     <div className="max-w-lg mx-auto text-center">
                         <div className="w-20 h-20 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-6"><CheckCircle className="h-10 w-10 text-success" /></div>
                         <h2 className="text-3xl font-serif text-foreground mb-4">Transfer request received</h2>
-                        <p className="text-muted-foreground text-lg mb-8">We'll contact your old pharmacy and have everything ready within 1-2 business days.</p>
+                        <p className="text-muted-foreground text-lg mb-8">We'll coordinate with your current pharmacy and follow up within 1-2 business days.</p>
                         <div className="bg-card border border-border/60 rounded-2xl p-6 text-left mb-8 max-w-sm mx-auto shadow-soft">
                             <h3 className="font-semibold text-foreground mb-4 border-b border-border pb-2">Request Summary</h3>
                             <div className="space-y-3 text-sm">
@@ -77,7 +77,7 @@ export function TransferForm() {
                         </div>
                         <div><Label htmlFor="name">Your Full Name *</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-2" /></div>
                         <div><Label htmlFor="phone">Your Phone Number *</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-2" /></div>
-                        <div><Label htmlFor="currentPharmacy">Current Pharmacy Name *</Label><Input id="currentPharmacy" value={formData.currentPharmacy} onChange={(e) => setFormData(prev => ({ ...prev, currentPharmacy: e.target.value }))} required className="mt-2" placeholder="e.g., Shoppers Drug Mart on Whyte Ave" /></div>
+                        <div><Label htmlFor="currentPharmacy">Current Pharmacy Name *</Label><Input id="currentPharmacy" value={formData.currentPharmacy} onChange={(e) => setFormData(prev => ({ ...prev, currentPharmacy: e.target.value }))} required className="mt-2" placeholder="e.g., your current pharmacy" /></div>
                         <div><Label htmlFor="currentPharmacyPhone">Current Pharmacy Phone (optional)</Label><Input id="currentPharmacyPhone" type="tel" value={formData.currentPharmacyPhone} onChange={(e) => setFormData(prev => ({ ...prev, currentPharmacyPhone: e.target.value }))} className="mt-2" placeholder="If you have it handy" /></div>
                         <div className="pt-4 border-t border-border">
                             <Label className="text-base font-serif mb-2 block">Medications to Transfer</Label>

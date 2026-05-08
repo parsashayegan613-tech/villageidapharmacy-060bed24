@@ -47,7 +47,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-sm opacity-60 leading-relaxed max-w-[260px]">
-              Your local Edmonton pharmacy for personalized care, prescription services, and trusted health advice.
+              Your Edmonton pharmacy for personalized care, prescription services, and trusted health advice.
             </p>
           </div>
 

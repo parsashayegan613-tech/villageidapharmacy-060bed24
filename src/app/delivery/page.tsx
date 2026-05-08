@@ -6,7 +6,7 @@ import { CheckCircle, Truck, MapPin, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "Free Prescription Delivery in Edmonton | Village IDA Pharmacy",
-    description: "Get your medications delivered directly to your door anywhere in Edmonton. Fast, free, and reliable prescription delivery from your local independent pharmacy.",
+    description: "Get your medications delivered directly to your door anywhere in Edmonton. Fast, free, and reliable prescription delivery from Village IDA Pharmacy.",
     alternates: {
         canonical: "https://www.villageidapharmacy.com/delivery"
     }

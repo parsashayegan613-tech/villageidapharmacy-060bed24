@@ -9,7 +9,7 @@ export const metadata: Metadata = {
         default: "Village IDA Pharmacy | Edmonton Prescription & Health Services",
         template: "%s | Village IDA Pharmacy",
     },
-    description: "Your local Edmonton pharmacy for refills, transfers, compounding, and personalized care. Free delivery available. Call 780-440-4555.",
+    description: "Your Edmonton pharmacy for refills, transfers, compounding, and personalized care. Free delivery available. Call 780-440-4555.",
     metadataBase: new URL("https://www.villageidapharmacy.com"),
     icons: {
         icon: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: "Village IDA Pharmacy | Edmonton",
-        description: "Local Edmonton pharmacy with free delivery, easy transfers, and custom compounding.",
+        description: "Edmonton pharmacy with free delivery, easy transfers, and custom compounding.",
         url: "https://www.villageidapharmacy.com",
         siteName: "Village IDA Pharmacy",
         images: [{ url: "/village-ida-logo.jpg", width: 400, height: 400, alt: "Village IDA Pharmacy Logo" }],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     },
 };
 
-const localBusinessSchema = {
+const pharmacySchema = {
     "@context": "https://schema.org",
     "@type": ["Pharmacy", "MedicalBusiness"],
     name: "Village IDA Pharmacy",
@@ -73,7 +73,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <head>
                 <script
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(pharmacySchema) }}
                 />
             </head>
             <body className="antialiased bg-pattern">

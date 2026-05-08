@@ -27,7 +27,7 @@ const compoundingExamples = [
 
 const goodFitChecklist = [
   "You have allergies to dyes, fillers, or preservatives in standard medications",
-  "Your child refuses to take bitter-tasting medications",
+  "Your child has difficulty taking bitter-tasting medications",
   "You need a medication in a form that's not commercially available",
   "Your doctor recommends a specific strength not available commercially",
   "You need a topical version of an oral medication",
@@ -35,11 +35,11 @@ const goodFitChecklist = [
 ];
 
 const faqs = [
-  { question: "What is a compounding pharmacy?", answer: "A compounding pharmacy specializes in creating customized medications from scratch. While traditional pharmacies only dispense mass-manufactured drugs, our specially trained compounding pharmacists can alter the form, dosage, or ingredients of a medication to meet your exact medical needs." },
-  { question: "Why would my child need compounded medication?", answer: "Many medications are only manufactured for adults. If your child needs a specific dose, has trouble swallowing pills, or is allergic to common dyes and preservatives, we can compound their prescription into a favorable flavor (like bubblegum or grape) as a liquid suspension, lollipop, or gummy." },
-  { question: "Do I need a prescription for compounded medications?", answer: "Yes. Just like mass-manufactured drugs, compounded medications require a valid prescription from a licensed healthcare provider (such as a doctor, dentist, or veterinarian). We work directly with your prescriber to formulate the exact treatment you need." },
+  { question: "What is a compounding pharmacy?", answer: "A compounding pharmacy specializes in creating customized medications when a commercially available option does not meet a patient's needs. Our specially trained compounding pharmacists can adjust the form, dosage, or ingredients of a medication based on a valid prescription." },
+  { question: "Why would my child need compounded medication?", answer: "Many medications are manufactured in standard strengths or forms. If your child needs a specific dose, has trouble swallowing pills, or is allergic to common dyes and preservatives, we can compound their prescription into a child-friendly flavor, liquid suspension, lollipop, or gummy." },
+  { question: "Do I need a prescription for compounded medications?", answer: "Yes. Just like commercially available medications, compounded medications require a valid prescription from a licensed healthcare provider (such as a doctor, dentist, or veterinarian). We work directly with your prescriber to formulate the exact treatment you need." },
   { question: "Is compounding covered by Alberta health insurance?", answer: "Coverage depends entirely on your specific insurance provider and plan. Many extended health benefit plans do cover compounded medications, provided the active ingredients are eligible. Our team can help process the claim or provide the necessary documentation for you to submit." },
-  { question: "Can you compound medications for my pets?", answer: "Yes! Getting pets to take medication is notoriously difficult. We work with local veterinarians to compound pet medications into easy-to-administer forms, such as tuna-flavored liquids for cats, beef-flavored treats for dogs, or transdermal creams that can be rubbed on their ear." },
+  { question: "Can you compound medications for my pets?", answer: "Yes. Some pets have difficulty taking standard medications. We work with veterinarians to compound pet medications into easier-to-administer forms, such as tuna-flavored liquids for cats, beef-flavored treats for dogs, or transdermal creams that can be rubbed on their ear." },
 ];
 
 const faqSchema = {

@@ -26,13 +26,13 @@ export function HomeHero() {
                 <div className="container mx-auto px-4 relative z-10 py-20">
                     <div className="max-w-2xl">
                         <p className="text-primary-foreground/60 text-sm font-semibold uppercase tracking-[0.2em] mb-4">
-                            Edmonton's Independent Pharmacy
+                            Edmonton Pharmacy Services
                         </p>
                         <h1 className="text-display-sm md:text-5xl lg:text-6xl text-background leading-[1.05] mb-6 font-serif">
-                            Switch in minutes, get personal care without the <span className="italic relative">chain pharmacy hassle.</span>
+                            Transfer in minutes and receive attentive care from <span className="italic relative">our pharmacy team.</span>
                         </h1>
                         <p className="text-lg md:text-xl text-background/70 mb-10 leading-relaxed max-w-lg">
-                            Local Edmonton pharmacy with free city-wide delivery, fast refills, and pharmacists who actually know your case.
+                            Free city-wide delivery, fast refills, and pharmacists who take the time to understand your medications and health goals.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <Button asChild size="lg" className="rounded-full px-8 gap-2 shadow-lift">
@@ -46,7 +46,7 @@ export function HomeHero() {
                             <span className="inline-flex items-center gap-1.5 text-sm text-background/90 bg-background/10 backdrop-blur-sm rounded-full px-4 py-1.5 font-medium">
                                 <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" /> 4.9 Google Rating
                             </span>
-                            {["Free delivery", "Walk-in flu shots", "Local independent pharmacy"].map((item) => (
+                            {["Free delivery", "Walk-in flu shots", "Personalized pharmacy care"].map((item) => (
                                 <span key={item} className="inline-flex items-center gap-2 text-sm text-background/80 bg-background/10 backdrop-blur-sm rounded-full px-4 py-1.5">
                                     <CheckCircle className="h-3.5 w-3.5 text-success/80" />{item}
                                 </span>

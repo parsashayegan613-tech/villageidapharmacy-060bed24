@@ -7,14 +7,14 @@ import { Heart, Users, Award, Truck, Clock, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "About Us | Village IDA Pharmacy Edmonton",
-    description: "Learn about Village IDA Pharmacy — your trusted Edmonton pharmacy for personalized care, prescription services, and community health support.",
+    description: "Learn about Village IDA Pharmacy — your trusted Edmonton pharmacy for personalized care, prescription services, and patient health support.",
 };
 
 
 
 const values = [
     { icon: Heart, title: "Personal Care", description: "We take the time to know each patient by name, understand their health goals, and provide tailored advice." },
-    { icon: Users, title: "Community Focus", description: "We've been part of Edmonton's community for decades, building lasting relationships with the families we serve." },
+    { icon: Users, title: "Patient Relationships", description: "We build lasting relationships with the patients and families we serve." },
     { icon: Award, title: "Expert Knowledge", description: "Our pharmacists stay current with the latest treatments and medications to give you the best possible guidance." },
     { icon: Truck, title: "Free Delivery", description: "We deliver prescriptions across Edmonton at no extra charge — because health shouldn't wait." },
     { icon: Clock, title: "Always Accessible", description: "With walk-in availability and quick turnaround times, we're here when you need us." },
@@ -47,13 +47,13 @@ export default function About() {
                         <div className="max-w-2xl">
                             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">About us</p>
                             <h1 className="text-display-sm md:text-display font-serif text-foreground mb-6">
-                                Tired of feeling like just another number?
+                                Pharmacy care built around people.
                             </h1>
                             <p className="text-lg text-muted-foreground leading-relaxed mb-4 font-medium">
-                                At Village IDA Pharmacy, we believe healthcare shouldn't be rushed, transactional, or impersonal. We actually take the time to know you, your medications, and your health goals.
+                                At Village IDA Pharmacy, we believe pharmacy care should be personal, clear, and easy to access. Our team takes the time to understand your medications, health goals, and day-to-day needs.
                             </p>
                             <p className="text-lg text-muted-foreground leading-relaxed">
-                                As an independent Edmonton pharmacy, we offer an antidote to the frustrating big-box pharmacy experience. No long lines, no being put on hold forever, and no talking to a different pharmacist every time you visit. Just consistent, caring people who know your name.
+                                At our Edmonton pharmacy, we provide consistent support from a team that gets to know you. Whether you need refills, transfers, delivery, compounding, or medication advice, we aim to make every interaction simple, respectful, and helpful.
                             </p>
                         </div>
                     </ScrollReveal>
@@ -68,17 +68,17 @@ export default function About() {
                             <div>
                                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Our story</p>
                                 <h2 className="text-display-sm font-serif text-foreground mb-6">
-                                    Why patients switch <span className="italic">to us.</span>
+                                    Why patients choose <span className="italic">us.</span>
                                 </h2>
                                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                                     <p>
-                                        We hear it every day: patients come to us because they are exhausted by the big pharmacy chains. They're tired of waiting days for simple refills, battling automated phone systems, and feeling rushed out the door before they can ask a question about their new prescription.
+                                        Patients often come to us when they want a more personal pharmacy relationship. They value familiar faces, clear answers, and practical help with refills, transfers, delivery, and medication management.
                                     </p>
                                     <p>
                                         When you trust Village IDA Pharmacy with your care, you get direct access to the same dedicated pharmacists every time. We offer free city-wide delivery so you don't even have to leave home, custom compounding for unusual dosages, and compliance blister packaging to make managing multiple daily pills effortless.
                                     </p>
                                     <p>
-                                        Best of all, <strong className="text-foreground">we handle the entire transfer process for you.</strong> You don't have to call your old pharmacy or lift a finger. Just tell us you want to switch, and we do the rest in minutes.
+                                        Best of all, <strong className="text-foreground">we handle the transfer process for you.</strong> Just tell us you would like to transfer, and our team coordinates the details with your current pharmacy.
                                     </p>
                                 </div>
                             </div>

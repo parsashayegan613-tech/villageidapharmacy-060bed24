@@ -63,7 +63,7 @@ export default function GuideBlisterPackaging() {
                             At Village IDA Pharmacy, we specialize in helping Edmonton seniors and busy caregivers transition to compliance packaging. If you currently fill your prescriptions with us, just ask us to switch you over. We will consolidate your refill schedule and start preparing your customized cards.
                         </p>
                         <p>
-                            If you’re currently with another pharmacy, moving everything to us is a completely free, seamless process that we handle on our end. We'll simply contact your old pharmacy, pull your files, and start building your custom blister packs. Then, we can schedule our driver to deliver the blister pack directly to your door, across Edmonton.
+                            If you’re currently with another pharmacy, moving everything to us is a free, seamless process that we coordinate on your behalf. We'll contact your current pharmacy, securely transfer your prescription records, and start building your custom blister packs. Then, we can schedule our driver to deliver the blister pack directly to your door, across Edmonton.
                         </p>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Village IDA Pharmacy | Edmonton Prescription & Health Services",
-  description: "Your local Edmonton pharmacy for refills, transfers, compounding, and personalized care. Free delivery available. Call 780-440-4555.",
+  description: "Your Edmonton pharmacy for refills, transfers, compounding, and personalized care. Free delivery available. Call 780-440-4555.",
 };
 
 
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     question: "How do I transfer my prescriptions to Village IDA in Edmonton?",
-    answer: "Transferring your prescriptions is simple and legally protected in Alberta. You don't even need to call your old pharmacy. Just fill out our online transfer request form or call us directly. Our pharmacists will contact your previous pharmacy on your behalf to securely transfer all your active medication files and refill counts. The process is usually completed the same business day."
+    answer: "Transferring your prescriptions is simple and legally protected in Alberta. You do not need to coordinate it yourself. Just fill out our online transfer request form or call us directly. Our pharmacists will contact your current pharmacy on your behalf to securely transfer your active medication files and refill counts. The process is usually completed the same business day."
   },
   {
     question: "Do you offer free prescription delivery in Edmonton?",
@@ -97,7 +97,7 @@ export default function HomePage() {
                 <h2 className="text-2xl md:text-3xl font-serif text-foreground mb-10">Transfer in 3 steps</h2>
                 <div className="space-y-8">
                   <StepCard icon={MessageSquare} step={1} title="Tell us where to call" description="Share your current pharmacy name and we'll take it from there." />
-                  <StepCard icon={Phone} step={2} title="We handle the paperwork" description="We contact your old pharmacy and transfer everything over." />
+                  <StepCard icon={Phone} step={2} title="We handle the paperwork" description="We coordinate with your current pharmacy and transfer everything over." />
                   <StepCard icon={CheckCircle} step={3} title="Pick up or get delivery" description="Your medications are ready — choose pickup or free delivery." />
                 </div>
                 <Button asChild className="mt-10 rounded-full px-6 gap-2" variant="outline">

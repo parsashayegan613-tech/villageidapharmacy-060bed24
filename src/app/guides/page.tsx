@@ -24,7 +24,7 @@ const guides = [
     },
     {
         title: "Custom Medication for Kids: A Parent's Guide to Compounding",
-        description: "What to do when your child can't swallow pills or hates the taste of antibiotics. Discover the safe, legal process of pediatric compounding.",
+        description: "What to do when your child can't swallow pills or has difficulty with the taste of antibiotics. Discover the safe, legal process of pediatric compounding.",
         slug: "pediatric-compounding-guide",
         readTime: "5 min read",
     },
@@ -39,7 +39,7 @@ export default function GuidesIndex() {
                         <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Resources</p>
                         <h1 className="text-display-sm md:text-display font-serif text-foreground mb-6">Patient Guides</h1>
                         <p className="text-lg text-muted-foreground leading-relaxed">
-                            Clear, practical advice to help you manage your health, navigate the Alberta healthcare system, and make the most of local pharmacy services.
+                            Clear, practical advice to help you manage your health, navigate the Alberta healthcare system, and make informed pharmacy care decisions.
                         </p>
                     </div>
                 </div>

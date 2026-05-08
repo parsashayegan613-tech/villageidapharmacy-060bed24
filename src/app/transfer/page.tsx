@@ -10,8 +10,8 @@ const faqs = [
     answer: "Most prescription transfers are completed on the same business day. Depending on how quickly your current pharmacy responds to our request, we typically have everything moved over within a few hours.",
   },
   {
-    question: "Do I have to call my old pharmacy?",
-    answer: "No, you don't have to lift a finger! Once you submit the form above, our pharmacists will contact your old pharmacy directly to transfer all your active prescription files on your behalf.",
+    question: "Do I have to call my current pharmacy?",
+    answer: "No. Once you submit the form above, our pharmacists will contact your current pharmacy directly to transfer your active prescription files on your behalf.",
   },
   {
     question: "How does transferring prescriptions work in Alberta?",
@@ -39,7 +39,7 @@ import { CheckCircle, Phone, MessageSquare, Truck } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Transfer Prescriptions | Village IDA Pharmacy Edmonton",
-  description: "Transfer your prescriptions to Village IDA. We handle all the paperwork with your old pharmacy. Free delivery available in Edmonton.",
+  description: "Transfer your prescriptions to Village IDA. We coordinate the paperwork with your current pharmacy. Free delivery available in Edmonton.",
 };
 
 export default function TransferPage() {
@@ -55,7 +55,7 @@ export default function TransferPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Transfer</p>
             <h1 className="text-display-sm font-serif text-foreground mb-6">We'll handle everything.</h1>
             <ul className="space-y-3 text-muted-foreground">
-              {["Save time — we handle all the paperwork", "We contact your old pharmacy directly", "Quick pickup or free delivery"].map((item) => (
+              {["Save time — we handle the paperwork", "We coordinate with your current pharmacy", "Quick pickup or free delivery"].map((item) => (
                 <li key={item} className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-success/15 flex items-center justify-center flex-shrink-0">
                     <CheckCircle className="h-3.5 w-3.5 text-success" />
