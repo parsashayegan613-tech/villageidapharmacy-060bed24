@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CTABand } from "@/components/CTABand";
-import { Heart, Users, Award, Truck, Clock, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Heart, Users, Award, Truck, Clock, ShieldCheck, FileCheck2, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "About Us | Village IDA Pharmacy Edmonton",
@@ -141,6 +143,44 @@ export default function About() {
                             </ScrollReveal>
                         ))}
                     </div>
+                </div>
+            </section>
+
+            {/* Licensing */}
+            <section className="py-16 md:py-20">
+                <div className="container mx-auto px-4">
+                    <ScrollReveal>
+                        <div className="grid gap-8 rounded-3xl border border-border/60 bg-card p-6 shadow-soft md:p-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+                            <div>
+                                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
+                                    <FileCheck2 className="h-6 w-6 text-primary" />
+                                </div>
+                                <p className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-primary">Licensing</p>
+                                <h2 className="font-serif text-display-sm text-foreground">Current pharmacy licence and patient notice.</h2>
+                            </div>
+                            <div className="space-y-5">
+                                <p className="text-muted-foreground leading-relaxed">
+                                    Village IDA Pharmacy displays Alberta College of Pharmacy licensing information and patient concern guidance for transparency.
+                                </p>
+                                <div className="grid gap-3 sm:grid-cols-2">
+                                    <div className="rounded-2xl border border-border/60 bg-secondary p-4">
+                                        <p className="text-sm font-semibold text-foreground">Licence No. 4572</p>
+                                        <p className="mt-1 text-sm text-muted-foreground">Expires June 30, 2026</p>
+                                    </div>
+                                    <div className="rounded-2xl border border-border/60 bg-secondary p-4">
+                                        <p className="text-sm font-semibold text-foreground">Patient concerns</p>
+                                        <p className="mt-1 text-sm text-muted-foreground">ACP contact details are available online.</p>
+                                    </div>
+                                </div>
+                                <Button asChild>
+                                    <Link href="/licensing">
+                                        View licensing documents
+                                        <ArrowRight className="h-4 w-4" />
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </ScrollReveal>
                 </div>
             </section>
 

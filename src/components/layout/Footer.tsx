@@ -7,6 +7,7 @@ const quickLinks = [
   { name: "Request Appointment", href: "/appointments" },
   { name: "Services", href: "/services" },
   { name: "Patient Guides", href: "/guides" },
+  { name: "Licensing", href: "/licensing" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -118,6 +119,7 @@ export function Footer() {
             <div className="flex items-center gap-4">
               <Link href="/privacy" className="hover:text-background transition-colors focus-ring rounded">Privacy Policy</Link>
               <Link href="/terms" className="hover:text-background transition-colors focus-ring rounded">Terms of Service</Link>
+              <Link href="/licensing" className="hover:text-background transition-colors focus-ring rounded">Licensing</Link>
               <span>Member of the IDA Pharmacy Group</span>
             </div>
           </div>
