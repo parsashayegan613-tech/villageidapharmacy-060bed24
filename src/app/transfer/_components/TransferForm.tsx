@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { TurnstileField } from "@/components/TurnstileField";
+import { PrivacyNote } from "@/components/PrivacyNote";
 import { trackLead } from "@/lib/analytics";
 import { CheckCircle, Phone, Home, ArrowRight, Plus, Trash2 } from "lucide-react";
 
@@ -20,6 +21,7 @@ export function TransferForm() {
     const addMedication = () => setFormData(prev => ({ ...prev, medications: [...prev.medications, ""] }));
     const removeMedication = (index: number) => setFormData(prev => ({ ...prev, medications: prev.medications.filter((_, i) => i !== index) }));
     const updateMedication = (index: number, value: string) => setFormData(prev => ({ ...prev, medications: prev.medications.map((m, i) => i === index ? value : m) }));
+    const hasMedication = formData.medications.some((medication) => medication.trim().length > 0);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -48,7 +50,7 @@ export function TransferForm() {
                     <div className="max-w-lg mx-auto text-center">
                         <div className="w-20 h-20 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-6"><CheckCircle className="h-10 w-10 text-success" /></div>
                         <h2 className="text-3xl font-serif text-foreground mb-4">Transfer request received</h2>
-                        <p className="text-muted-foreground text-lg mb-8">We'll coordinate with your current pharmacy and follow up within 1-2 business days.</p>
+                        <p className="text-muted-foreground text-lg mb-8">We'll coordinate with your current pharmacy and follow up within 1 business day before anything is finalized.</p>
                         <div className="bg-card border border-border/60 rounded-2xl p-6 text-left mb-8 max-w-sm mx-auto shadow-soft">
                             <h3 className="font-semibold text-foreground mb-4 border-b border-border pb-2">Request Summary</h3>
                             <div className="space-y-3 text-sm">
@@ -84,19 +86,18 @@ export function TransferForm() {
                             <div className="space-y-3 mt-2">
                                 {formData.medications.map((med, index) => (
                                     <div key={index} className="flex gap-2">
-                                        <Input value={med} onChange={(e) => updateMedication(index, e.target.value)} placeholder={`Medication #${index + 1}${index === 0 ? " (or 'Transfer All')" : ""}`} />
+                                        <Input value={med} onChange={(e) => updateMedication(index, e.target.value)} required={index === 0} placeholder={`Medication #${index + 1}${index === 0 ? " (or 'Transfer All')" : ""}`} />
                                         {formData.medications.length > 1 && (<Button type="button" variant="outline" size="icon" onClick={() => removeMedication(index)}><Trash2 className="h-4 w-4" /></Button>)}
                                     </div>
                                 ))}
                             </div>
                             <Button type="button" variant="ghost" size="sm" onClick={addMedication} className="mt-2 text-muted-foreground"><Plus className="h-4 w-4 mr-2" />Add Another</Button>
+                            <p className="text-xs text-muted-foreground mt-2">Enter specific medications or type "Transfer All" if you want us to coordinate the full profile.</p>
                         </div>
                         <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will confirm everything by phone.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
                         <TurnstileField action="transfer" onVerify={setTurnstileToken} onReset={() => setTurnstileToken("")} />
-                        <p className="text-xs text-muted-foreground text-center">
-                            Your request is sent securely to our pharmacy team and used only to coordinate your transfer.
-                        </p>
-                        <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2 shadow-lift" size="lg">
+                        <PrivacyNote>Your request is sent securely to our pharmacy team and used only to coordinate your transfer.</PrivacyNote>
+                        <Button type="submit" disabled={isSubmitting || !hasMedication} aria-busy={isSubmitting} className="w-full rounded-full gap-2 shadow-lift" size="lg">
                             {isSubmitting ? "Submitting..." : "We'll Handle Your Transfer"} <ArrowRight className="h-4 w-4" />
                         </Button>
                     </form>

@@ -1,6 +1,9 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
 import { CTABand } from "@/components/CTABand";
+import { RelatedGuides } from "@/components/RelatedGuides";
+import { ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "Custom Medication for Kids: A Parent's Guide to Compounding",
@@ -12,6 +15,10 @@ export default function GuidePediatricCompounding() {
         <Layout>
             <article className="py-20 md:py-28 bg-background">
                 <div className="container mx-auto px-4 max-w-3xl">
+                    <Link href="/guides" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors mb-8 focus-ring rounded">
+                        <ArrowLeft className="h-4 w-4" />
+                        Back to patient guides
+                    </Link>
                     <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Patient Guide</p>
                     <h1 className="text-display-sm md:text-5xl font-serif text-foreground mb-8">
                         Custom Medication for Kids: A Parent's Guide to Compounding
@@ -72,10 +79,12 @@ export default function GuidePediatricCompounding() {
                 </div>
             </article>
 
+            <RelatedGuides excludeHref="/guides/pediatric-compounding-guide" />
+
             <CTABand
-                headline="Need custom pediatric medication?"
-                primaryAction={{ label: "Contact Compounding Team", href: "/appointments?type=compounding" }}
-                secondaryAction={{ label: "Learn More", href: "/compounding" }}
+                headline="Want to discuss a compounded prescription?"
+                primaryAction={{ label: "Request Compounding Consult", href: "/appointments?type=compounding" }}
+                secondaryAction={{ label: "Learn About Compounding", href: "/compounding" }}
             />
         </Layout>
     );

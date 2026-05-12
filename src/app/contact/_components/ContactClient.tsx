@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { TurnstileField } from "@/components/TurnstileField";
+import { PrivacyNote } from "@/components/PrivacyNote";
 import { trackLead } from "@/lib/analytics";
 import { MapPin, Phone, Printer, Mail, Clock, Copy, Check } from "lucide-react";
 
@@ -110,8 +111,8 @@ export function ContactClient() {
                                         <div><Label htmlFor="phone">Phone</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-1.5" /></div>
                                         <div><Label htmlFor="message">Message</Label><Textarea id="message" value={formData.message} onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))} required rows={4} className="mt-1.5" /></div>
                                         <TurnstileField action="contact" onVerify={setTurnstileToken} onReset={() => setTurnstileToken("")} />
-                                        <p className="text-xs text-muted-foreground font-medium mb-3 mt-4 text-center">We typically reply within 1-2 hours during business operations. Your message is sent securely and used only for follow-up.</p>
-                                        <Button type="submit" disabled={isSubmitting} className="w-full rounded-full shadow-lift">{isSubmitting ? "Sending..." : "Send Message"}</Button>
+                                        <PrivacyNote className="mt-4">We typically reply within 1-2 hours during business operations. Your message is sent securely and used only for follow-up.</PrivacyNote>
+                                        <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting} className="w-full rounded-full shadow-lift">{isSubmitting ? "Sending..." : "Send Message"}</Button>
                                     </form>
                                 )}
                             </div>

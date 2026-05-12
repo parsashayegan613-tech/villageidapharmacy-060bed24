@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, Calendar, User, LogOut } from "lucide-react";
+import { Menu, X, ChevronDown, Calendar, Syringe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -57,11 +57,14 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full">
       {/* Announcement Bar */}
       {showAnnouncement && (
-        <div className="bg-foreground text-background py-2.5 px-4 text-center text-sm relative">
-          <span className="font-medium">💉 Flu shots now available — walk-ins welcome</span>
+        <div className="bg-foreground text-background py-2.5 px-12 text-center text-sm relative">
+          <span className="inline-flex items-center justify-center gap-2 font-medium">
+            <Syringe className="h-4 w-4 text-background/80" aria-hidden="true" />
+            Flu shots now available — walk-ins welcome
+          </span>
           <button
             onClick={() => setShowAnnouncement(false)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 opacity-60 hover:opacity-100 transition-opacity focus-ring rounded"
+            className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg opacity-70 transition-opacity hover:opacity-100 focus-ring"
             aria-label="Dismiss announcement"
           >
             <X className="h-4 w-4" />

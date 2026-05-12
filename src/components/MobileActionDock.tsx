@@ -19,7 +19,7 @@ export function MobileActionDock() {
               href={action.href}
               target={action.href.startsWith("http") ? "_blank" : undefined}
               rel={action.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="flex flex-col items-center justify-center py-3 text-muted-foreground hover:text-primary hover:bg-muted transition-colors focus-ring"
+              className="flex min-h-[64px] flex-col items-center justify-center py-3 text-muted-foreground hover:text-primary hover:bg-muted transition-colors focus-ring"
             >
               <action.icon className="h-5 w-5 mb-1" />
               <span className="text-xs font-medium">{action.label}</span>
@@ -28,7 +28,7 @@ export function MobileActionDock() {
             <Link
               key={action.label}
               href={action.href}
-              className="flex flex-col items-center justify-center py-3 text-muted-foreground hover:text-primary hover:bg-muted transition-colors focus-ring"
+              className="flex min-h-[64px] flex-col items-center justify-center py-3 text-muted-foreground hover:text-primary hover:bg-muted transition-colors focus-ring"
             >
               <action.icon className="h-5 w-5 mb-1" />
               <span className="text-xs font-medium">{action.label}</span>

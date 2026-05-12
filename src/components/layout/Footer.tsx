@@ -46,44 +46,44 @@ export function Footer() {
                 </span>
               </div>
             </Link>
-            <p className="text-sm opacity-60 leading-relaxed max-w-[260px]">
+            <p className="text-sm text-background/70 leading-relaxed max-w-[260px]">
               Your Edmonton pharmacy for personalized care, prescription services, and trusted health advice.
             </p>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="font-sans font-semibold mb-5 text-sm uppercase tracking-wider opacity-80">Contact</h3>
+            <h3 className="font-sans font-semibold mb-5 text-sm uppercase tracking-wider text-background/85">Contact</h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50" />
-                <span className="opacity-70">7004 98 Ave, Edmonton, AB T6A 0A5</span>
+                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-background/55" />
+                <span className="text-background/75">7004 98 Ave, Edmonton, AB T6A 0A5</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-4 w-4 flex-shrink-0 opacity-50" />
-                <a href="tel:780-440-4555" className="opacity-70 hover:opacity-100 transition-opacity">780-440-4555</a>
+                <Phone className="h-4 w-4 flex-shrink-0 text-background/55" />
+                <a href="tel:780-440-4555" className="text-background/75 hover:text-background transition-colors focus-ring rounded">780-440-4555</a>
               </li>
               <li className="flex items-center gap-3">
-                <Printer className="h-4 w-4 flex-shrink-0 opacity-50" />
-                <span className="opacity-70">780-440-1931</span>
+                <Printer className="h-4 w-4 flex-shrink-0 text-background/55" />
+                <span className="text-background/75">780-440-1931</span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-4 w-4 flex-shrink-0 opacity-50" />
-                <a href="mailto:villageidapharmacy@gmail.com" className="opacity-70 hover:opacity-100 transition-opacity">villageidapharmacy@gmail.com</a>
+                <Mail className="h-4 w-4 flex-shrink-0 text-background/55" />
+                <a href="mailto:villageidapharmacy@gmail.com" className="text-background/75 hover:text-background transition-colors focus-ring rounded">villageidapharmacy@gmail.com</a>
               </li>
             </ul>
           </div>
 
           {/* Hours */}
           <div>
-            <h3 className="font-sans font-semibold mb-5 text-sm uppercase tracking-wider opacity-80">Hours</h3>
+            <h3 className="font-sans font-semibold mb-5 text-sm uppercase tracking-wider text-background/85">Hours</h3>
             <ul className="space-y-3 text-sm">
               {hours.map((item) => (
                 <li key={item.day} className="flex items-start gap-3">
-                  <Clock className="h-4 w-4 mt-0.5 flex-shrink-0 opacity-50" />
+                  <Clock className="h-4 w-4 mt-0.5 flex-shrink-0 text-background/55" />
                   <div>
-                    <div className="opacity-80 font-medium">{item.day}</div>
-                    <div className="opacity-50">{item.time}</div>
+                    <div className="text-background/85 font-medium">{item.day}</div>
+                    <div className="text-background/60">{item.time}</div>
                   </div>
                 </li>
               ))}
@@ -92,13 +92,13 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-sans font-semibold mb-5 text-sm uppercase tracking-wider opacity-80">Quick Links</h3>
+            <h3 className="font-sans font-semibold mb-5 text-sm uppercase tracking-wider text-background/85">Quick Links</h3>
             <ul className="space-y-2.5 text-sm">
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="opacity-60 hover:opacity-100 transition-opacity inline-flex items-center gap-1 group"
+                    className="text-background/70 hover:text-background transition-colors inline-flex items-center gap-1 group focus-ring rounded"
                   >
                     {link.name}
                     <ArrowUpRight className="h-3 w-3 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
@@ -113,11 +113,11 @@ export function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-background/10">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs opacity-40">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-background/55">
             <p>© {new Date().getFullYear()} Village IDA Pharmacy. All rights reserved.</p>
             <div className="flex items-center gap-4">
-              <Link href="/privacy" className="hover:opacity-80 transition-opacity">Privacy Policy</Link>
-              <Link href="/terms" className="hover:opacity-80 transition-opacity">Terms of Service</Link>
+              <Link href="/privacy" className="hover:text-background transition-colors focus-ring rounded">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-background transition-colors focus-ring rounded">Terms of Service</Link>
               <span>Member of the IDA Pharmacy Group</span>
             </div>
           </div>

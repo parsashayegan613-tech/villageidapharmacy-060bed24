@@ -12,6 +12,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { TurnstileField } from "@/components/TurnstileField";
+import { PrivacyNote } from "@/components/PrivacyNote";
 import { trackLead } from "@/lib/analytics";
 import { format, isToday, parse } from "date-fns";
 import { Syringe, ClipboardCheck, HeartPulse, Cigarette, FlaskConical, HelpCircle, CheckCircle, Phone, Home, ArrowRight, Calendar as CalendarIcon } from "lucide-react";
@@ -85,7 +86,7 @@ function AppointmentsContent() {
                     <div className="max-w-lg mx-auto text-center">
                         <div className="w-20 h-20 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-6"><CheckCircle className="h-10 w-10 text-success" /></div>
                         <h2 className="text-3xl font-serif text-foreground mb-4">Request received</h2>
-                        <p className="text-muted-foreground text-lg mb-8">We'll contact you within 1 business day to confirm your appointment.</p>
+                        <p className="text-muted-foreground text-lg mb-8">We'll contact you within 1 business day to confirm the exact appointment time.</p>
                         <div className="bg-card border border-border/60 rounded-2xl p-6 text-left mb-8 max-w-sm mx-auto shadow-soft">
                             <h3 className="font-semibold text-foreground mb-4 border-b border-border pb-2">Request Summary</h3>
                             <div className="space-y-3 text-sm">
@@ -171,8 +172,8 @@ function AppointmentsContent() {
                             <div><Label htmlFor="notes">Additional Notes</Label><p className="text-sm text-muted-foreground mt-1 mb-2">Please do not include medical details here. We will discuss in person.</p><Textarea id="notes" value={formData.notes} onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))} rows={3} /></div>
                             <TurnstileField action="appointment" onVerify={setTurnstileToken} onReset={() => setTurnstileToken("")} />
                             <div className="pt-2">
-                                <p className="text-xs text-muted-foreground font-medium mb-3 text-center">We will contact you within 1 business day to confirm your exact appointment time. Your request is used only to schedule pharmacy care.</p>
-                                <Button type="submit" disabled={isSubmitting} className="w-full rounded-full gap-2 shadow-lift" size="lg">{isSubmitting ? "Submitting..." : "Request Appointment"} <ArrowRight className="h-4 w-4" /></Button>
+                                <PrivacyNote className="mb-4">We will contact you within 1 business day to confirm your exact appointment time. Your request is used only to schedule pharmacy care.</PrivacyNote>
+                                <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting} className="w-full rounded-full gap-2 shadow-lift" size="lg">{isSubmitting ? "Submitting..." : "Request Appointment"} <ArrowRight className="h-4 w-4" /></Button>
                             </div>
                         </form>
                     )}

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { CTABand } from "@/components/CTABand";
 import { StepCard } from "@/components/StepCard";
+import { PageHero } from "@/components/PageHero";
+import { SectionHeading } from "@/components/SectionHeading";
 import {
   FlaskConical, Droplets, Palette, Pill, TestTube, Sparkles,
   CheckCircle, Phone, FileText, MessageSquare, Package, Calendar,
@@ -62,49 +63,27 @@ export default function Compounding() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      {/* Hero */}
-      <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Compounding</p>
-              <h1 className="text-display-sm md:text-display font-serif text-foreground mb-6">
-                Medications made <span className="italic">just for you</span>
-              </h1>
-              <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
-                When standard medications don't fit your needs, we create custom solutions. Our compounding pharmacy tailors medications to work for you.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3">
+      <PageHero
+        eyebrow="Compounding"
+        title={<>Medications made <span className="italic">just for you</span></>}
+        description="When standard medications do not fit your needs, we create custom solutions. Our compounding pharmacy tailors medications to work for you."
+        image={{ src: "/_DSC3900.jpg", alt: "Pharmacist compounding medications" }}
+        actions={
+          <>
                 <Button asChild size="lg" className="rounded-full px-8 gap-2">
                   <Link href="/appointments?type=compounding"><Calendar className="h-4 w-4" />Request a Consult</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full px-8 gap-2">
                   <a href="tel:780-440-4555"><Phone className="h-4 w-4" />Call to Discuss</a>
                 </Button>
-              </div>
-            </div>
-            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lift border border-border/60">
-              <Image
-                src="/_DSC3900.jpg"
-                alt="Pharmacist compounding medications"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                quality={76}
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       {/* What We Compound */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4">
-          <div className="max-w-xl mb-14">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Capabilities</p>
-            <h2 className="text-display-sm font-serif text-foreground mb-4">What we can compound</h2>
-            <p className="text-muted-foreground text-lg">Custom solutions for a variety of needs.</p>
-          </div>
+          <SectionHeading eyebrow="Capabilities" title="What we can compound" description="Custom solutions for a variety of needs." />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {compoundingExamples.map((example) => (
               <div key={example.title} className="bg-card rounded-2xl p-6 border border-border/60 hover:border-primary/20 transition-colors">
@@ -122,10 +101,7 @@ export default function Compounding() {
       {/* How It Works */}
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-xl mb-14">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Process</p>
-            <h2 className="text-display-sm font-serif text-foreground">How it works</h2>
-          </div>
+          <SectionHeading eyebrow="Process" title="How it works" />
           <div className="max-w-2xl space-y-8">
             <StepCard icon={MessageSquare} step={1} title="Consult with us" description="Discuss your needs with our pharmacist — we'll explain what's possible." />
             <StepCard icon={FileText} step={2} title="Get a prescription" description="Your doctor writes a prescription for your custom medication." />
@@ -139,10 +115,7 @@ export default function Compounding() {
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <div className="max-w-xl mb-14">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Is it right for you?</p>
-              <h2 className="text-display-sm font-serif text-foreground">Compounding might be right for you if...</h2>
-            </div>
+            <SectionHeading eyebrow="Is it right for you?" title="Compounding might be right for you if..." />
             <div className="bg-card rounded-2xl p-8 shadow-soft border border-border/60">
               <ul className="space-y-4">
                 {goodFitChecklist.map((item, i) => (
@@ -162,10 +135,7 @@ export default function Compounding() {
       {/* FAQ */}
       <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-xl mb-14">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">FAQ</p>
-            <h2 className="text-display-sm font-serif text-foreground">Common questions</h2>
-          </div>
+          <SectionHeading eyebrow="FAQ" title="Common questions" />
           <div className="max-w-3xl">
             <FAQAccordion items={faqs} />
           </div>

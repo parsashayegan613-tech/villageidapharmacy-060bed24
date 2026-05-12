@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { TurnstileField } from "@/components/TurnstileField";
+import { PrivacyNote } from "@/components/PrivacyNote";
 import { trackLead } from "@/lib/analytics";
 import { CheckCircle, Plus, Trash2, Phone, Home, ArrowRight, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -28,6 +29,7 @@ export function RefillForm() {
     const addPrescription = () => setFormData(prev => ({ ...prev, prescriptions: [...prev.prescriptions, ""] }));
     const removePrescription = (index: number) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.filter((_, i) => i !== index) }));
     const updatePrescription = (index: number, value: string) => setFormData(prev => ({ ...prev, prescriptions: prev.prescriptions.map((p, i) => i === index ? value : p) }));
+    const hasPrescription = formData.prescriptions.some((prescription) => prescription.trim().length > 0);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -58,7 +60,7 @@ export function RefillForm() {
                             <CheckCircle className="h-10 w-10 text-success" />
                         </div>
                         <h2 className="text-3xl font-serif text-foreground mb-4">We received your request</h2>
-                        <p className="text-muted-foreground text-lg mb-8">We'll respond within 1 business day to confirm your refill.</p>
+                        <p className="text-muted-foreground text-lg mb-8">We'll respond within 1 business day to confirm your refill before pickup or delivery.</p>
                         <div className="bg-card border border-border/60 rounded-2xl p-6 text-left mb-8 max-w-sm mx-auto shadow-soft">
                             <h3 className="font-semibold text-foreground mb-4 border-b border-border pb-2">Request Summary</h3>
                             <div className="space-y-3 text-sm">
@@ -110,6 +112,7 @@ export function RefillForm() {
                                     <div><Label htmlFor="name">Full Name *</Label><Input id="name" value={formData.name} onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))} required className="mt-2" /></div>
                                     <div><Label htmlFor="phone">Phone Number *</Label><Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))} required className="mt-2" /></div>
                                     <div><Label htmlFor="email">Email (optional)</Label><Input id="email" type="email" value={formData.email} onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))} className="mt-2" /></div>
+                                    <p className="text-xs text-muted-foreground">Name and phone are required so we can confirm the refill before it is prepared.</p>
                                     <Button type="button" onClick={() => setStep(2)} disabled={!formData.name || !formData.phone} className="w-full rounded-full" size="lg">Continue<ArrowRight className="h-4 w-4 ml-2" /></Button>
                                 </div>
                             )}
@@ -120,12 +123,13 @@ export function RefillForm() {
                                         <div className="space-y-3 mt-2">
                                             {formData.prescriptions.map((rx, index) => (
                                                 <div key={index} className="flex gap-2">
-                                                    <Input value={rx} onChange={(e) => updatePrescription(index, e.target.value)} placeholder={`Prescription #${index + 1}`} />
+                                                    <Input value={rx} onChange={(e) => updatePrescription(index, e.target.value)} placeholder={`Prescription #${index + 1}`} required={index === 0} />
                                                     {formData.prescriptions.length > 1 && (<Button type="button" variant="outline" size="icon" onClick={() => removePrescription(index)}><Trash2 className="h-4 w-4" /></Button>)}
                                                 </div>
                                             ))}
                                         </div>
                                         <Button type="button" variant="ghost" size="sm" onClick={addPrescription} className="mt-2 text-muted-foreground"><Plus className="h-4 w-4 mr-2" />Add Another</Button>
+                                        {!hasPrescription && <p className="text-xs text-muted-foreground mt-2">At least one prescription number is required.</p>}
                                     </div>
                                     <div>
                                         <Label>Pickup or Delivery</Label>
@@ -147,11 +151,9 @@ export function RefillForm() {
                                     <TurnstileField action="refill" onVerify={setTurnstileToken} onReset={() => setTurnstileToken("")} />
                                     <div className="flex gap-4">
                                         <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1 rounded-full" size="lg"><ArrowLeft className="h-4 w-4 mr-2" />Back</Button>
-                                        <Button type="submit" disabled={isSubmitting} className="flex-1 rounded-full" size="lg">{isSubmitting ? "Submitting..." : "Submit Request"}</Button>
+                                        <Button type="submit" disabled={isSubmitting || !hasPrescription} aria-busy={isSubmitting} className="flex-1 rounded-full" size="lg">{isSubmitting ? "Submitting..." : "Submit Request"}</Button>
                                     </div>
-                                    <p className="text-xs text-muted-foreground text-center">
-                                        Your request is sent securely to our pharmacy team and used only to prepare and confirm your refill.
-                                    </p>
+                                    <PrivacyNote>Your request is sent securely to our pharmacy team and used only to prepare and confirm your refill.</PrivacyNote>
                                 </div>
                             )}
                         </form>

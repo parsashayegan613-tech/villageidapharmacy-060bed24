@@ -1,6 +1,9 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
 import { CTABand } from "@/components/CTABand";
+import { RelatedGuides } from "@/components/RelatedGuides";
+import { ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "How to Transfer Prescriptions in Alberta (Step-by-Step)",
@@ -12,6 +15,10 @@ export default function GuideTransfer() {
         <Layout>
             <article className="py-20 md:py-28 bg-background">
                 <div className="container mx-auto px-4 max-w-3xl">
+                    <Link href="/guides" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors mb-8 focus-ring rounded">
+                        <ArrowLeft className="h-4 w-4" />
+                        Back to patient guides
+                    </Link>
                     <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Patient Guide</p>
                     <h1 className="text-display-sm md:text-5xl font-serif text-foreground mb-8">
                         How to Transfer Prescriptions in Alberta (Step-by-Step)
@@ -68,10 +75,12 @@ export default function GuideTransfer() {
                 </div>
             </article>
 
+            <RelatedGuides excludeHref="/guides/transferring-prescriptions-alberta" />
+
             <CTABand
-                headline="Ready for personal pharmacy care?"
-                primaryAction={{ label: "Transfer in 60 Seconds", href: "/transfer" }}
-                secondaryAction={{ label: "Call Us", href: "tel:780-440-4555", external: true }}
+                headline="Want us to coordinate your prescription transfer?"
+                primaryAction={{ label: "Start Transfer Request", href: "/transfer" }}
+                secondaryAction={{ label: "Call Pharmacy", href: "tel:780-440-4555", external: true }}
             />
         </Layout>
     );

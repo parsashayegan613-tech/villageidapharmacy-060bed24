@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { CTABand } from "@/components/CTABand";
+import { PageHero } from "@/components/PageHero";
 import {
   Truck, Package, ClipboardCheck, HeartPulse, Cigarette, Syringe,
   FlaskConical, Home as HomeIcon, X, CheckCircle, Clock, FileText, ArrowRight,
@@ -44,31 +44,12 @@ export function ServicesContent() {
     <Layout>
 
       {/* Hero */}
-      <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Services</p>
-              <h1 className="text-display-sm md:text-display font-serif text-foreground mb-6">
-                Everything your pharmacy <span className="italic">should</span> do.
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                More than just prescriptions — we offer a full range of services to support your health.
-              </p>
-            </div>
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lift hidden md:block">
-              <Image
-                src="/_DSC3877.jpg"
-                alt="Pharmacist preparing blister packaging"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                quality={76}
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Services"
+        title={<>Everything your pharmacy <span className="italic">should</span> do.</>}
+        description="A full range of pharmacy services to support your health, from prescription delivery and packaging to compounding, injections, and medication reviews."
+        image={{ src: "/_DSC3877.jpg", alt: "Pharmacist preparing blister packaging" }}
+      />
 
       {/* Filter */}
       <section className="sticky top-[64px] z-40 bg-card/95 backdrop-blur-xl border-b border-border/50 py-3">

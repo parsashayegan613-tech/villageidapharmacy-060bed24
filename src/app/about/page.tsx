@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/PageHero";
+import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CTABand } from "@/components/CTABand";
 import { Heart, Users, Award, Truck, Clock, ShieldCheck } from "lucide-react";
@@ -31,7 +33,7 @@ const team = [
     {
         name: "Anoosh",
         role: "Pharmacist",
-        statement: "We treat every customer like family — because to us, they are.",
+        statement: "We want every patient to leave with clear answers and confidence in their medication plan.",
         image: "/staff_anoosh.png",
     },
 ];
@@ -41,24 +43,21 @@ export default function About() {
         <Layout>
 
             {/* Hero */}
-            <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
-                <div className="container mx-auto px-4 relative z-10">
-                    <ScrollReveal>
-                        <div className="max-w-2xl">
-                            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">About us</p>
-                            <h1 className="text-display-sm md:text-display font-serif text-foreground mb-6">
-                                Pharmacy care built around people.
-                            </h1>
-                            <p className="text-lg text-muted-foreground leading-relaxed mb-4 font-medium">
-                                At Village IDA Pharmacy, we believe pharmacy care should be personal, clear, and easy to access. Our team takes the time to understand your medications, health goals, and day-to-day needs.
-                            </p>
-                            <p className="text-lg text-muted-foreground leading-relaxed">
-                                At our Edmonton pharmacy, we provide consistent support from a team that gets to know you. Whether you need refills, transfers, delivery, compounding, or medication advice, we aim to make every interaction simple, respectful, and helpful.
-                            </p>
-                        </div>
-                    </ScrollReveal>
-                </div>
-            </section>
+            <PageHero
+                eyebrow="About us"
+                title="Pharmacy care built around people."
+                description={
+                    <>
+                        <p className="font-medium">
+                            At Village IDA Pharmacy, we believe pharmacy care should be personal, clear, and easy to access. Our team takes the time to understand your medications, health goals, and day-to-day needs.
+                        </p>
+                        <p>
+                            Whether you need refills, transfers, delivery, compounding, or medication advice, we aim to make every interaction simple, respectful, and helpful.
+                        </p>
+                    </>
+                }
+                compact
+            />
 
             {/* Our Story */}
             <section className="py-20 md:py-28">
@@ -123,11 +122,11 @@ export default function About() {
             <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
                 <div className="container mx-auto px-4 relative z-10">
                     <ScrollReveal>
-                        <div className="max-w-xl mb-14">
-                            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">What we stand for</p>
-                            <h2 className="text-display-sm font-serif text-foreground mb-4">Our values</h2>
-                            <p className="text-muted-foreground text-lg">The principles that guide everything we do.</p>
-                        </div>
+                        <SectionHeading
+                            eyebrow="What we stand for"
+                            title="Our values"
+                            description="The principles that guide everything we do."
+                        />
                     </ScrollReveal>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {values.map((value, i) => (
@@ -146,39 +145,43 @@ export default function About() {
             </section>
 
             {/* Team */}
-            <section className="py-20 md:py-28">
+            <section id="team" className="py-20 md:py-28">
                 <div className="container mx-auto px-4">
                     <ScrollReveal>
-                        <div className="max-w-xl mb-14">
-                            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Our team</p>
-                            <h2 className="text-display-sm font-serif text-foreground mb-4">Meet the people who care.</h2>
-                            <p className="text-muted-foreground text-lg">Real pharmacists, real relationships.</p>
-                        </div>
+                        <SectionHeading
+                            eyebrow="Our team"
+                            title="Meet the pharmacy team."
+                            description="Clear answers from pharmacists who know your care."
+                            centered
+                        />
                     </ScrollReveal>
-                    <div className="grid md:grid-cols-2 max-w-4xl gap-8">
+                    <div className="grid md:grid-cols-2 max-w-5xl mx-auto gap-8">
                         {team.map((member, i) => (
                             <ScrollReveal key={member.name} delay={i * 0.1}>
-                                <div className="bg-card rounded-2xl p-8 shadow-soft hover-lift border border-border/60">
+                                <div className="bg-card rounded-2xl overflow-hidden shadow-soft hover-lift border border-border/60 h-full">
                                     {member.image ? (
-                                        <Image
-                                            src={member.image}
-                                            alt={member.name}
-                                            width={80}
-                                            height={80}
-                                            sizes="80px"
-                                            quality={74}
-                                            className="w-20 h-20 rounded-2xl mb-5 object-cover shadow-sm"
-                                        />
+                                        <div className="relative aspect-[5/4] bg-secondary">
+                                            <Image
+                                                src={member.image}
+                                                alt={`${member.name}, ${member.role}`}
+                                                fill
+                                                sizes="(min-width: 1024px) 480px, (min-width: 768px) 50vw, 100vw"
+                                                quality={76}
+                                                className="object-cover"
+                                            />
+                                        </div>
                                     ) : (
-                                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 mb-5 flex items-center justify-center">
-                                            <span className="text-xl font-serif text-primary/70">
+                                        <div className="aspect-[5/4] bg-gradient-to-br from-primary/15 to-accent/10 flex items-center justify-center">
+                                            <span className="text-5xl font-serif text-primary/70">
                                                 {member.name.split(' ').map(n => n[0]).join('')}
                                             </span>
                                         </div>
                                     )}
-                                    <h3 className="font-sans font-semibold text-foreground text-lg">{member.name}</h3>
-                                    <p className="text-sm text-primary font-medium mb-3">{member.role}</p>
-                                    <p className="text-sm text-muted-foreground italic leading-relaxed">"{member.statement}"</p>
+                                    <div className="p-7 md:p-8">
+                                        <h3 className="font-sans font-semibold text-foreground text-xl">{member.name}</h3>
+                                        <p className="text-sm text-primary font-medium mb-4">{member.role}</p>
+                                        <p className="text-sm text-muted-foreground italic leading-relaxed border-l-2 border-primary/20 pl-4">"{member.statement}"</p>
+                                    </div>
                                 </div>
                             </ScrollReveal>
                         ))}
@@ -188,9 +191,9 @@ export default function About() {
 
             {/* CTA */}
             <CTABand
-                headline="Ready to experience the difference?"
-                primaryAction={{ label: "Switch to Village IDA", href: "/transfer" }}
-                secondaryAction={{ label: "Call Us Today", href: "tel:780-440-4555", external: true }}
+                headline="Need help with your next refill or transfer?"
+                primaryAction={{ label: "Transfer Prescriptions", href: "/transfer" }}
+                secondaryAction={{ label: "Call Pharmacy", href: "tel:780-440-4555", external: true }}
             />
 
             <div className="h-16 md:hidden" />

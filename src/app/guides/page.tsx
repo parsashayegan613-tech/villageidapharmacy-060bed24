@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Layout } from "@/components/layout/Layout";
+import { PageHero } from "@/components/PageHero";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
@@ -33,24 +34,19 @@ const guides = [
 export default function GuidesIndex() {
     return (
         <Layout>
-            <section className="py-20 md:py-28 bg-secondary relative overflow-hidden noise">
-                <div className="container mx-auto px-4 relative z-10">
-                    <div className="max-w-2xl">
-                        <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary mb-3">Resources</p>
-                        <h1 className="text-display-sm md:text-display font-serif text-foreground mb-6">Patient Guides</h1>
-                        <p className="text-lg text-muted-foreground leading-relaxed">
-                            Clear, practical advice to help you manage your health, navigate the Alberta healthcare system, and make informed pharmacy care decisions.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <PageHero
+                eyebrow="Resources"
+                title="Patient Guides"
+                description="Clear, practical advice to help you manage your health, navigate pharmacy services, and make informed care decisions."
+                compact
+            />
 
             <section className="py-20">
                 <div className="container mx-auto px-4">
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {guides.map((guide, i) => (
                             <ScrollReveal key={guide.slug} delay={i * 0.1}>
-                                <Link href={`/guides/${guide.slug}`} className="group block h-full">
+                                <Link href={`/guides/${guide.slug}`} className="group block h-full focus-ring rounded-2xl">
                                     <div className="bg-card rounded-2xl p-8 shadow-soft border border-border/60 hover:-translate-y-1 transition-all duration-300 h-full flex flex-col hover:border-primary/20 hover:shadow-lg">
                                         <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6">
                                             <BookOpen className="h-5 w-5" />
